@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-primary": "#006e2f",
+              "primary-container": "#0abc56",
+              "on-primary-container": "#002c0f",
+              "surface-container-lowest": "#000000",
+              "surface-tint": "#6bff8f",
+              "inverse-on-surface": "#4d556b",
+              "on-surface-variant": "#a3aac4",
+              "surface-container-highest": "#192540",
+              "on-tertiary-container": "#495468",
+              "surface-dim": "#060e20",
+              "on-tertiary": "#515c70",
+              "on-background": "#dee5ff",
+              "on-surface": "#dee5ff",
+              "tertiary-dim": "#ccd7ef",
+              "surface-container-high": "#141f38",
+              "on-primary-fixed-variant": "#006a2d",
+              "tertiary": "#f0f3ff",
+              "on-tertiary-fixed-variant": "#535e72",
+              "on-primary": "#005f28",
+              "error": "#ff7351",
+              "surface-variant": "#192540",
+              "secondary-dim": "#efc900",
+              "primary-fixed-dim": "#5bf083",
+              "on-secondary": "#5b4b00",
+              "surface-container": "#0f1930",
+              "secondary-fixed-dim": "#efc900",
+              "on-error-container": "#ffd2c8",
+              "error-container": "#b92902",
+              "tertiary-container": "#dae6fe",
+              "tertiary-fixed": "#dae6fe",
+              "primary-fixed": "#6bff8f",
+              "surface-container-low": "#091328",
+              "secondary": "#ffd709",
+              "on-tertiary-fixed": "#374155",
+              "error-dim": "#d53d18",
+              "secondary-fixed": "#ffd709",
+              "on-primary-fixed": "#004a1d",
+              "primary": "#6bff8f",
+              "outline-variant": "#40485d",
+              "on-secondary-fixed": "#453900",
+              "primary-dim": "#5bf083",
+              "background": "#060e20",
+              "secondary-container": "#705d00",
+              "on-error": "#450900",
+              "surface-bright": "#1f2b49",
+              "surface": "#060e20",
+              "on-secondary-fixed-variant": "#665500",
+              "outline": "#6d758c",
+              "tertiary-fixed-dim": "#ccd7ef",
+              "on-secondary-container": "#fff7e6",
+              "inverse-surface": "#faf8ff"
+            },
+            fontFamily: {
+              "headline": ["Lexend"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #060e20;
+            color: #dee5ff;
+            font-family: 'Inter', sans-serif;
+        }
+        .pitch-gradient {
+            background: linear-gradient(45deg, #6bff8f 0%, #0abc56 100%);
+        }
+        .glass-panel {
+            background: rgba(31, 43, 73, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#060e20] docked w-full top-0 flex items-center justify-between px-6 h-16 w-full z-50">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#22C55E] cursor-pointer" data-icon="arrow_back">arrow_back</span>
+<h1 class="font-['Lexend'] font-bold tracking-tight text-xl text-[#dee5ff]">Help &amp; Support</h1>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#a3aac4] hover:text-[#6bff8f] transition-colors" data-icon="notifications">notifications</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-[#40485d]">
+<img class="w-full h-full object-cover" data-alt="Football Academy Logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBywZ_fbRZO5v932_Eu05t8J5rFtT1ICgQh26KhhX70uLlV-LFdFFCCtC8EUlHfdLWB7TGlGK7uTBRnTpvZVVvJuVUX5goWdqc4hFLcrtGx_6DJfUtI7wDP0ltPGTosvJU4baBaf6y-n5_cs5R01RIM0quXgt6mNes0avt4tL92zCzyWz6_CzORFfypgvpgSQF3NhVNEZjdWDsEj2pDZYbG0G3VODkKhVNsadofcMeNAz7mh1fZAkF5J6S_6D7j2MxTIARrc7q4vJM"/>
+</div>
+</div>
+</header>
+<main class="px-6 pt-8 max-w-4xl mx-auto space-y-10">
+<!-- Search Section -->
+<section class="relative">
+<div class="absolute inset-0 bg-[#6bff8f]/10 blur-3xl rounded-full -z-10 opacity-30"></div>
+<div class="space-y-4">
+<h2 class="font-headline text-3xl font-extrabold tracking-tight">How can we help <br/><span class="text-primary">the squad today?</span></h2>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant focus:ring-2 focus:ring-primary transition-all shadow-lg" placeholder="Search for help..." type="text"/>
+</div>
+</div>
+</section>
+<!-- Quick Categories: Bento Style -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<button class="flex flex-col items-center justify-center p-6 bg-surface-container rounded-2xl hover:bg-surface-container-high active:scale-95 transition-all group">
+<span class="material-symbols-outlined text-primary mb-3 text-3xl group-hover:scale-110 transition-transform" data-icon="account_circle">account_circle</span>
+<span class="font-label text-xs uppercase tracking-widest font-bold">Account</span>
+</button>
+<button class="flex flex-col items-center justify-center p-6 bg-surface-container rounded-2xl hover:bg-surface-container-high active:scale-95 transition-all group">
+<span class="material-symbols-outlined text-primary mb-3 text-3xl group-hover:scale-110 transition-transform" data-icon="event_available">event_available</span>
+<span class="font-label text-xs uppercase tracking-widest font-bold">Attendance</span>
+</button>
+<button class="flex flex-col items-center justify-center p-6 bg-surface-container rounded-2xl hover:bg-surface-container-high active:scale-95 transition-all group">
+<span class="material-symbols-outlined text-primary mb-3 text-3xl group-hover:scale-110 transition-transform" data-icon="assignment">assignment</span>
+<span class="font-label text-xs uppercase tracking-widest font-bold">Tasks</span>
+</button>
+<button class="flex flex-col items-center justify-center p-6 bg-surface-container rounded-2xl hover:bg-surface-container-high active:scale-95 transition-all group">
+<span class="material-symbols-outlined text-primary mb-3 text-3xl group-hover:scale-110 transition-transform" data-icon="payments">payments</span>
+<span class="font-label text-xs uppercase tracking-widest font-bold">Payments</span>
+</button>
+</section>
+<!-- FAQ Items -->
+<section class="space-y-6">
+<div class="flex items-end justify-between">
+<h3 class="font-headline text-xl font-bold">Frequently Asked</h3>
+<span class="text-xs font-label text-primary font-bold uppercase tracking-widest cursor-pointer">View All</span>
+</div>
+<div class="space-y-4">
+<!-- Accordion 1 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden group">
+<div class="p-5 flex items-center justify-between cursor-pointer hover:bg-surface-container transition-colors">
+<span class="font-body font-semibold text-on-surface">How do I mark attendance?</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Accordion 2 (Expanded Example Appearance) -->
+<div class="bg-surface-container rounded-xl overflow-hidden ring-1 ring-primary/20">
+<div class="p-5 flex items-center justify-between cursor-pointer bg-surface-container-high">
+<span class="font-body font-semibold text-primary">What should I do if my task video won't upload?</span>
+<span class="material-symbols-outlined text-primary" data-icon="expand_less">expand_less</span>
+</div>
+<div class="p-5 text-sm text-on-surface-variant font-body leading-relaxed border-t border-outline-variant/10">
+                        Check your internet connection first. If you are at the academy, connect to the 'Athleo-Guest' Wi-Fi. Ensure the video format is MP4 and under 50MB. If it still fails, use the 'Submit Offline' button and show the video to your coach manually.
+                    </div>
+</div>
+<!-- Accordion 3 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden group">
+<div class="p-5 flex items-center justify-between cursor-pointer hover:bg-surface-container transition-colors">
+<span class="font-body font-semibold text-on-surface">How can I check my pending fees?</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Accordion 4 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden group">
+<div class="p-5 flex items-center justify-between cursor-pointer hover:bg-surface-container transition-colors">
+<span class="font-body font-semibold text-on-surface">How do I submit a complaint to the Director?</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Still Need Help? Section -->
+<section class="bg-surface-container rounded-3xl p-8 relative overflow-hidden shadow-2xl">
+<!-- Decorative Pitch Background -->
+<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-primary/20 blur-3xl rounded-full"></div>
+<div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="text-center md:text-left">
+<p class="text-secondary font-label text-xs font-bold uppercase tracking-widest mb-2">24/7 Field Support</p>
+<h3 class="font-headline text-2xl font-extrabold mb-2">Still need help?</h3>
+<p class="text-on-surface-variant font-body text-sm max-w-xs">Our academy administrators are ready to assist with any tactical or technical issues.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+<button class="pitch-gradient text-on-primary-container font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
+                        Chat with Support
+                    </button>
+<button class="bg-surface-container-highest text-on-surface font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-surface-bright active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+                        Call Us
+                    </button>
+</div>
+</div>
+</section>
+<!-- Academy Note -->
+<footer class="text-center py-6">
+<p class="text-[10px] font-label text-on-surface-variant uppercase tracking-[0.2em]">Athleo Football Academy • India • Version 4.2.0</p>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#1f2b49]/80 backdrop-blur-xl z-50 rounded-t-2xl shadow-[0_-10px_30px_rgba(0,0,0,0.3)]">
+<a class="flex flex-col items-center justify-center text-[#a3aac4] hover:text-[#dee5ff] transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="strategy">strategy</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-wider font-semibold">Strategy</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a3aac4] hover:text-[#dee5ff] transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-wider font-semibold">Squad</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a3aac4] hover:text-[#dee5ff] transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="sports_soccer">sports_soccer</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-wider font-semibold">Match</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a3aac4] hover:text-[#dee5ff] transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-wider font-semibold">Training</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#6bff8f] bg-[#0abc56]/10 rounded-xl px-3 py-1 transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline" style="font-variation-settings: 'FILL' 1;">help_outline</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-wider font-semibold">Support</span>
+</a>
+</nav>
+</body></html>

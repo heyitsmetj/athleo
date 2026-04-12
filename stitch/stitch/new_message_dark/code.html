@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#000000",
+              "surface-container-high": "#141f38",
+              "on-tertiary": "#515c70",
+              "primary-fixed-dim": "#5bf083",
+              "surface-container-low": "#091328",
+              "primary-dim": "#5bf083",
+              "tertiary-fixed": "#dae6fe",
+              "secondary-container": "#705d00",
+              "on-surface-variant": "#a3aac4",
+              "on-secondary-fixed": "#453900",
+              "error-dim": "#d53d18",
+              "inverse-surface": "#faf8ff",
+              "primary-container": "#0abc56",
+              "surface-bright": "#1f2b49",
+              "background": "#060e20",
+              "tertiary-dim": "#ccd7ef",
+              "surface": "#060e20",
+              "surface-dim": "#060e20",
+              "on-primary-fixed-variant": "#006a2d",
+              "on-surface": "#dee5ff",
+              "error": "#ff7351",
+              "surface-variant": "#192540",
+              "surface-tint": "#6bff8f",
+              "on-secondary": "#5b4b00",
+              "on-error-container": "#ffd2c8",
+              "secondary": "#ffd709",
+              "primary-fixed": "#6bff8f",
+              "secondary-fixed-dim": "#efc900",
+              "on-secondary-fixed-variant": "#665500",
+              "on-tertiary-container": "#495468",
+              "secondary-fixed": "#ffd709",
+              "on-primary-container": "#002c0f",
+              "primary": "#6bff8f",
+              "on-tertiary-fixed-variant": "#535e72",
+              "surface-container": "#0f1930",
+              "on-tertiary-fixed": "#374155",
+              "on-error": "#450900",
+              "tertiary-fixed-dim": "#ccd7ef",
+              "error-container": "#b92902",
+              "tertiary": "#f0f3ff",
+              "on-primary": "#005f28",
+              "secondary-dim": "#efc900",
+              "on-background": "#dee5ff",
+              "inverse-on-surface": "#4d556b",
+              "outline-variant": "#40485d",
+              "inverse-primary": "#006e2f",
+              "surface-container-highest": "#192540",
+              "outline": "#6d758c",
+              "on-primary-fixed": "#004a1d",
+              "on-secondary-container": "#fff7e6",
+              "tertiary-container": "#dae6fe"
+            },
+            fontFamily: {
+              "headline": ["Lexend"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        background-color: #060e20;
+        color: #dee5ff;
+        font-family: 'Inter', sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#091328] w-full top-0 z-50 flex items-center justify-between px-6 py-4 sticky">
+<div class="flex items-center gap-4">
+<button class="hover:bg-[#1f2b49]/80 transition-colors active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined text-[#6bff8f]">arrow_back</span>
+</button>
+<h1 class="font-['Lexend'] font-bold tracking-tight text-[#dee5ff] text-xl">New Message</h1>
+</div>
+<button class="hover:bg-[#1f2b49]/80 transition-colors active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined text-[#6bff8f]">more_vert</span>
+</button>
+</header>
+<main class="px-6 pt-6 space-y-8 max-w-2xl mx-auto">
+<!-- Search Bar Section -->
+<section>
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant focus:ring-2 focus:ring-primary transition-all outline-none" placeholder="Search contacts or roles" type="text"/>
+</div>
+</section>
+<!-- Role Filters Section -->
+<section>
+<div class="flex gap-3 overflow-x-auto no-scrollbar pb-2">
+<button class="px-6 py-2 rounded-full bg-primary text-on-primary-container font-headline font-semibold text-sm whitespace-nowrap">All</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-headline font-medium text-sm whitespace-nowrap hover:bg-surface-bright transition-colors">Coaches</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-headline font-medium text-sm whitespace-nowrap hover:bg-surface-bright transition-colors">Trainers</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-headline font-medium text-sm whitespace-nowrap hover:bg-surface-bright transition-colors">Squads</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-headline font-medium text-sm whitespace-nowrap hover:bg-surface-bright transition-colors">Admins</button>
+</div>
+</section>
+<!-- Frequent Contacts Section -->
+<section class="space-y-4">
+<div class="flex justify-between items-end">
+<h2 class="font-headline font-bold text-lg tracking-tight">Frequent Contacts</h2>
+<span class="text-secondary font-label text-xs uppercase tracking-widest font-bold">Top Picks</span>
+</div>
+<div class="bg-surface-container-low rounded-2xl p-6 flex justify-around items-center">
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="relative">
+<img class="w-16 h-16 rounded-full border-2 border-primary p-0.5" data-alt="Portrait of Rohan Sharma athlete" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgChnLPH2mYuw9IkXbE8y2uT8t1HNhd6x0JaS5HzBAJSlbpzuqyYdlAyDYO4eLHGGq6OppomOSwh9Stc49EBn8X3uFuDEFK5CPV02WqvxrOqUQfEnYzQIAEW5tDbHeQLA5tNOB0YbfhFPOtS8gK7ZDQb5aHNc7EtyXDXC_GtbcPbFuqT7TDOqYLeweCpYXh8jZ8ZSlkTXUA1DbCBo4-FvHrUt7Mr0Hx_qiEIheUAIrcLrPyM-wd3olDtyaAdUtTr23p9fsQR7MZdxO"/>
+<div class="absolute bottom-0 right-0 w-4 h-4 bg-primary rounded-full border-2 border-surface-container-low"></div>
+</div>
+<span class="font-body text-xs font-medium group-hover:text-primary transition-colors">Rohan</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="relative">
+<img class="w-16 h-16 rounded-full border-2 border-transparent hover:border-outline-variant p-0.5" data-alt="Portrait of Priya Verma trainer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmQshLzuIeiiEturorhZo-dkovTlISd2f2gLGiHvUGBLqyX7h6BmrVxRd_PVff8ThFTlfR6HFG_hsdwILTVo4kKpfP_TK_PXhf4enme1XWM2wKtCPVFzYYM595_Zp8rpT6_7nKCp6rY6kXxgIkzEesZekbxXxqn8g5bdrgzOBrqgh3ir2GjEsjnOs-4MovVmIjwTDB_GWWa_Xzzltbyl3sUtAWf5FNaqs5rwK1Cgx4TrY6ENYPSs3GXi7wHjI_jAPkjc1BUnHVUQc8"/>
+</div>
+<span class="font-body text-xs font-medium group-hover:text-primary transition-colors">Priya</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="relative">
+<img class="w-16 h-16 rounded-full border-2 border-transparent hover:border-outline-variant p-0.5" data-alt="Portrait of Ishaan Khan captain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEl3SQsbB85-hn8IVGSteVLCgSwoHWdvHxVVMhJXrrWD3abnTPZ-GzR5ZiOmEeIeQ50TaN_gFMz9xM5CrAqeqhdpF6wDWNYXtgy2zCbMt322A48_7cQUc37XLFprsd6icP8PprRJRbrNNX_EU9pw4qaF140ybqqV9SD1Vv700NQoUKfGWlPJ2KevxO9rt2avk4gFrY_wL7fQfHvrfjGawX15P_5nA_TS4nHcIP1xbHX4mV6crYv7ayd70DPN7tgaXmM-ePkEmjfb_1"/>
+</div>
+<span class="font-body text-xs font-medium group-hover:text-primary transition-colors">Ishaan</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="relative">
+<img class="w-16 h-16 rounded-full border-2 border-transparent hover:border-outline-variant p-0.5" data-alt="Portrait of Sunil Kumar coach" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByMipuPSnc1WTUi6QjesBdfQqC7pNF-k0V4v8t_EA7DY1swljvKzHvZmQHlVinJlH31Zzw69sY1qmntrnTYVyyh9H2d6lUKc9qiLvj7qsAxL54BpMG-lFFaHuKpuyfV29zFzzQ3USjh2F0PjNXNjvqPTcsTYRWFu5L67dwEXfQpaBlye_mZC4DpbGv5u0WZBOAf3aYf5Ie87qp7LQBdd0zxpmryDCeFfhC5EgEb-fNeP-CA1guUKFB9WfbzUtkitwawd4E7T7RECRk"/>
+</div>
+<span class="font-body text-xs font-medium group-hover:text-primary transition-colors">Sunil</span>
+</div>
+</div>
+</section>
+<!-- Contact List Section -->
+<section class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="h-[1px] flex-grow bg-outline-variant/20"></div>
+<span class="text-on-surface-variant font-headline font-bold text-xs uppercase tracking-[0.2em]">Directory</span>
+<div class="h-[1px] flex-grow bg-outline-variant/20"></div>
+</div>
+<div class="space-y-3">
+<!-- Group A -->
+<div class="sticky top-[80px] bg-background/80 backdrop-blur-md py-2 z-10">
+<span class="font-headline font-extrabold text-primary text-sm">A</span>
+</div>
+<div class="group flex items-center justify-between p-4 bg-surface-container rounded-xl hover:bg-surface-bright transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-lg object-cover" data-alt="Avatar of Aryan Sharma" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdLJ2rDAyylHS8K69TyzaT7etvdVs8rS_C4xU6fp0IV3Fx03OotyQjU3acN4AsuFtbWJB8OmjT_JvngqjMKGqBZYNOXzB5uX-JcZAbROpJlckUJfycHHTNlrTBdZwiFoWoxctsTQqV_J-WDOhfdlPKS-0XDMcumQrkLPQ5X17VIYvtIA6gnejYd23BIPtOMSIP3IKvXUYviLwKtU2AoycJ2JkYxm5UC8M5CyYlmn3-l2ngkh_iDXLRYOPD34vtizPutoP9cB8SyZ0U"/>
+<div>
+<h3 class="font-headline font-semibold text-on-surface">Aryan Sharma</h3>
+<p class="font-body text-sm text-on-surface-variant">Student</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary">chevron_right</span>
+</div>
+<div class="group flex items-center justify-between p-4 bg-surface-container rounded-xl hover:bg-surface-bright transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-lg object-cover" data-alt="Avatar of Arjun Nair" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxOSSZuftQCxEAjp0PQZQwyeUsLK2mWIvB4zSCaC0zB74ip2KK5Bqa-irU4tS_3O1WEKjT0g1Cafyt4ZFQswr8jGtZBcs0BkOB-V1CHnRKj3X87cWa-T7beYM43AN452Xqp2zV4Z7RpY-HWhEVexDAuMiLZjNkyJ8-jG69TyATZ8XbVhlu-jgrludSvfglzp4poS1dCN7UhTLQb5YwrRt3XsED9leI1Z5VANb9WxR3KKxzREdRZr_Oln9SgKvZBMGL-hFPX7Tdn3fM"/>
+<div>
+<h3 class="font-headline font-semibold text-on-surface">Arjun Nair</h3>
+<p class="font-body text-sm text-secondary font-medium">Head Coach</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary">chevron_right</span>
+</div>
+<div class="group flex items-center justify-between p-4 bg-surface-container rounded-xl hover:bg-surface-bright transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-lg object-cover" data-alt="Avatar of Ananya Kapoor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyroS6n8VcyZDVB83vMqzT4CCP2KMfJSqLrIKkrO8zmulZRGwXvI1t5wKQGtnfB1pcSC9V-MJ8aFfnAYvvGI15gVIdz8po9KpflaAlM3XwP1Deo_kQWQOB_HeXF7QOnWbxwgETN1KLLzmsddlgk-Hq-vou56qcCGthtttSLQlKFLNmsdZb_DQ24JDfgyfOEQdXxhrUL0jOT2T-kR_hqjPoMoOp-h5QUTlsyLutyjnZ2Oqv0WIat2yHLJFzoAtJl5FIBGVNzvBO_1Dy"/>
+<div>
+<h3 class="font-headline font-semibold text-on-surface">Ananya Kapoor</h3>
+<p class="font-body text-sm text-on-surface-variant">Physiotherapist</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary">chevron_right</span>
+</div>
+<!-- Group K -->
+<div class="sticky top-[80px] bg-background/80 backdrop-blur-md py-2 z-10">
+<span class="font-headline font-extrabold text-primary text-sm">K</span>
+</div>
+<div class="group flex items-center justify-between p-4 bg-surface-container rounded-xl hover:bg-surface-bright transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="font-headline font-bold text-primary">KV</span>
+</div>
+<div>
+<h3 class="font-headline font-semibold text-on-surface">Kabir Verma</h3>
+<p class="font-body text-sm text-on-surface-variant">Admin</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary">chevron_right</span>
+</div>
+<!-- Group S -->
+<div class="sticky top-[80px] bg-background/80 backdrop-blur-md py-2 z-10">
+<span class="font-headline font-extrabold text-primary text-sm">S</span>
+</div>
+<div class="group flex items-center justify-between p-4 bg-surface-container rounded-xl hover:bg-surface-bright transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-lg object-cover" data-alt="Avatar of Sameer Joshi" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApr6x3VtWZglRI0lj7vM-2_YxXROOmJxRuvbdqs8RZ5tSj6Yevs6HFxr50Wvugr-DivIHgz4J-sX3p2hm0p_vRcCx3ei0Ws1kSXC_KrQaBchDXb2Blnx6mcropcS3w7s5RWq7Bo_iSpKJWZk-vZ67QddLqszqIH89tQaPBoTSMfJCCTCXWJSNaf3aAa-Ohn_Je48mOEIyHB2XJn5kxekkBz1zRn6dEmAXKyyTwI6ohMVWriuP5OcWa2eV4Hfxr6Ayr8uywmIZO1Ks1"/>
+<div>
+<h3 class="font-headline font-semibold text-on-surface">Sameer Joshi</h3>
+<p class="font-body text-sm text-on-surface-variant">Strength Trainer</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#1f2b49]/80 backdrop-blur-xl z-50 rounded-t-2xl shadow-[0_-20px_40px_rgba(0,0,0,0.4)]">
+<div class="flex flex-col items-center justify-center text-[#a3aac4] hover:text-[#ffd709] transition-all active:scale-90 duration-300 cursor-pointer">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-wider">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#a3aac4] hover:text-[#ffd709] transition-all active:scale-90 duration-300 cursor-pointer">
+<span class="material-symbols-outlined">group</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-wider">Squad</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#6bff8f] bg-[#0f1930] rounded-xl px-3 py-1 active:scale-90 duration-300 cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-wider">Messages</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#a3aac4] hover:text-[#ffd709] transition-all active:scale-90 duration-300 cursor-pointer">
+<span class="material-symbols-outlined">strategy</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-wider">Tactics</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#a3aac4] hover:text-[#ffd709] transition-all active:scale-90 duration-300 cursor-pointer">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-wider">Profile</span>
+</div>
+</nav>
+</body></html>

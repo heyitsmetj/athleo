@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Athleo | Create Task</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#6bff8f",
+              "background": "#0a0a0a",
+              "surface": "#1f1f1f",
+              "surface-border": "#333333"
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      body { background-color: #0a0a0a; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+      .glass-panel { background: rgba(31, 31, 31, 0.8); backdrop-filter: blur(24px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+      
+      .input-field {
+        background: #1f1f1f !important;
+        border: 2px solid #333333 !important;
+        color: #ffffff !important;
+        border-radius: 1.25rem;
+        padding: 1rem 1.25rem;
+        width: 100%;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .input-field:focus {
+        border-color: #6bff8f !important;
+        outline: none;
+        background: #262626 !important;
+      }
+
+      /* Custom Dropdown styling */
+      .dropdown-container { position: relative; }
+      .dropdown-trigger { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        cursor: pointer;
+      }
+      
+      .dropdown-menu {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        right: 0;
+        background: #1a1a1a;
+        border: 2px solid #333333;
+        border-radius: 1.25rem;
+        overflow: hidden;
+        z-index: 100;
+        display: none;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      }
+      .dropdown-menu.show { display: block; animation: slideIn 0.2s ease-out; }
+      
+      .dropdown-item {
+        padding: 1rem 1.25rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #9ca3af;
+        transition: all 0.2s;
+        border-bottom: 1px solid #262626;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .dropdown-item:last-child { border-bottom: none; }
+      .dropdown-item:hover { background: #262626; color: #6bff8f; }
+      .dropdown-item.selected { color: #6bff8f; background: rgba(107, 255, 143, 0.05); }
+
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      ::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+
+<!-- FORCED GLOBAL STANDARDIZATION -->
+<style>
+input:not([type="file"]), textarea, select { 
+    background-color: #171717 !important; 
+    border: 1px solid #262626 !important; 
+    color: #fafafa !important; 
+    border-radius: 0.75rem !important;
+    padding-top: 0.85rem !important; padding-bottom: 0.85rem !important;
+    color-scheme: dark !important;
+    font-size: 0.9rem !important;
+}
+input:focus, textarea:focus, select:focus { 
+    border-color: rgba(107, 255, 143, 0.6) !important; 
+    outline: none !important; 
+    box-shadow: 0 0 0 1px rgba(107, 255, 143, 0.2) !important; 
+}
+select {
+    appearance: none !important; 
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="white" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>') !important; 
+    background-repeat: no-repeat !important; 
+    background-position: right 1.25rem center !important; 
+}
+</style>
+
+            <script>
+                window.Android = {
+                    login: function() { console.log("Mock Login"); },
+                    registerUser: function() { console.log("Mock Register"); },
+                    openAnnouncements: function() { console.log("Mock Announcements"); },
+                    seedTestAccounts: function() { console.log("Mock Seed"); },
+                    saveProfile: function() { console.log("Mock Save Profile"); },
+                    closeScreen: function() { console.log("Mock Close"); },
+                    goBack: function() { console.log("Mock Back"); },
+                    createTask: function() { console.log("Mock Task"); },
+                    sendMessage: function() { console.log("Mock msg"); },
+                    showToast: function() { console.log("Toast shown"); }
+                };
+                
+                // Block the renderProfile from constantly resetting our mock title
+                window.renderProfile = function(user) { console.log("Mock profile render blocked for static HTML"); };
+            </script>
+            </head>
+<body class="min-h-screen pb-12">
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] h-[50vh] bg-primary/5 blur-[120px] rounded-full"></div>
+    </div>
+
+    <header class="fixed top-0 w-full z-50 h-16 glass-panel flex items-center px-6">
+        <button onclick="Android.finishActivity()" class="material-symbols-outlined text-gray-400 mr-4">arrow_back</button>
+        <h1 class="font-bold text-lg tracking-tight">New Drill</h1>
+    </header>
+
+    <main class="relative z-10 pt-24 px-6 max-w-lg mx-auto space-y-8">
+            <div class="space-y-2">
+                <label class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Assign To</label>
+                <div class="dropdown-container" id="student-container">
+                    <div id="student-trigger" onclick="toggleStudentDropdown()" class="input-field dropdown-trigger">
+                        <span id="selected-student-label">ALL PLAYERS</span>
+                        <span class="material-symbols-outlined text-primary transition-transform" id="student-arrow">expand_more</span>
+                    </div>
+                    <div id="student-dropdown-menu" class="dropdown-menu">
+                        <div class="dropdown-item selected" data-id="All" onclick="selectStudent(this)">ALL PLAYERS <span class="material-symbols-outlined text-xs">check</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Title</label>
+                <input id="task-title" type="text" placeholder="Drill name..." class="input-field">
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Category</label>
+                <div class="dropdown-container">
+                    <div id="category-trigger" onclick="toggleDropdown()" class="input-field dropdown-trigger">
+                        <span id="selected-label">TACTICAL</span>
+                        <span class="material-symbols-outlined text-primary transition-transform" id="arrow">expand_more</span>
+                    </div>
+                    <div id="dropdown-menu" class="dropdown-menu">
+                        <div class="dropdown-item selected" data-value="TACTICAL" onclick="selectOption(this)">TACTICAL <span class="material-symbols-outlined text-xs">check</span></div>
+                        <div class="dropdown-item" data-value="PHYSICAL" onclick="selectOption(this)">PHYSICAL</div>
+                        <div class="dropdown-item" data-value="TECHNICAL" onclick="selectOption(this)">TECHNICAL</div>
+                        <div class="dropdown-item" data-value="MENTAL" onclick="selectOption(this)">MENTAL</div>
+                        <div class="dropdown-item" data-value="REVIEW" onclick="selectOption(this)">REVIEW</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Deadline Date</label>
+                <input id="task-deadline" type="date" class="input-field" style="color-scheme: dark;">
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Objectives</label>
+                <textarea id="task-desc" rows="4" placeholder="Define the drill goals..." class="input-field"></textarea>
+            </div>
+
+            <button onclick="submitTask()" class="w-full bg-primary text-black py-4 rounded-2xl font-black uppercase tracking-[0.2em] text-xs shadow-xl active:scale-95 transition-all mt-6">
+                Deploy Assignment
+            </button>
+        </div>
+    </main>
+
+    <script>
+        let selectedCategory = 'TACTICAL';
+        let selectedStudentId = 'All';
+
+        function toggleDropdown() {
+            const menu = document.getElementById('dropdown-menu');
+            const arrow = document.getElementById('arrow');
+            menu.classList.toggle('show');
+            arrow.style.transform = menu.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        function toggleStudentDropdown() {
+            const menu = document.getElementById('student-dropdown-menu');
+            const arrow = document.getElementById('student-arrow');
+            menu.classList.toggle('show');
+            arrow.style.transform = menu.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        function selectOption(el) {
+            const val = el.getAttribute('data-value');
+            selectedCategory = val;
+            document.getElementById('selected-label').innerText = val;
+            
+            // UI Update
+            document.querySelectorAll('#dropdown-menu .dropdown-item').forEach(item => {
+                item.classList.remove('selected');
+                const existingCheck = item.querySelector('span');
+                if(existingCheck) existingCheck.remove();
+            });
+            el.classList.add('selected');
+            el.innerHTML += '<span class="material-symbols-outlined text-xs">check</span>';
+            
+            toggleDropdown();
+        }
+
+        function selectStudent(el) {
+            const id = el.getAttribute('data-id');
+            const name = el.innerText.split(' check')[0];
+            selectedStudentId = id;
+            document.getElementById('selected-student-label').innerText = name;
+            
+            document.querySelectorAll('#student-dropdown-menu .dropdown-item').forEach(item => {
+                item.classList.remove('selected');
+                const existingCheck = item.querySelector('span');
+                if(existingCheck) existingCheck.remove();
+            });
+            el.classList.add('selected');
+            el.innerHTML += '<span class="material-symbols-outlined text-xs">check</span>';
+            
+            toggleStudentDropdown();
+        }
+
+        window.renderPlayers = (players) => {
+            try {
+                const menu = document.getElementById('student-dropdown-menu');
+                if (!menu) return;
+                let html = '<div class="dropdown-item selected" data-id="All" onclick="selectStudent(this)">ALL PLAYERS <span class="material-symbols-outlined text-xs">check</span></div>';
+                if (players && players.length > 0) {
+                    for (let i = 0; i < players.length; i++) {
+                        const p = players[i];
+                        const name = (p.name || 'Player ' + i).toUpperCase();
+                        const id = p.id || '';
+                        html += '<div class="dropdown-item" data-id="' + id + '" onclick="selectStudent(this)">' + name + '</div>';
+                    }
+                }
+                menu.innerHTML = html;
+            } catch(e) {
+                document.title = 'ERR:' + e.message;
+            }
+        };
+
+        // Close on outside click
+        window.addEventListener('click', (e) => {
+            if (!document.getElementById('student-container').contains(e.target)) {
+                document.getElementById('student-dropdown-menu').classList.remove('show');
+                document.getElementById('student-arrow').style.transform = 'rotate(0deg)';
+            }
+            if (!document.querySelector('.dropdown-container:not(#student-container)').contains(e.target)) {
+                document.getElementById('dropdown-menu').classList.remove('show');
+                document.getElementById('arrow').style.transform = 'rotate(0deg)';
+            }
+        });
+
+        function submitTask() {
+            const title = document.getElementById('task-title').value.trim();
+            const desc = document.getElementById('task-desc').value.trim();
+            const deadline = document.getElementById('task-deadline').value || 'No Deadline';
+
+            if (!title || !desc) {
+                if (typeof Android !== 'undefined') Android.showToast('Details Required');
+                return;
+            }
+
+            if (typeof Android !== 'undefined') {
+                Android.createTaskForPlayer(title, desc, selectedCategory, selectedStudentId, deadline);
+            }
+        }
+
+        window.onload = () => {
+            if (typeof Android !== 'undefined') Android.loadPlayers();
+        };
+    </script>
+</body>
+</html>

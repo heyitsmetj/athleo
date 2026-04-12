@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Athleo" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/primaryOrange</item>
+        <item name="colorPrimaryDark">@color/primaryOrangeDark</item>
+        <item name="colorSecondary">@color/secondaryGreen</item>
+        <item name="android:windowBackground">@color/backgroundLight</item>
+        <item name="android:textColorPrimary">@color/textPrimaryLight</item>
+    </style>
+
+    <style name="Theme.Athleo" parent="Base.Theme.Athleo" />
+</resources>

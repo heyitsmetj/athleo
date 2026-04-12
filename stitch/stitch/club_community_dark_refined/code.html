@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Pitch - Club Community</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-background": "#dee5ff",
+              "surface-container-low": "#091328",
+              "on-tertiary": "#515c70",
+              "surface-tint": "#6bff8f",
+              "secondary-fixed-dim": "#efc900",
+              "surface-container": "#0f1930",
+              "on-primary": "#005f28",
+              "on-tertiary-fixed": "#374155",
+              "tertiary-fixed": "#dae6fe",
+              "primary": "#6bff8f",
+              "on-tertiary-fixed-variant": "#535e72",
+              "on-primary-container": "#002c0f",
+              "outline-variant": "#40485d",
+              "tertiary-dim": "#ccd7ef",
+              "on-surface": "#dee5ff",
+              "on-primary-fixed": "#004a1d",
+              "error-container": "#b92902",
+              "surface-container-high": "#141f38",
+              "primary-fixed": "#6bff8f",
+              "on-secondary-container": "#fff7e6",
+              "tertiary-container": "#dae6fe",
+              "on-secondary-fixed": "#453900",
+              "surface-container-lowest": "#000000",
+              "secondary": "#ffd709",
+              "secondary-dim": "#efc900",
+              "on-error": "#450900",
+              "error": "#ff7351",
+              "surface-bright": "#1f2b49",
+              "inverse-on-surface": "#4d556b",
+              "on-error-container": "#ffd2c8",
+              "inverse-surface": "#faf8ff",
+              "secondary-container": "#705d00",
+              "primary-dim": "#5bf083",
+              "background": "#060e20",
+              "tertiary-fixed-dim": "#ccd7ef",
+              "outline": "#6d758c",
+              "on-primary-fixed-variant": "#006a2d",
+              "on-secondary": "#5b4b00",
+              "tertiary": "#f0f3ff",
+              "secondary-fixed": "#ffd709",
+              "on-surface-variant": "#a3aac4",
+              "inverse-primary": "#006e2f",
+              "primary-container": "#0abc56",
+              "surface-variant": "#192540",
+              "on-tertiary-container": "#495468",
+              "surface-container-highest": "#192540",
+              "surface": "#060e20",
+              "error-dim": "#d53d18",
+              "primary-fixed-dim": "#5bf083",
+              "on-secondary-fixed-variant": "#665500",
+              "surface-dim": "#060e20"
+            },
+            fontFamily: {
+              "headline": ["Lexend"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #060e20;
+            color: #dee5ff;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+        .lexend { font-family: 'Lexend', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="pb-32 pt-24 bg-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 h-20 bg-surface/80 backdrop-blur-xl border-b border-white/5 flex items-center justify-between px-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/20 border border-primary/30 overflow-hidden">
+<img alt="Coach Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKE5RV5XbIL3mQQ6PmT_lckkV290KMICYc-9UM7jiniqEEwaE60DX_IQbK_NtbNq3L-L0c68FBaUL9LT06ZPfu5iBSMeR-ib9HM3sJLZoAqZziEGzerV_QdrxOKAN-iwlPWaEpxYnrszc3FaXz5sHr3CsbLFCnFtEvlLSONbKjHpdFIwq70DfwfXkC9Ova3m6XLjri_zXocLHIsTH2W1n4XInkMT6mGlTioQkrPUi0vESZCHNECTxMosusaeBA0KEnQZfqWxlcIhhe"/>
+</div>
+<div>
+<h1 class="font-['Lexend'] font-black tracking-tighter text-2xl uppercase text-primary leading-none">THE PITCH</h1>
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Bengaluru United</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="relative text-[#dee5ff] bg-surface-container-high w-10 h-10 flex items-center justify-center rounded-full">
+<span class="material-symbols-outlined text-xl" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-surface"></span>
+</button>
+</div>
+</header>
+<main class="px-4 max-w-2xl mx-auto space-y-8">
+<!-- News & Announcements -->
+<section>
+<div class="flex items-baseline justify-between mb-4">
+<h2 class="lexend text-sm font-black uppercase tracking-[0.2em] text-on-surface-variant">Latest News</h2>
+<button class="text-primary lexend text-[10px] font-black uppercase tracking-widest flex items-center gap-1">
+                    Explore <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</button>
+</div>
+<div class="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-2xl">
+<img alt="Bengaluru Stadium training" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsb1vrrDZ1ljEcqcBHdCsk8OBvrf1h4y8wvMurnNLP-PZVnj7ihK87wbPvEVljYyRyygB1KXNXFtWX4wB0bkjNXBoUt-gzfKusivfOkAkuorppu7DQZsQT0c_GzZJWBvZ0JcvnjiOPwpDgMgljRLX5MUauI0cxVYjTo_DjV3M_jxv9TjDxDfYa-fE5IVXC3OotFKTV74Ff8OYfy9W_F8Y4VcXqznb7LJ3Uzxy5RkRPrHve18Zjpj3gMRgUaQy9uuE4hthYDAO5maJ3"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-90"></div>
+<div class="absolute bottom-5 left-5 right-5">
+<div class="flex gap-2 mb-2">
+<span class="bg-primary text-on-primary-container px-2 py-0.5 rounded-full text-[9px] font-black uppercase lexend">Match Report</span>
+<span class="bg-white/10 backdrop-blur-md text-white px-2 py-0.5 rounded-full text-[9px] font-black uppercase lexend">5 min read</span>
+</div>
+<h3 class="lexend text-xl font-black leading-tight text-white uppercase italic tracking-tight">Mumbai Derby: Coach Arjun's Tactical Masterclass Secures Win</h3>
+</div>
+</div>
+</section>
+<!-- Squad Comms - Modern Chat Interface -->
+<section>
+<div class="flex items-baseline justify-between mb-4">
+<h2 class="lexend text-sm font-black uppercase tracking-[0.2em] text-on-surface-variant">Squad Comms</h2>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-surface bg-surface-container overflow-hidden">
+<img alt="P1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4RNFuW-_u0epb8mnAQsLTe1ZmGhoCrB67400j48oibEDFxsa59JNPTclJitfzsZkdAa0OIK-rUuUiELMWsI_USymXWY2Tn46-V7F9KJol96QHAw0DOS7-ObfCedfMDgrl4mDzR7bi3IA0OEB1PSlqIkZk6U5HppyKJKp6PoIShn5-dYu_NIPyDP_Zt7UDe65bUmyMvklVYHGt5R5FsSBC3-cmt4zHDGa2CQkioVM3661xOAFhVtafClUQosp4KnjlAzKcG5Sodbkr"/>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-surface bg-surface-container overflow-hidden">
+<img alt="P2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhQKZyOFYpSOANYbM3ybSHUCA1TB4ZPMV9CmhyNgz1wv6_gO5Gzi3OFHmAFg8W7g_2RX7et6T1hd9qMOpX2tMyDu5unc0_9XLvrXI92SIM8JJsBMqrT8MnlX5Xa2y8XdawoDDfI5sjkHKUwEjsSBPMUAjjD_iv-fv_mBetTtbCPQrDazJaJx1X_qQ_IjAJmAQEUx01T4tR8C1Ob-KdTjLtqr9MRXIhWtMf5HH0ZJxF3DCnat1O7jJAtWneeNr4RktoL8ZkyLqF8a3J"/>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-surface bg-primary flex items-center justify-center text-[8px] font-black text-on-primary-container">+45</div>
+</div>
+</div>
+<div class="bg-surface-container rounded-3xl overflow-hidden divide-y divide-white/5 border border-white/5">
+<!-- Chat Item: First Team -->
+<div class="p-4 flex items-center gap-4 hover:bg-surface-container-high transition-colors active:bg-surface-container-highest cursor-pointer">
+<div class="relative w-12 h-12 flex-shrink-0">
+<div class="w-full h-full rounded-2xl bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="shield">shield</span>
+</div>
+<span class="absolute -top-1 -right-1 w-5 h-5 bg-primary text-on-primary-container text-[10px] font-black rounded-full flex items-center justify-center border-2 border-surface-container">3</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-center mb-0.5">
+<h4 class="lexend text-sm font-black uppercase text-on-surface truncate">First Team Alpha</h4>
+<span class="text-[10px] font-bold text-primary">2m ago</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate"><span class="text-secondary font-bold">Rohan:</span> "Check the new set-piece drill guys..."</p>
+</div>
+</div>
+<!-- Chat Item: U-17 Elite -->
+<div class="p-4 flex items-center gap-4 hover:bg-surface-container-high transition-colors active:bg-surface-container-highest cursor-pointer">
+<div class="relative w-12 h-12 flex-shrink-0">
+<div class="w-full h-full rounded-2xl bg-gradient-to-br from-secondary/20 to-secondary/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="bolt">bolt</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-center mb-0.5">
+<h4 class="lexend text-sm font-black uppercase text-on-surface truncate">U-17 Elite Squad</h4>
+<span class="text-[10px] font-medium text-on-surface-variant">1h ago</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate"><span class="text-on-surface/70 font-bold">Ishaan:</span> "Who's up for extra practice at Kanteerava?"</p>
+</div>
+</div>
+<!-- Chat Item: Coach's Corner -->
+<div class="p-4 flex items-center gap-4 hover:bg-surface-container-high transition-colors active:bg-surface-container-highest cursor-pointer">
+<div class="relative w-12 h-12 flex-shrink-0">
+<div class="w-full h-full rounded-2xl bg-gradient-to-br from-error/20 to-error/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-error" data-icon="sports_handball">sports_handball</span>
+</div>
+<span class="absolute top-0 right-0 w-3 h-3 bg-error rounded-full border-2 border-surface-container"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-center mb-0.5">
+<h4 class="lexend text-sm font-black uppercase text-on-surface truncate">Coach's Corner</h4>
+<span class="text-[10px] font-bold text-error">Active</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate italic font-medium">Coach Arjun is typing...</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Schedules Section - Integrated -->
+<section class="pb-10">
+<div class="flex items-baseline justify-between mb-4">
+<h2 class="lexend text-sm font-black uppercase tracking-[0.2em] text-on-surface-variant">Schedule</h2>
+<button class="bg-surface-container-high p-1.5 rounded-lg text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="calendar_month">calendar_month</span>
+</button>
+</div>
+<!-- Date Scroller -->
+<div class="flex gap-3 overflow-x-auto pb-6 no-scrollbar">
+<div class="flex-shrink-0 w-16 h-20 rounded-2xl bg-surface-container-high flex flex-col items-center justify-center gap-1 border border-white/5">
+<span class="lexend text-[10px] font-bold text-on-surface-variant uppercase">Mon</span>
+<span class="lexend text-xl font-black text-on-surface">12</span>
+</div>
+<div class="flex-shrink-0 w-16 h-20 rounded-2xl bg-primary flex flex-col items-center justify-center gap-1 shadow-[0_10px_20px_-5px_rgba(107,255,143,0.3)]">
+<span class="lexend text-[10px] font-black text-on-primary-container uppercase">Tue</span>
+<span class="lexend text-xl font-black text-on-primary-container">13</span>
+</div>
+<div class="flex-shrink-0 w-16 h-20 rounded-2xl bg-surface-container-high flex flex-col items-center justify-center gap-1 border border-white/5">
+<span class="lexend text-[10px] font-bold text-on-surface-variant uppercase">Wed</span>
+<span class="lexend text-xl font-black text-on-surface">14</span>
+</div>
+<div class="flex-shrink-0 w-16 h-20 rounded-2xl bg-surface-container-high flex flex-col items-center justify-center gap-1 border border-white/5">
+<span class="lexend text-[10px] font-bold text-on-surface-variant uppercase">Thu</span>
+<span class="lexend text-xl font-black text-on-surface">15</span>
+</div>
+<div class="flex-shrink-0 w-16 h-20 rounded-2xl bg-surface-container-high flex flex-col items-center justify-center gap-1 border border-white/5">
+<span class="lexend text-[10px] font-bold text-on-surface-variant uppercase">Fri</span>
+<span class="lexend text-xl font-black text-on-surface">16</span>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Integrated Training Card -->
+<div class="bg-surface-container rounded-2xl p-4 border-l-4 border-secondary flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-secondary/10 flex flex-col items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-2xl" data-icon="exercise">exercise</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="lexend text-sm font-black text-on-surface uppercase tracking-tight">Strength &amp; Power</h4>
+<span class="text-[9px] font-black text-secondary bg-secondary/10 px-2 py-0.5 rounded uppercase">Gym</span>
+</div>
+<div class="flex items-center gap-3 mt-1.5 text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span> 07:00 AM</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs" data-icon="person">person</span> Coach Rahul</span>
+</div>
+</div>
+</div>
+<!-- Match Card -->
+<div class="bg-surface-container rounded-2xl p-4 border-l-4 border-primary flex items-center gap-4 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 -mr-12 -mt-12 rounded-full blur-2xl"></div>
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex flex-col items-center justify-center text-primary z-10">
+<span class="material-symbols-outlined text-2xl" data-icon="sports_soccer">sports_soccer</span>
+</div>
+<div class="flex-1 z-10">
+<div class="flex justify-between items-start">
+<h4 class="lexend text-sm font-black text-on-surface uppercase tracking-tight">VS Chennai Titans</h4>
+<span class="text-[9px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded uppercase">Home</span>
+</div>
+<div class="flex items-center gap-3 mt-1.5 text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs" data-icon="event_note">event_note</span> Aug 17</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs" data-icon="timer">timer</span> 19:30</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-8 h-24 z-50 bg-surface/80 backdrop-blur-2xl border-t border-white/5">
+<a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant opacity-60 hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-['Inter'] font-black text-[9px] uppercase tracking-[0.15em]">Hub</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+<span class="font-['Inter'] font-black text-[9px] uppercase tracking-[0.15em]">Comms</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant opacity-60" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-['Inter'] font-black text-[9px] uppercase tracking-[0.15em]">Fixtures</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant opacity-60" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-['Inter'] font-black text-[9px] uppercase tracking-[0.15em]">Profile</span>
+</a>
+</nav>
+<!-- High Performance FAB -->
+<button class="fixed bottom-28 right-6 w-16 h-16 bg-primary text-on-primary-container rounded-2xl shadow-[0_15px_30px_-5px_rgba(107,255,143,0.4)] flex items-center justify-center active:scale-90 transition-all z-40">
+<span class="material-symbols-outlined text-3xl font-black" data-icon="add_comment">add_comment</span>
+</button>
+</body></html>

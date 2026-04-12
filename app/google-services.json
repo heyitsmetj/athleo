@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "166729980479",
+    "project_id": "athleo-5b712",
+    "storage_bucket": "athleo-5b712.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:166729980479:android:c714a8a0e6b2c78931b68a",
+        "android_client_info": {
+          "package_name": "com.example.athleo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZ5lBtocpS2xmoNZRGPCGgy1CFTDWjbyw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

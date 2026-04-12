@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Athleo | Edit Profile</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#6bff8f",
+              "background": "#0a0a0a",
+              "surface": "#171717",
+              "surface-border": "#262626",
+              "on-surface": "#fafafa",
+              "on-surface-variant": "#a3a3a3"
+            },
+            fontFamily: { "sans": ["Inter", "sans-serif"] }
+          }
+        }
+      }
+    </script>
+    <style>
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      body { background-color: #0a0a0a; color: #fafafa; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+      .glass-panel { background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(24px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+      .glass-card { background: rgba(23, 23, 23, 0.6); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+      
+      .input-style { 
+          background: #171717; 
+          border: 1px solid #262626; 
+          border-radius: 0.75rem; 
+          padding: 0.75rem 1rem; 
+          width: 100%; 
+          font-size: 0.85rem; 
+          color: #fafafa;
+          color-scheme: dark;
+          transition: all 0.2s ease-in-out;
+      }
+      .input-style:focus { outline: none; border-color: rgba(107, 255, 143, 0.4); box-shadow: 0 0 0 1px rgba(107, 255, 143, 0.2); }
+      textarea.input-style { resize: vertical; min-height: 80px; }
+      select.input-style { 
+          appearance: none; 
+          background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="white" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>'); 
+          background-repeat: no-repeat; 
+          background-position: right 1rem center; 
+      }
+      
+      .btn-primary { 
+          background: #6bff8f; 
+          color: #0a0a0a; 
+          border-radius: 1rem; 
+          width: 100%; 
+          height: 3.5rem; 
+          font-weight: 700; 
+          font-size: 0.95rem; 
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+          display: flex; 
+          align-items: center; 
+          justify-content: center; 
+      }
+      .btn-primary:disabled { opacity: 0.5; pointer-events: none; }
+      .btn-primary:active { transform: scale(0.97); }
+
+      /* Cropper styles overrides */
+      .cropper-view-box,
+      .cropper-face {
+        border-radius: 50%;
+      }
+      .cropper-container { max-height: 100% !important; width: 100% !important; }
+      
+      ::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+
+<!-- FORCED GLOBAL STANDARDIZATION -->
+<style>
+input:not([type="file"]), textarea, select { 
+    background-color: #171717 !important; 
+    border: 1px solid #262626 !important; 
+    color: #fafafa !important; 
+    border-radius: 0.75rem !important;
+    padding-top: 0.85rem !important; padding-bottom: 0.85rem !important;
+    color-scheme: dark !important;
+    font-size: 0.9rem !important;
+}
+input:focus, textarea:focus, select:focus { 
+    border-color: rgba(107, 255, 143, 0.6) !important; 
+    outline: none !important; 
+    box-shadow: 0 0 0 1px rgba(107, 255, 143, 0.2) !important; 
+}
+select {
+    appearance: none !important; 
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="white" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>') !important; 
+    background-repeat: no-repeat !important; 
+    background-position: right 1.25rem center !important; 
+}
+</style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 h-[72px] glass-panel px-4 flex items-center">
+        <button onclick="if(window.Android) window.Android.finishActivity(); else window.history.back();" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/5 active:scale-95 transition-all text-on-surface">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </button>
+        <h1 class="ml-2 font-bold text-[17px] tracking-tight text-on-surface">Edit Profile</h1>
+    </header>
+
+    <main class="relative z-10 pt-[100px] px-6 max-w-lg mx-auto pb-8">
+        
+        <!-- Profile Picture Section -->
+        <div class="flex flex-col items-center mb-10">
+            <div class="relative group cursor-pointer" onclick="document.getElementById('imageInput').click()">
+                <div class="w-32 h-32 rounded-full border border-surface-border overflow-hidden bg-surface flex items-center justify-center relative shadow-lg">
+                    <img id="avatar-preview" src="" class="w-full h-full object-cover hidden">
+                    <span id="avatar-initial" class="text-3xl font-bold text-primary">A</span>
+                    
+                    <!-- Hover overlay -->
+                    <div class="absolute inset-0 bg-black/50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span class="material-symbols-outlined text-white text-3xl">photo_camera</span>
+                    </div>
+                </div>
+                <div class="absolute bottom-0 right-0 w-10 h-10 bg-surface border border-surface-border rounded-full flex items-center justify-center shadow-lg text-primary">
+                    <span class="material-symbols-outlined text-[20px]">edit</span>
+                </div>
+            </div>
+            <p class="text-xs text-on-surface-variant mt-4 font-medium">Tap to change profile picture</p>
+            <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="handleImageSelect(event)">
+        </div>
+
+        <form id="profileForm" class="space-y-6" onsubmit="saveProfile(event)">
+            <div>
+                <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-2 px-1">Full Name</label>
+                <input type="text" id="nameInput" placeholder="Your Name" class="input-style" required>
+            </div>
+            
+            <button type="submit" id="saveBtn" class="btn-primary mt-8">
+                <span>Save Changes</span>
+            </button>
+        </form>
+
+    </main>
+
+    <!-- Cropper Modal -->
+    <div id="cropperModal" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md hidden flex-col">
+        <div class="h-[72px] flex items-center justify-between px-4 border-b border-white/10 shrink-0">
+            <button onclick="closeCropper()" class="text-on-surface w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/5 transition-all"><span class="material-symbols-outlined">close</span></button>
+            <span class="font-bold text-[15px] text-on-surface">Crop Photo</span>
+            <button onclick="applyCrop()" class="bg-primary text-[#0a0a0a] px-4 py-2 rounded-full font-bold text-xs uppercase tracking-widest active:scale-95 transition-all">DONE</button>
+        </div>
+        <div class="flex-1 w-full relative bg-black overflow-hidden">
+            <img id="cropperImage" src="" class="block max-w-full">
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script>
+        let cropper = null;
+        let base64Image = null; // Holds the newly cropped image data
+
+        // Loaded from WebAppInterface
+        window.renderProfile = (user) => {
+            if (user.name) {
+                document.getElementById('nameInput').value = user.name;
+                document.getElementById('avatar-initial').innerText = user.name.charAt(0).toUpperCase();
+            }
+            if (user.profileImageUrl) {
+                document.getElementById('avatar-preview').src = user.profileImageUrl;
+                document.getElementById('avatar-preview').classList.remove('hidden');
+                document.getElementById('avatar-initial').classList.add('hidden');
+                base64Image = user.profileImageUrl; // Keep existing if not changed
+            }
+        };
+
+        function handleImageSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('cropperImage').src = e.target.result;
+                document.getElementById('cropperModal').classList.remove('hidden');
+                document.getElementById('cropperModal').style.display = 'flex';
+                
+                if (cropper) { cropper.destroy(); }
+                
+                cropper = new Cropper(document.getElementById('cropperImage'), {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                    dragMode: 'move',
+                    background: false,
+                    modal: true,
+                    guides: false,
+                    center: false,
+                    highlight: false,
+                    autoCropArea: 1,
+                    toggleDragModeOnDblclick: false,
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function closeCropper() {
+            document.getElementById('cropperModal').classList.add('hidden');
+            document.getElementById('cropperModal').style.display = 'none';
+            if (cropper) {
+                cropper.destroy();
+                cropper = null;
+            }
+            document.getElementById('imageInput').value = ''; // Reset input
+        }
+
+        function applyCrop() {
+            if (!cropper) return;
+            // Get a smartly sized canvas (max 256x256 for fast upload to Firestore string)
+            const canvas = cropper.getCroppedCanvas({
+                width: 256,
+                height: 256,
+                imageSmoothingEnabled: true,
+                imageSmoothingQuality: 'high',
+            });
+            
+            base64Image = canvas.toDataURL('image/jpeg', 0.85); // Compress it highly
+            
+            // Update Preview
+            document.getElementById('avatar-preview').src = base64Image;
+            document.getElementById('avatar-preview').classList.remove('hidden');
+            document.getElementById('avatar-initial').classList.add('hidden');
+            
+            closeCropper();
+        }
+
+        function saveProfile(e) {
+            e.preventDefault();
+            const name = document.getElementById('nameInput').value.trim();
+            if(!name) return;
+
+            const btn = document.getElementById('saveBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-xl">progress_activity</span>';
+
+            if(window.Android) {
+                window.Android.saveProfile(name, base64Image || "");
+            } else {
+                // Mock delay
+                setTimeout(() => window.onProfileSaved(true), 1500);
+            }
+        }
+
+        window.onProfileSaved = (success, errorMsg) => {
+            const btn = document.getElementById('saveBtn');
+            btn.disabled = false;
+            
+            if(success) {
+                btn.innerHTML = '<span>Saved!</span>';
+                btn.classList.replace('bg-primary', 'bg-blue-400');
+                
+                setTimeout(() => {
+                    if(window.Android) window.Android.finishActivity();
+                    else window.history.back();
+                }, 800);
+            } else {
+                btn.innerHTML = '<span>Retry</span>';
+                alert("Failed to save: " + errorMsg);
+            }
+        }
+
+        window.onload = () => {
+            if (window.Android) {
+                window.Android.loadUserProfile();
+            } else {
+                // Mock
+                window.renderProfile({name: "Demo User", profileImageUrl: ""});
+            }
+        };
+    </script>
+</body>
+</html>

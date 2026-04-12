@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Athleo Director | Technical Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#a3aac4",
+              "secondary-container": "#705d00",
+              "on-secondary-fixed": "#453900",
+              "primary-dim": "#5bf083",
+              "surface-container-low": "#091328",
+              "tertiary-fixed": "#dae6fe",
+              "error-dim": "#d53d18",
+              "surface-container-high": "#141f38",
+              "surface-container-lowest": "#000000",
+              "primary-fixed-dim": "#5bf083",
+              "on-tertiary": "#515c70",
+              "on-error-container": "#ffd2c8",
+              "on-secondary": "#5b4b00",
+              "surface-tint": "#6bff8f",
+              "surface-variant": "#192540",
+              "secondary": "#ffd709",
+              "on-primary-fixed-variant": "#006a2d",
+              "surface-dim": "#060e20",
+              "error": "#ff7351",
+              "on-surface": "#dee5ff",
+              "surface-bright": "#1f2b49",
+              "primary-container": "#0abc56",
+              "background": "#060e20",
+              "inverse-surface": "#faf8ff",
+              "tertiary-dim": "#ccd7ef",
+              "surface": "#060e20",
+              "tertiary-fixed-dim": "#ccd7ef",
+              "on-error": "#450900",
+              "on-tertiary-fixed-variant": "#535e72",
+              "on-tertiary-fixed": "#374155",
+              "surface-container": "#0f1930",
+              "on-primary": "#005f28",
+              "tertiary": "#f0f3ff",
+              "error-container": "#b92902",
+              "secondary-fixed-dim": "#efc900",
+              "primary-fixed": "#6bff8f",
+              "on-secondary-fixed-variant": "#665500",
+              "primary": "#6bff8f",
+              "on-primary-container": "#002c0f",
+              "secondary-fixed": "#ffd709",
+              "on-tertiary-container": "#495468",
+              "on-primary-fixed": "#004a1d",
+              "outline": "#6d758c",
+              "tertiary-container": "#dae6fe",
+              "on-secondary-container": "#fff7e6",
+              "inverse-primary": "#006e2f",
+              "outline-variant": "#40485d",
+              "surface-container-highest": "#192540",
+              "inverse-on-surface": "#4d556b",
+              "secondary-dim": "#efc900",
+              "on-background": "#dee5ff"
+            },
+            fontFamily: {
+              "headline": ["Lexend"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        background-color: #060e20;
+        color: #dee5ff;
+        font-family: 'Inter', sans-serif;
+      }
+      .kinetic-gradient {
+        background: linear-gradient(45deg, #6bff8f, #0abc56);
+      }
+      .glass-card {
+        background: rgba(31, 43, 73, 0.8);
+        backdrop-filter: blur(20px);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-[#060e20] docked full-width top-0 sticky z-50 flex justify-between items-center px-6 py-4 w-full bg-[#091328] flat no shadows">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<img alt="Technical Director Profile" class="w-full h-full object-cover" data-alt="Technical Director profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsl09Jf_OMvWRUjcwMm08aakPab5zL6_DHXpy1wwmAi5zrHFv4ya2kA9zKaqSiem2ug9hDWUwf6EJEv9gpcC7UWMBxLyNYLrBjPlKCNsbGjIYZ0rwfSuK_HS3xzYj8xfCjZkAcSGlCz1oDyvacN-O0239L8KIUmEjQG3dgdi0qGE7L7Qekr98yUW2yRo2eazaKWJJkkpBBql4Ewbil5eqQ_1Ok_SHU3gwpbtQwvVat1Lylg_1Db67GFhKFf_XJ8ODpTOWhuI-_Cg07"/>
+</div>
+<h1 class="font-['Lexend'] font-bold tracking-tight text-[#dee5ff] text-2xl font-black text-[#22C55E] tracking-tighter">Athleo Director</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-[#22C55E] font-['Lexend'] text-sm font-semibold tracking-wide" href="#">Dashboard</a>
+<a class="text-[#a3aac4] hover:bg-[#1f2b49]/80 transition-colors font-['Lexend'] text-sm font-semibold tracking-wide" href="#">Schedules</a>
+<a class="text-[#a3aac4] hover:bg-[#1f2b49]/80 transition-colors font-['Lexend'] text-sm font-semibold tracking-wide" href="#">Finances</a>
+<a class="text-[#a3aac4] hover:bg-[#1f2b49]/80 transition-colors font-['Lexend'] text-sm font-semibold tracking-wide" href="#">Community</a>
+<a class="text-[#a3aac4] hover:bg-[#1f2b49]/80 transition-colors font-['Lexend'] text-sm font-semibold tracking-wide" href="#">Reports</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-[#dee5ff] p-2 hover:bg-[#1f2b49]/80 transition-colors rounded-full relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="md:hidden text-[#dee5ff] p-2">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-8">
+<!-- Hero Section: Quick Actions & Overview -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-12">
+<div class="lg:col-span-8">
+<p class="text-secondary font-headline font-bold uppercase tracking-[0.2em] text-xs mb-2">Command Center</p>
+<h2 class="text-on-surface font-headline text-4xl md:text-5xl font-extrabold tracking-tight mb-6">Operations Overview</h2>
+<!-- Quick Actions -->
+<div class="flex flex-wrap gap-4">
+<button class="kinetic-gradient text-on-primary-container px-6 py-3 rounded-xl font-headline font-bold flex items-center gap-2 active:scale-95 duration-150 shadow-lg shadow-primary-container/20">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+                        Approve Expenses
+                    </button>
+<button class="bg-surface-container-highest text-primary px-6 py-3 rounded-xl font-headline font-bold flex items-center gap-2 active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+                        Broadcast Announcement
+                    </button>
+</div>
+</div>
+<div class="lg:col-span-4 flex items-end justify-start lg:justify-end">
+<div class="bg-surface-container-low p-4 rounded-2xl border border-outline-variant/10 flex items-center gap-4">
+<div class="text-right">
+<p class="text-on-surface-variant text-xs uppercase font-bold tracking-widest">System Status</p>
+<p class="text-primary font-bold">Operational</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Metric Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+<!-- Total Students -->
+<div class="bg-surface-container p-6 rounded-2xl border-l-4 border-primary shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="groups">groups</span>
+<span class="text-primary text-xs font-bold">+12%</span>
+</div>
+<p class="text-on-surface-variant text-sm font-medium mb-1">Total Students</p>
+<p class="text-on-surface font-headline text-3xl font-bold">240</p>
+</div>
+<!-- Active Trainers -->
+<div class="bg-surface-container p-6 rounded-2xl border-l-4 border-secondary shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="sports">sports</span>
+<span class="text-secondary text-xs font-bold">Full Staff</span>
+</div>
+<p class="text-on-surface-variant text-sm font-medium mb-1">Active Trainers</p>
+<p class="text-on-surface font-headline text-3xl font-bold">12</p>
+</div>
+<!-- Weekly Revenue -->
+<div class="bg-surface-container p-6 rounded-2xl border-l-4 border-primary-container shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="payments">payments</span>
+<span class="text-primary-container text-xs font-bold">On Target</span>
+</div>
+<p class="text-on-surface-variant text-sm font-medium mb-1">Weekly Revenue</p>
+<p class="text-on-surface font-headline text-3xl font-bold">$1,200</p>
+</div>
+<!-- Pending Fees -->
+<div class="bg-surface-container p-6 rounded-2xl border-l-4 border-error shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="pending_actions">pending_actions</span>
+<span class="text-error text-xs font-bold">Urgent</span>
+</div>
+<p class="text-on-surface-variant text-sm font-medium mb-1">Pending Fees</p>
+<p class="text-on-surface font-headline text-3xl font-bold">$3,450</p>
+</div>
+</div>
+<!-- Main Content Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Approvals & Schedule -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Pending Approvals Section -->
+<section>
+<div class="flex justify-between items-end mb-4 px-2">
+<h3 class="font-headline text-xl font-bold text-on-surface">Pending Approvals</h3>
+<a class="text-primary text-sm font-bold hover:underline" href="#">View All</a>
+</div>
+<div class="bg-surface-container-low rounded-3xl overflow-hidden">
+<div class="p-4 space-y-3">
+<div class="bg-surface-container p-4 rounded-2xl flex items-center justify-between group hover:bg-surface-container-high transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-variant flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</div>
+<div>
+<p class="text-on-surface font-bold">New equipment expense</p>
+<p class="text-on-surface-variant text-xs font-medium">Requested by Head Coach Marcus</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<p class="text-secondary font-headline font-bold text-lg">$450</p>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full bg-error/10 text-error flex items-center justify-center hover:bg-error hover:text-on-error transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-4 rounded-2xl flex items-center justify-between group hover:bg-surface-container-high transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-variant flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="travel_explore">travel_explore</span>
+</div>
+<div>
+<p class="text-on-surface font-bold">Away Match Transport</p>
+<p class="text-on-surface-variant text-xs font-medium">U-18 Regional Qualifiers</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<p class="text-secondary font-headline font-bold text-lg">$1,100</p>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full bg-error/10 text-error flex items-center justify-center hover:bg-error hover:text-on-error transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Today's Schedule -->
+<section>
+<div class="flex justify-between items-end mb-4 px-2">
+<h3 class="font-headline text-xl font-bold text-on-surface">Today's Pitch Schedule</h3>
+<p class="text-on-surface-variant text-sm font-medium">October 24, 2023</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Event 1 -->
+<div class="bg-surface-container p-5 rounded-3xl relative overflow-hidden border-t-4 border-primary">
+<div class="flex justify-between mb-4">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] uppercase font-black tracking-widest">Training</span>
+<p class="text-on-surface-variant text-xs font-bold">09:00 - 11:30</p>
+</div>
+<h4 class="text-on-surface font-headline font-bold text-lg mb-1">Elite Squad Drills</h4>
+<p class="text-on-surface-variant text-sm mb-4">Main Pitch • 18 Participants</p>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-variant">
+<img alt="Trainer" class="w-full h-full object-cover rounded-full" data-alt="Trainer avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbmFQZ9RetrDl3EfSkGrBT2Ws_Hdn7jrxS8nyQTvLXJ8vZ5KbQ1Z0T5LwBoekPNondSbNEUul4404RiR-gyF-wHOUQYzAejfejxZk1WWRf0TXwiZfKhWau6fr4DcSlDfKmZMY9FkK2FvtKyNnMlNl8jYVow6ceH9zPR7CXlK_eByJTHzBjtADdaDUdBMGP8oYQko6BIfKSF6gQ5SfF8XL0f_uF7_4Hd9T0idBSzh-bMStfAZZx8WGkR1IMrZf6B3UxENxCj5j3hljN"/>
+</div>
+<p class="text-xs text-on-surface font-medium">Coach Peterson</p>
+</div>
+</div>
+<!-- Event 2 (Live) -->
+<div class="bg-surface-container p-5 rounded-3xl relative overflow-hidden border-t-4 border-error">
+<div class="flex justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-error rounded-full animate-pulse"></span>
+<span class="bg-error/10 text-error px-3 py-1 rounded-full text-[10px] uppercase font-black tracking-widest">Live Match</span>
+</div>
+<p class="text-on-surface-variant text-xs font-bold">14:00 - 16:00</p>
+</div>
+<h4 class="text-on-surface font-headline font-bold text-lg mb-1">U-15 vs West Academy</h4>
+<p class="text-on-surface-variant text-sm mb-4">Stadium Pitch • League Match</p>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-variant">
+<img alt="Trainer" class="w-full h-full object-cover rounded-full" data-alt="Referee avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZh9AstKO6tWjevep4Uu3Nl2lg--CE2CHFOUCdbZR_8mgpRZg7OQ0fvs5mAcNakNcFyPwS5In7bxsylmTvc41QyVVzQ3DK9o6V75maRHgnZdQ4bk-37jaBn8KZ6mG7OGZZF1b_55-2qxatzxq45jgVAm8E_sAZlFA9MIn-ipX_k-anrcM5kEn-mKoh42zl2zoe3iS8H_L6SkOLtg5uyxvLQhL936Cuq8XYlGutT5VNNkTgSFNXcMExUGerhTqc3Oc_jcMWGYMs2lmK"/>
+</div>
+<p class="text-xs text-on-surface font-medium">Official: Sarah Jenkins</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Recent Activity Feed -->
+<div class="lg:col-span-4">
+<section class="bg-surface-container-low p-6 rounded-3xl h-full border border-outline-variant/10">
+<h3 class="font-headline text-xl font-bold text-on-surface mb-6">Recent Activity</h3>
+<div class="space-y-6">
+<!-- Activity 1 -->
+<div class="relative pl-8 pb-6 border-l border-outline-variant/20">
+<div class="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-surface-container-low"></div>
+<p class="text-on-surface-variant text-[10px] uppercase font-black tracking-widest mb-1">15 mins ago</p>
+<p class="text-sm text-on-surface leading-relaxed">
+<span class="font-bold text-primary">Head Coach Marcus</span> uploaded the tactical report for <span class="italic text-on-surface-variant">U-18 Sunday League</span>.
+                            </p>
+</div>
+<!-- Activity 2 -->
+<div class="relative pl-8 pb-6 border-l border-outline-variant/20">
+<div class="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-secondary ring-4 ring-surface-container-low"></div>
+<p class="text-on-surface-variant text-[10px] uppercase font-black tracking-widest mb-1">2 hours ago</p>
+<p class="text-sm text-on-surface leading-relaxed">
+<span class="font-bold text-secondary">Trainer Elias</span> marked 24 students as <span class="text-primary-container font-bold">Present</span> for morning session.
+                            </p>
+</div>
+<!-- Activity 3 -->
+<div class="relative pl-8 pb-6 border-l border-outline-variant/20">
+<div class="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-error ring-4 ring-surface-container-low"></div>
+<p class="text-on-surface-variant text-[10px] uppercase font-black tracking-widest mb-1">5 hours ago</p>
+<p class="text-sm text-on-surface leading-relaxed">
+<span class="font-bold text-error">System Alert:</span> 3 tuition payments are over 10 days overdue.
+                            </p>
+</div>
+<!-- Activity 4 -->
+<div class="relative pl-8 border-l border-outline-variant/20">
+<div class="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim ring-4 ring-surface-container-low"></div>
+<p class="text-on-surface-variant text-[10px] uppercase font-black tracking-widest mb-1">Yesterday</p>
+<p class="text-sm text-on-surface leading-relaxed">
+<span class="font-bold">Director Ops</span> scheduled a club-wide broadcast for tomorrow.
+                            </p>
+</div>
+</div>
+<button class="w-full mt-8 py-3 bg-surface-container-highest text-on-surface-variant text-sm font-bold rounded-xl hover:text-on-surface transition-colors">
+                        Load Full History
+                    </button>
+</section>
+</div>
+</div>
+<!-- Upcoming Matches (Horizontal Scroll) -->
+<section class="mt-12">
+<h3 class="font-headline text-xl font-bold text-on-surface mb-6 px-2">Upcoming Events &amp; Matches</h3>
+<div class="flex overflow-x-auto gap-6 pb-6 no-scrollbar">
+<div class="min-w-[320px] bg-surface-container p-6 rounded-3xl border border-outline-variant/10">
+<p class="text-primary text-[10px] uppercase font-black tracking-[0.2em] mb-4">Finals</p>
+<div class="flex justify-between items-center mb-6">
+<div class="text-center">
+<div class="w-12 h-12 bg-surface-variant rounded-full mb-2 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface" data-icon="shield">shield</span>
+</div>
+<p class="text-xs font-bold">Athleo</p>
+</div>
+<p class="font-headline font-black text-2xl text-outline-variant">VS</p>
+<div class="text-center">
+<div class="w-12 h-12 bg-surface-variant rounded-full mb-2 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface" data-icon="shield">shield</span>
+</div>
+<p class="text-xs font-bold">City FC</p>
+</div>
+</div>
+<div class="pt-4 border-t border-outline-variant/10 flex justify-between text-xs">
+<span class="text-on-surface-variant">Sat, Oct 28</span>
+<span class="text-on-surface font-bold">Olympic Stadium</span>
+</div>
+</div>
+<div class="min-w-[320px] bg-surface-container p-6 rounded-3xl border border-outline-variant/10">
+<p class="text-secondary text-[10px] uppercase font-black tracking-[0.2em] mb-4">Training Camp</p>
+<h4 class="font-headline font-bold text-lg mb-2">Winter Skills Intensive</h4>
+<p class="text-on-surface-variant text-sm mb-6">3-day specialized workshop for U-12 to U-15 squads.</p>
+<div class="pt-4 border-t border-outline-variant/10 flex justify-between text-xs">
+<span class="text-on-surface-variant">Starts Nov 15</span>
+<span class="text-on-surface font-bold">Facility A</span>
+</div>
+</div>
+<div class="min-w-[320px] bg-surface-container p-6 rounded-3xl border border-outline-variant/10">
+<p class="text-on-surface-variant text-[10px] uppercase font-black tracking-[0.2em] mb-4">Community</p>
+<h4 class="font-headline font-bold text-lg mb-2">Parents' Strategy Evening</h4>
+<p class="text-on-surface-variant text-sm mb-6">Annual meeting to discuss Q1 tactical roadmap and development.</p>
+<div class="pt-4 border-t border-outline-variant/10 flex justify-between text-xs">
+<span class="text-on-surface-variant">Nov 2, 19:00</span>
+<span class="text-on-surface font-bold">Main Hall</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- NavigationDrawer (Mobile Sidebar Concept for context) -->
+<!-- Not explicitly rendered unless toggled, but here for structural completeness -->
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-2 bg-[#1f2b49]/80 backdrop-blur-xl z-50 rounded-t-2xl shadow-[0_-20px_40px_rgba(0,0,0,0.4)]">
+<a class="flex flex-col items-center justify-center text-[#a3aac4] p-2 hover:text-[#dee5ff] transition-all active:scale-110 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-widest mt-1">Schedules</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a3aac4] p-2 hover:text-[#dee5ff] transition-all active:scale-110 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-widest mt-1">Finances</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#22C55E]/10 text-[#22C55E] rounded-xl p-2 active:scale-110 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-widest mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a3aac4] p-2 hover:text-[#dee5ff] transition-all active:scale-110 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-widest mt-1">Community</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a3aac4] p-2 hover:text-[#dee5ff] transition-all active:scale-110 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="Assessment">assessment</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-widest mt-1">Reports</span>
+</a>
+</nav>
+<!-- FAB Concept (Contextual Suppression applies if not Dashboard, but here we are on Dashboard) -->
+<button class="fixed right-6 bottom-24 md:bottom-8 w-16 h-16 rounded-full kinetic-gradient text-on-primary-container shadow-2xl flex items-center justify-center active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+</body></html>

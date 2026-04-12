@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="24dp"
+    android:layout_marginVertical="8dp"
+    app:cardBackgroundColor="@color/surface_container"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp">
+
+    <!-- Primary border indicator (left edge style from HTML) -->
+    <View
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:background="@color/primary" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_marginStart="4dp">
+
+        <TextView
+            android:id="@+id/tvItemTaskCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TRAINING"
+            android:textColor="@color/secondary"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvItemTaskTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Task Title"
+            android:textColor="@color/on_surface"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvItemTaskCategory" />
+
+        <TextView
+            android:id="@+id/tvItemTaskDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Description goes here..."
+            android:textColor="@color/on_surface_variant"
+            android:textSize="14sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvItemTaskTitle" />
+
+        <!-- Status Container -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_role_container"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvItemTaskDesc">
+            
+            <View
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_input_field"
+                android:backgroundTint="@color/primary"
+                android:layout_marginEnd="6dp" />
+
+            <TextView
+                android:id="@+id/tvItemTaskStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pending"
+                android:textColor="@color/on_surface"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>        
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnItemSubmitAction"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Submit Proof"
+            android:textColor="@color/on_primary_container"
+            app:backgroundTint="@color/primary"
+            app:cornerRadius="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvItemTaskDesc" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

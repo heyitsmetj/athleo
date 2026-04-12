@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roster Analytics</title>
+    <style>
+        :root {
+            --primary: #6bff8f;
+            --bg-dark: #0a0a0a;
+            --bg-card: rgba(23, 23, 23, 0.4);
+            --text-main: #fafafa;
+            --text-sub: #a3a3a3;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(24px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            color: white;
+            font-size: 0.95rem;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        .search-bar:focus {
+            border-color: var(--primary);
+        }
+
+        .roster-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .player-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .player-card:active {
+            transform: scale(0.96);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .player-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
+            background: rgba(107, 255, 143, 0.1);
+            border: 1px solid rgba(107, 255, 143, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .player-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .player-info {
+            flex: 1;
+        }
+
+        .player-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .player-meta {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .player-score {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: #000;
+            font-weight: 800;
+            font-size: 0.9rem;
+            min-width: 40px;
+            height: 30px;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+        }
+      ::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+
+<!-- FORCED GLOBAL STANDARDIZATION -->
+<style>
+input:not([type="file"]), textarea, select { 
+    background-color: #171717 !important; 
+    border: 1px solid #262626 !important; 
+    color: #fafafa !important; 
+    border-radius: 0.75rem !important;
+    padding-top: 0.85rem !important; padding-bottom: 0.85rem !important;
+    color-scheme: dark !important;
+    font-size: 0.9rem !important;
+}
+input:focus, textarea:focus, select:focus { 
+    border-color: rgba(107, 255, 143, 0.6) !important; 
+    outline: none !important; 
+    box-shadow: 0 0 0 1px rgba(107, 255, 143, 0.2) !important; 
+}
+select {
+    appearance: none !important; 
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="white" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>') !important; 
+    background-repeat: no-repeat !important; 
+    background-position: right 1.25rem center !important; 
+}
+</style>
+
+            <script>
+                window.Android = {
+                    login: function() { console.log("Mock Login"); },
+                    registerUser: function() { console.log("Mock Register"); },
+                    openAnnouncements: function() { console.log("Mock Announcements"); },
+                    seedTestAccounts: function() { console.log("Mock Seed"); },
+                    saveProfile: function() { console.log("Mock Save Profile"); },
+                    closeScreen: function() { console.log("Mock Close"); },
+                    goBack: function() { console.log("Mock Back"); },
+                    createTask: function() { console.log("Mock Task"); },
+                    sendMessage: function() { console.log("Mock msg"); },
+                    showToast: function() { console.log("Toast shown"); }
+                };
+                
+                // Block the renderProfile from constantly resetting our mock title
+                window.renderProfile = function(user) { console.log("Mock profile render blocked for static HTML"); };
+            </script>
+            </head>
+<body>
+
+    <div class="header">
+        <button class="back-btn" onclick="window.history.back()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+        </button>
+        <h1>Roster Analytics</h1>
+    </div>
+
+    <div class="content">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search athletes..." oninput="filterRoster()">
+        
+        <div class="roster-list" id="rosterList">
+            <div class="empty-state">Loading roster...</div>
+        </div>
+    </div>
+
+    <script>
+        let allPlayers = [];
+
+        function renderRoster(dataVal) {
+            try {
+                allPlayers = (typeof dataVal === 'string') ? JSON.parse(dataVal) : dataVal;
+                displayPlayers(allPlayers);
+            } catch(e) {
+                document.getElementById('rosterList').innerHTML = '<div class="empty-state">Error loading generic roster data.</div>';
+            }
+        }
+
+        function filterRoster() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allPlayers.filter(p => p.name && p.name.toLowerCase().includes(query));
+            displayPlayers(filtered);
+        }
+
+        function displayPlayers(players) {
+            const listEl = document.getElementById('rosterList');
+            if(!players || players.length === 0) {
+                listEl.innerHTML = '<div class="empty-state">No players found.</div>';
+                return;
+            }
+            
+            listEl.innerHTML = players.map(player => {
+                const score = player.performanceScore ? Math.round(player.performanceScore) : 'N/A';
+                const rank = player.rank || 'Trainee';
+                const initial = player.name ? player.name.charAt(0) : '?';
+                
+                return `
+                    <div class="player-card" onclick="openAnalytics('${player.id}')">
+                        <div class="player-avatar">
+                            ${player.profileImageUrl ? `<img src="${player.profileImageUrl}">` : initial}
+                        </div>
+                        <div class="player-info">
+                            <div class="player-name">${player.name || 'Unknown Student'}</div>
+                            <div class="player-meta">
+                                <span>${rank}</span> • <span>${player.attendancePercentage || 0}% Att.</span>
+                            </div>
+                        </div>
+                        <div class="player-score">${score}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openAnalytics(id) {
+            if(window.Android) {
+                window.Android.openPlayerAnalytics(id);
+            } else {
+                console.log("Opening analytics for", id);
+            }
+        }
+
+        window.onload = () => {
+            if(window.Android) {
+                window.Android.loadAllPlayers(); // Let's add this bridge method to fetch and bounce back
+            } else {
+                // Mock data
+                renderRoster('[{"id":"1", "name":"Alice", "rank":"Pro", "performanceScore": 88, "attendancePercentage": 96}, {"id":"2", "name":"Bob", "rank":"Elite", "performanceScore": 92}]');
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#495468",
+                        "error-dim": "#d53d18",
+                        "primary-container": "#0abc56",
+                        "surface-tint": "#6bff8f",
+                        "on-primary-fixed-variant": "#006a2d",
+                        "surface-dim": "#f8f9ff",
+                        "on-secondary-container": "#453900",
+                        "on-secondary-fixed-variant": "#665500",
+                        "error": "#ff7351",
+                        "inverse-primary": "#006e2f",
+                        "on-primary-fixed": "#004a1d",
+                        "secondary-container": "#ffd709",
+                        "inverse-on-surface": "#4d556b",
+                        "on-error": "#ffffff",
+                        "on-surface": "#060e20",
+                        "tertiary-dim": "#ccd7ef",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#efc900",
+                        "secondary": "#ffd709",
+                        "outline-variant": "#dee5ff",
+                        "on-error-container": "#450900",
+                        "on-background": "#060e20",
+                        "surface-container-high": "#f1f4ff",
+                        "surface-container-highest": "#e8edff",
+                        "inverse-surface": "#060e20",
+                        "on-surface-variant": "#4d556b",
+                        "surface-container-low": "#f8faff",
+                        "tertiary-fixed": "#dae6fe",
+                        "background": "#f8f9ff",
+                        "on-tertiary-fixed-variant": "#535e72",
+                        "secondary-fixed": "#ffd709",
+                        "surface-bright": "#ffffff",
+                        "surface-variant": "#e1e6f0",
+                        "primary-fixed": "#6bff8f",
+                        "primary-dim": "#5bf083",
+                        "error-container": "#ffd2c8",
+                        "secondary-dim": "#efc900",
+                        "tertiary-container": "#dae6fe",
+                        "tertiary-fixed-dim": "#ccd7ef",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#f1f4ff",
+                        "outline": "#6d758c",
+                        "on-secondary-fixed": "#453900",
+                        "primary": "#22C55E",
+                        "on-tertiary-fixed": "#374155",
+                        "primary-fixed-dim": "#5bf083",
+                        "tertiary": "#f0f3ff",
+                        "surface": "#f8f9ff",
+                        "on-primary-container": "#002c0f",
+                        "on-tertiary": "#515c70"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9ff; }
+        .font-lexend { font-family: 'Lexend', sans-serif; }
+        .kinetic-grid {
+            background-image: radial-gradient(#22C55E 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center px-6 h-16 w-full bg-surface-bright/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary">
+<img class="w-full h-full object-cover" data-alt="Portrait of professional soccer player Erling Haaland" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-gIyUhQyImdLSpmpCpZiJ5zsSV4X97gaJTK8H7bfhn-_UBr-o4PrAeuUrp4KYBGgNf8oUOt2JcJEoRdWbxfhC3pnt73Fz8cRTWFsL1UioPWyX9Is9jVRMO5AvadE2awkqfIzMNlilYVjhjTOSiMBkh9WLw1bL9N4gl7CkKip7Z40UGNa7mU3zVb5vw0uWAKKVTTe43v7krjrxN8_vwZTWrAwTDkY_ZVeLsjNFOUJ1RdqRRHuAOqx4hI1NuQ3tNXW8w2Yksu_62ab7"/>
+</div>
+<h1 class="font-headline tracking-tight font-bold text-on-surface text-lg">Erling Haaland</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="more_vert">more_vert</span>
+</button>
+</header>
+<main class="px-6 pt-6 max-w-5xl mx-auto relative">
+<div class="absolute inset-0 kinetic-grid pointer-events-none"></div>
+<!-- Hero Stats Bento -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<!-- Summary Card -->
+<div class="md:col-span-2 bg-surface-bright rounded-3xl p-8 flex flex-col md:flex-row gap-8 items-center shadow-sm border border-outline-variant/30">
+<div class="relative">
+<div class="w-32 h-32 rounded-2xl bg-gradient-to-br from-primary to-primary-container p-1">
+<img class="w-full h-full object-cover rounded-[14px]" data-alt="Professional athlete profile shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNMX-5Zj9If7-bnLIuckxbQ55VW4xXn27rKeNbuL_-CpcI4uMCThf7ybD1-U3nbBv58H5bwAAAIn4-SSe7zjQxTK0bWWXi8T_a_5StVMsaelzH24CvVBxM6R_bt8CX1fnopy92X2yFcEe_ydHlHu51Kxfq7iotWD1mWKJd_bj5L5kzhP2mG6ipn7LRc6YstCQ_k_l12vKdEH-1A0ylWG2RiCBHm9ikLBZxvWlUJErzL_c00ZUckv8fiQBgcHwo3rXFfaPBZkqRta9L"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-secondary text-on-secondary-fixed px-3 py-1 rounded-full font-headline font-bold text-xs tracking-wider uppercase">
+                        Forward
+                    </div>
+</div>
+<div class="flex-1 text-center md:text-left">
+<div class="flex items-center justify-center md:justify-start gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-on-surface-variant font-headline font-semibold uppercase text-xs tracking-widest">Performance Tier: Elite</span>
+</div>
+<h2 class="text-4xl font-headline font-black text-on-surface mb-2 leading-none">Erling Haaland</h2>
+<p class="text-on-surface-variant font-medium mb-6">Manchester City • Norway National Team</p>
+<div class="flex flex-wrap justify-center md:justify-start gap-4">
+<div class="bg-surface-container px-4 py-2 rounded-2xl">
+<span class="block text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Goals</span>
+<span class="text-xl font-headline font-bold">32</span>
+</div>
+<div class="bg-surface-container px-4 py-2 rounded-2xl">
+<span class="block text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Assists</span>
+<span class="text-xl font-headline font-bold">08</span>
+</div>
+<div class="bg-surface-container px-4 py-2 rounded-2xl">
+<span class="block text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Minutes</span>
+<span class="text-xl font-headline font-bold">2,410</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Weekly Rating -->
+<div class="bg-primary text-on-primary-container rounded-3xl p-8 flex flex-col items-center justify-center shadow-xl shadow-primary/20 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-20">
+<span class="material-symbols-outlined text-6xl" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="font-headline font-bold text-sm uppercase tracking-widest mb-2 opacity-80">Weekly Rating</span>
+<div class="flex items-baseline gap-1">
+<span class="text-7xl font-headline font-black leading-none">4.5</span>
+<span class="text-2xl font-headline font-bold opacity-60">/5</span>
+</div>
+<div class="mt-4 flex gap-1">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-on-primary-container" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-on-primary-container" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-on-primary-container" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-on-primary-container opacity-40" data-icon="star_half" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+</div>
+</div>
+<!-- Technical & Trends -->
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-8">
+<!-- Technical Index -->
+<div class="lg:col-span-3 bg-surface-bright rounded-3xl p-8 shadow-sm border border-outline-variant/30">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h3 class="font-headline font-bold text-xl mb-1">Technical Skill Index</h3>
+<p class="text-on-surface-variant text-sm">Core competency distribution across metrics</p>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="analytics">analytics</span>
+</div>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-xs font-headline font-bold uppercase tracking-widest">Dribbling</span>
+<span class="text-xs font-bold text-primary">88%</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 88%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-xs font-headline font-bold uppercase tracking-widest">Speed &amp; Power</span>
+<span class="text-xs font-bold text-primary">96%</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 96%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-xs font-headline font-bold uppercase tracking-widest">Finishing Accuracy</span>
+<span class="text-xs font-bold text-primary">94%</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 94%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-xs font-headline font-bold uppercase tracking-widest">Stamina</span>
+<span class="text-xs font-bold text-primary">82%</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 82%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Progress Trends -->
+<div class="lg:col-span-2 bg-surface-container-high rounded-3xl p-8 shadow-sm">
+<h3 class="font-headline font-bold text-xl mb-1">Progress Trends</h3>
+<p class="text-on-surface-variant text-sm mb-10">Last 4 weeks intensity</p>
+<div class="flex items-end justify-between h-48 gap-4 px-2">
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-primary/20 rounded-t-xl relative group">
+<div class="absolute bottom-0 w-full bg-primary/40 rounded-t-xl h-3/4"></div>
+<div class="h-32"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">W1</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-primary/20 rounded-t-xl relative group">
+<div class="absolute bottom-0 w-full bg-primary/60 rounded-t-xl h-4/5"></div>
+<div class="h-32"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">W2</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-primary/20 rounded-t-xl relative group">
+<div class="absolute bottom-0 w-full bg-primary/80 rounded-t-xl h-full"></div>
+<div class="h-32"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">W3</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-primary/20 rounded-t-xl relative group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-xl h-[85%]"></div>
+<div class="h-32"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">W4</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Coach's Feedback Section -->
+<div class="bg-surface-bright rounded-3xl p-8 shadow-sm border border-outline-variant/30 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+<div class="relative flex flex-col md:flex-row gap-8 items-start">
+<div class="flex-shrink-0">
+<div class="w-16 h-16 rounded-2xl bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="forum">forum</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-4 mb-4">
+<h3 class="font-headline font-bold text-xl">Coach's Feedback</h3>
+<span class="bg-secondary text-on-secondary-fixed px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">New Update</span>
+</div>
+<p class="text-on-surface-variant leading-relaxed text-lg italic font-body">
+                        "Erling's positioning inside the box has reached a new level of maturity this week. His explosive acceleration in the first 5 meters is currently unmatched in the league. We're focusing on his link-up play under high pressure in the upcoming sessions, but his overall contribution to the team's kinetic flow is exceptional. Keep the intensity high."
+                    </p>
+<div class="mt-6 pt-6 border-t border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest">
+<img class="w-full h-full object-cover rounded-full" data-alt="Head coach portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs4_Dw-1ngrYSn4MtR22Y7mcLmb5uXOGeW7ps3F5kn5WFWaNgFo1pKdImH8JgDcSyoEyRtic5RsB3Lj8s13w_kWzsAGGPGx5Eaca27rlIedSFJ2KScngpxJeGltEQAd_iGcKbsa0dm9UGYQyPes4I0fT2kE-hhWIb9ZH2qUF98Cw8YDH-qXW0qzg4KWm1ZPz3wWe06hCSHx2N7pCDCjHPx4dlm3VkK2MzL2VcpG28pjWZENhde0KMh-CKpP1-VrbSgL7UMeprVA7V_"/>
+</div>
+<div>
+<p class="text-sm font-bold">Pep Guardiola</p>
+<p class="text-[10px] text-on-surface-variant font-headline uppercase tracking-widest">Head Coach</p>
+</div>
+</div>
+<button class="bg-surface-container px-6 py-2 rounded-full text-xs font-bold hover:bg-surface-container-high transition-colors">
+                            Request Meeting
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 backdrop-blur-xl z-50 rounded-t-2xl shadow-[0_-10px_30px_rgba(0,0,0,0.05)] border-t border-outline-variant/30">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="groups">groups</span>
+<span class="font-headline text-[10px] font-medium uppercase tracking-wider">Squad</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="strategy">strategy</span>
+<span class="font-headline text-[10px] font-medium uppercase tracking-wider">Tactics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="exercise">exercise</span>
+<span class="font-headline text-[10px] font-medium uppercase tracking-wider">Training</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="sports_soccer">sports_soccer</span>
+<span class="font-headline text-[10px] font-medium uppercase tracking-wider">Matches</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-primary to-primary-container text-white rounded-xl px-4 py-1 shadow-lg shadow-primary/20" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-headline text-[10px] font-medium uppercase tracking-wider">Reports</span>
+</a>
+</nav>
+</body></html>

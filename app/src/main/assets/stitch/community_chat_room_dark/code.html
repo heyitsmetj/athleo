@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Athleo | Chat Room</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6bff8f",
+                        "background": "#0a0a0a",
+                        "surface": "#171717",
+                        "surface-border": "#262626",
+                        "on-surface": "#fafafa",
+                        "on-surface-variant": "#a3a3a3",
+                        "received": "#1f1f1f",
+                        "sent": "#173b22"
+                    },
+                    fontFamily: { "sans": ["Inter", "sans-serif"] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { background-color: #0a0a0a; color: #fafafa; font-family: 'Inter', sans-serif; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        .glass-panel { background: rgba(23, 23, 23, 0.6); backdrop-filter: blur(24px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); border-top: 1px solid rgba(255, 255, 255, 0.08); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+
+<!-- FORCED GLOBAL STANDARDIZATION -->
+<style>
+input:not([type="file"]), textarea, select { 
+    background-color: #171717 !important; 
+    border: 1px solid #262626 !important; 
+    color: #fafafa !important; 
+    border-radius: 0.75rem !important;
+    padding-top: 0.85rem !important; padding-bottom: 0.85rem !important;
+    color-scheme: dark !important;
+    font-size: 0.9rem !important;
+}
+input:focus, textarea:focus, select:focus { 
+    border-color: rgba(107, 255, 143, 0.6) !important; 
+    outline: none !important; 
+    box-shadow: 0 0 0 1px rgba(107, 255, 143, 0.2) !important; 
+}
+select {
+    appearance: none !important; 
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="white" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>') !important; 
+    background-repeat: no-repeat !important; 
+    background-position: right 1.25rem center !important; 
+}
+</style>
+</head>
+<body class="relative">
+
+    <!-- Ambient Background -->
+    <div class="fixed inset-0 z-0 flex items-start justify-center pointer-events-none opacity-40">
+        <div class="w-[120vw] h-[60vw] bg-primary/10 blur-[120px] rounded-full translate-y-[-50%]"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="w-full z-50 h-[72px] glass-panel flex items-center px-4 gap-4 shrink-0 shadow-md">
+        <button onclick="Android.finishActivity()" class="material-symbols-outlined text-on-surface-variant hover:text-on-surface p-2 -ml-2 rounded-full">arrow_back</button>
+        
+        <div class="w-10 h-10 rounded-full bg-surface-border flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-on-surface-variant text-[20px]">group</span>
+        </div>
+        
+        <div class="flex-1 min-w-0">
+            <h1 id="group-name" class="font-bold text-base text-on-surface truncate">Loading...</h1>
+            <p class="text-xs text-primary font-medium truncate">Tap here for group info</p>
+        </div>
+        
+        <button class="material-symbols-outlined text-on-surface-variant p-2">more_vert</button>
+    </header>
+
+    <!-- Chat Area -->
+    <main id="chat-container" class="flex-1 w-full max-w-2xl mx-auto z-10 overflow-y-auto no-scrollbar p-4 flex flex-col gap-4 pb-4">
+        <!-- Messages will be injected here -->
+        <div class="flex justify-center my-4">
+            <span class="bg-surface border border-surface-border text-on-surface-variant text-[10px] uppercase tracking-wider font-semibold px-3 py-1 rounded-full">Secure E2E Encryption Demo</span>
+        </div>
+    </main>
+
+    <!-- Input Area -->
+    <footer class="w-full z-50 glass-panel p-3 shrink-0">
+        <div class="max-w-2xl mx-auto flex items-end gap-2 bg-surface border border-surface-border rounded-3xl p-1 pr-1.5 focus-within:border-primary/50 transition-colors">
+            <button class="material-symbols-outlined text-on-surface-variant p-2.5 hover:text-on-surface transition-colors shrink-0">add</button>
+            
+            <textarea id="message-input" rows="1" placeholder="Type a message..." class="flex-1 bg-transparent border-none focus:ring-0 text-[15px] resize-none py-3 text-on-surface placeholder:text-on-surface-variant min-h-[44px] max-h-32 no-scrollbar" oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'"></textarea>
+            
+            <button onclick="sendMessage()" class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-black shrink-0 hover:bg-primary/90 transition-colors mb-0.5 shadow-lg shadow-primary/20">
+                <span class="material-symbols-outlined text-[20px] ml-0.5">send</span>
+            </button>
+        </div>
+    </footer>
+
+    <!-- Group Info Modal -->
+    <div id="group-info-modal" class="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm hidden flex-col justify-end transition-all opacity-0">
+        <div class="glass-panel w-full max-h-[90vh] rounded-t-3xl p-6 flex flex-col gap-4 transform translate-y-full transition-transform duration-300" id="group-info-content">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-xl font-bold text-on-surface">Group Info</h3>
+                <button onclick="closeGroupInfo()" class="material-symbols-outlined text-on-surface-variant p-2 -mr-2">close</button>
+            </div>
+            
+            <div class="flex flex-col items-center py-4 border-b border-surface-border">
+                <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-3">
+                    <span class="material-symbols-outlined text-[36px]">group</span>
+                </div>
+                <h2 id="info-group-name" class="text-lg font-bold text-on-surface">...</h2>
+                <p id="info-group-type" class="text-xs text-on-surface-variant uppercase tracking-widest mt-1">...</p>
+            </div>
+
+            <div class="flex-1 overflow-y-auto no-scrollbar py-2">
+                <div class="flex justify-between items-end mb-3">
+                    <p class="text-xs font-semibold text-on-surface-variant uppercase tracking-widest">Members</p>
+                    <button id="btn-edit-members" onclick="toggleEditMode()" class="text-xs font-semibold text-primary hidden">Edit</button>
+                </div>
+                <div id="members-list" class="space-y-2 pb-20">
+                    <div class="text-center text-xs text-on-surface-variant py-4">Loading members...</div>
+                </div>
+            </div>
+
+            <div id="admin-actions" class="absolute bottom-6 left-6 right-6 hidden">
+                <button onclick="saveGroupSettings()" class="w-full bg-primary text-black font-bold py-3.5 rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-transform">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentGroupId = '';
+        let currentUser = null;
+        let messagesArray = [];
+        let groupData = null;
+        let allUsers = [];
+        let isEditMode = false;
+        
+        // Editable State
+        let pendingMemberIds = new Set();
+        let pendingAdminIds = new Set();
+
+        window.initChat = (groupId, groupName) => {
+            currentGroupId = groupId;
+            document.getElementById('group-name').textContent = groupName;
+            
+            if (typeof Android !== 'undefined') {
+                Android.loadChatMessages(groupId);
+                Android.getChatGroupInfo(groupId);
+            }
+        };
+
+        window.renderMessages = (mVal, uVal) => {
+            try {
+                if (uVal) currentUser = (typeof uVal === 'string') ? JSON.parse(uVal) : uVal;
+                const messages = (typeof mVal === 'string') ? JSON.parse(mVal) : mVal;
+                messagesArray = messages;
+
+                const container = document.getElementById('chat-container');
+                Array.from(container.children).forEach(child => {
+                    if(!child.querySelector('span') || !child.querySelector('span').textContent.includes('Encryption')) {
+                        child.remove();
+                    }
+                });
+
+                messages.forEach(msg => {
+                    const isMe = currentUser && msg.senderId === currentUser.id;
+                    const time = new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    const bubbleColor = isMe ? 'bg-sent text-on-surface' : 'bg-received border border-surface-border text-on-surface';
+                    const align = isMe ? 'self-end items-end' : 'self-start items-start';
+                    const borderRadius = isMe ? 'rounded-2xl rounded-tr-sm' : 'rounded-2xl rounded-tl-sm';
+                    const nameHtml = !isMe ? `<span class="text-[11px] font-semibold text-primary/80 mb-0.5 uppercase tracking-wide">${msg.senderName} • ${msg.role}</span>` : '';
+
+                    const html = `
+                        <div class="flex flex-col max-w-[80%] ${align} animate-fade-in-up">
+                            <div class="${bubbleColor} ${borderRadius} p-3 flex flex-col shadow-sm">
+                                ${nameHtml}
+                                <span class="text-[15px] leading-snug whitespace-pre-wrap">${escapeHtml(msg.text)}</span>
+                                <div class="flex items-center justify-end gap-1 mt-1 opacity-60">
+                                    <span class="text-[10px] font-medium">${time}</span>
+                                    ${isMe ? '<span class="material-symbols-outlined text-[12px]">done_all</span>' : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', html);
+                });
+                container.scrollTop = container.scrollHeight;
+            } catch (e) {
+                console.error("Error rendering messages: " + e.message);
+            }
+        };
+
+        window.renderGroupInfo = (gVal, uVal) => {
+            try {
+                groupData = (typeof gVal === 'string') ? JSON.parse(gVal) : gVal;
+                allUsers = (typeof uVal === 'string') ? JSON.parse(uVal) : uVal;
+                
+                // Initialize pending state
+                pendingMemberIds = new Set(groupData.memberIds || []);
+                pendingAdminIds = new Set(groupData.adminIds || []);
+                
+                document.getElementById('info-group-name').textContent = groupData.name;
+                document.getElementById('info-group-type').textContent = groupData.type === 'custom' ? 'Custom Group' : 'Academy Directory';
+                
+                renderMembersList();
+                
+                // Show edit button if user is admin
+                const isAdmin = pendingAdminIds.has(currentUser?.id);
+                if (isAdmin && groupData.type === 'custom') {
+                    document.getElementById('btn-edit-members').classList.remove('hidden');
+                } else {
+                    document.getElementById('btn-edit-members').classList.add('hidden');
+                }
+            } catch (e) { console.error(e); }
+        };
+        
+        function renderMembersList() {
+            const list = document.getElementById('members-list');
+            list.innerHTML = '';
+            
+            allUsers.forEach(user => {
+                const isMember = pendingMemberIds.has(user.id);
+                const isAdmin = pendingAdminIds.has(user.id);
+                
+                if (!isEditMode && !isMember && !isAdmin) return; // Only show members unless editing
+
+                // UI components
+                let checkboxHtml = '';
+                let adminBadgeHtml = isAdmin ? '<span class="text-[9px] bg-primary/20 text-primary px-1.5 py-0.5 rounded uppercase font-bold tracking-widest ml-2">Admin</span>' : '';
+                let promoteHtml = '';
+
+                if (isEditMode) {
+                    const checkedStr = (isMember || isAdmin) ? 'checked' : '';
+                    checkboxHtml = `<input type="checkbox" ${checkedStr} onchange="toggleMember('${user.id}', this)" class="w-5 h-5 rounded border-surface-border text-primary bg-surface cursor-pointer mr-3">`;
+                    
+                    if ((isMember || isAdmin) && user.id !== currentUser?.id) {
+                        promoteHtml = `<button onclick="toggleAdmin('${user.id}')" class="text-[10px] uppercase font-bold px-2 py-1 rounded bg-surface border ${isAdmin ? 'border-primary text-primary' : 'border-surface-border text-on-surface-variant'}">${isAdmin ? 'Revoke Admin' : 'Make Admin'}</button>`;
+                    }
+                }
+
+                const html = `
+                    <div class="flex items-center p-2 rounded-xl border border-transparent hover:border-surface-border transition-all">
+                        ${checkboxHtml}
+                        <div class="w-10 h-10 rounded-full bg-surface-border flex items-center justify-center text-on-surface mr-3 shrink-0">
+                            <span class="material-symbols-outlined text-[20px]">person</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-semibold text-on-surface flex items-center">${user.name} ${adminBadgeHtml}</p>
+                            <p class="text-[10px] text-on-surface-variant uppercase tracking-wide truncate">${user.role}</p>
+                        </div>
+                        ${promoteHtml}
+                    </div>
+                `;
+                list.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            document.getElementById('btn-edit-members').textContent = isEditMode ? 'Cancel' : 'Edit';
+            
+            if (isEditMode) {
+                document.getElementById('admin-actions').classList.remove('hidden');
+            } else {
+                document.getElementById('admin-actions').classList.add('hidden');
+                // Reset changes
+                pendingMemberIds = new Set(groupData.memberIds || []);
+                pendingAdminIds = new Set(groupData.adminIds || []);
+            }
+            renderMembersList();
+        }
+
+        function toggleMember(userId, cb) {
+            // Cannot remove yourself if you are the only Admin!
+            if (userId === currentUser?.id) {
+                if(typeof Android !== 'undefined') Android.showToast("Cannot remove yourself.");
+                cb.checked = true;
+                return;
+            }
+
+            if (cb.checked) {
+                pendingMemberIds.add(userId);
+            } else {
+                pendingMemberIds.delete(userId);
+                pendingAdminIds.delete(userId); // Also revoke admin
+            }
+            renderMembersList();
+        }
+
+        function toggleAdmin(userId) {
+            if (pendingAdminIds.has(userId)) {
+                pendingAdminIds.delete(userId);
+            } else {
+                pendingAdminIds.add(userId);
+                pendingMemberIds.add(userId); // Ensure they are a member
+            }
+            renderMembersList();
+        }
+
+        function saveGroupSettings() {
+            const membersArray = Array.from(pendingMemberIds);
+            const adminsArray = Array.from(pendingAdminIds);
+            if (typeof Android !== 'undefined') {
+                Android.updateChatGroupMembers(currentGroupId, JSON.stringify(membersArray), JSON.stringify(adminsArray));
+            }
+            toggleEditMode();
+        }
+
+        function openGroupInfo() {
+            if (typeof Android !== 'undefined') Android.getChatGroupInfo(currentGroupId);
+            const modal = document.getElementById('group-info-modal');
+            const content = document.getElementById('group-info-content');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('translate-y-full');
+            }, 10);
+        }
+
+        function closeGroupInfo() {
+            const modal = document.getElementById('group-info-modal');
+            const content = document.getElementById('group-info-content');
+            modal.classList.add('opacity-0');
+            content.classList.add('translate-y-full');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                if (isEditMode) toggleEditMode();
+            }, 300);
+        }
+
+        window.onGroupUpdated = () => {
+            if (typeof Android !== 'undefined') Android.getChatGroupInfo(currentGroupId);
+        };
+
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            const text = input.value.trim();
+            if (text.length === 0 || !currentGroupId) return;
+            input.value = '';
+            input.style.height = ''; 
+            if (typeof Android !== 'undefined') {
+                Android.sendChatMessage(currentGroupId, text);
+            }
+        }
+
+        function escapeHtml(unsafe) {
+            return unsafe
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+        }
+
+        document.getElementById('message-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+        
+        // Wire up header tap
+        document.querySelector('header .flex-1').addEventListener('click', openGroupInfo);
+    </script>
+
+</body>
+</html>

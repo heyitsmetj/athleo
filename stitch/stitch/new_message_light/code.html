@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #060e20;
+        }
+        .font-headline {
+            font-family: 'Lexend', sans-serif;
+        }
+        /* Custom scrollbar suppression */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-lowest": "#000000",
+                        "surface-container-high": "#141f38",
+                        "on-tertiary": "#515c70",
+                        "primary-fixed-dim": "#5bf083",
+                        "surface-container-low": "#091328",
+                        "primary-dim": "#5bf083",
+                        "tertiary-fixed": "#dae6fe",
+                        "secondary-container": "#705d00",
+                        "on-surface-variant": "#a3aac4",
+                        "on-secondary-fixed": "#453900",
+                        "error-dim": "#d53d18",
+                        "inverse-surface": "#faf8ff",
+                        "primary-container": "#0abc56",
+                        "surface-bright": "#1f2b49",
+                        "background": "#060e20",
+                        "tertiary-dim": "#ccd7ef",
+                        "surface": "#060e20",
+                        "surface-dim": "#060e20",
+                        "on-primary-fixed-variant": "#006a2d",
+                        "on-surface": "#dee5ff",
+                        "error": "#ff7351",
+                        "surface-variant": "#192540",
+                        "surface-tint": "#6bff8f",
+                        "on-secondary": "#5b4b00",
+                        "on-error-container": "#ffd2c8",
+                        "secondary": "#ffd709",
+                        "primary-fixed": "#6bff8f",
+                        "secondary-fixed-dim": "#efc900",
+                        "on-secondary-fixed-variant": "#665500",
+                        "on-tertiary-container": "#495468",
+                        "secondary-fixed": "#ffd709",
+                        "on-primary-container": "#002c0f",
+                        "primary": "#6bff8f",
+                        "on-tertiary-fixed-variant": "#535e72",
+                        "surface-container": "#0f1930",
+                        "on-tertiary-fixed": "#374155",
+                        "on-error": "#450900",
+                        "tertiary-fixed-dim": "#ccd7ef",
+                        "error-container": "#b92902",
+                        "tertiary": "#f0f3ff",
+                        "on-primary": "#005f28",
+                        "secondary-dim": "#efc900",
+                        "on-background": "#dee5ff",
+                        "inverse-on-surface": "#4d556b",
+                        "outline-variant": "#40485d",
+                        "inverse-primary": "#006e2f",
+                        "surface-container-highest": "#192540",
+                        "outline": "#6d758c",
+                        "on-primary-fixed": "#004a1d",
+                        "on-secondary-container": "#fff7e6",
+                        "tertiary-container": "#dae6fe"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface selection:bg-primary selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="bg-[#091328] w-full top-0 z-50 flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-4">
+<button class="text-[#6bff8f] hover:bg-[#1f2b49]/80 transition-colors p-2 rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-['Lexend'] font-bold tracking-tight text-[#dee5ff] text-xl">New Message</h1>
+</div>
+<button class="text-[#6bff8f] hover:bg-[#1f2b49]/80 transition-colors p-2 rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</header>
+<main class="max-w-3xl mx-auto px-6 pt-6 pb-32">
+<!-- Search Bar Section -->
+<div class="mb-8">
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant focus:ring-2 focus:ring-primary transition-all duration-300" placeholder="Search contacts or roles" type="text"/>
+</div>
+</div>
+<!-- Role Filters Section -->
+<div class="mb-10 overflow-x-auto no-scrollbar -mx-6 px-6">
+<div class="flex gap-3 whitespace-nowrap pb-2">
+<button class="px-6 py-2 rounded-full bg-primary text-on-primary-container font-headline font-semibold text-sm transition-transform active:scale-95">All</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-headline font-medium text-sm hover:text-primary transition-all active:scale-95">Coaches</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-headline font-medium text-sm hover:text-primary transition-all active:scale-95">Trainers</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-headline font-medium text-sm hover:text-primary transition-all active:scale-95">Squads</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-headline font-medium text-sm hover:text-primary transition-all active:scale-95">Admins</button>
+</div>
+</div>
+<!-- Frequent Contacts (Asymmetric/Premium Layout) -->
+<section class="mb-12">
+<h2 class="font-headline text-secondary text-xs uppercase tracking-[0.2em] font-bold mb-6">Frequent Contacts</h2>
+<div class="grid grid-cols-4 md:grid-cols-5 gap-6">
+<!-- Contact 1 -->
+<div class="flex flex-col items-center gap-3 group">
+<div class="relative p-1 rounded-full bg-gradient-to-tr from-primary to-secondary transition-transform group-hover:scale-110 duration-300">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-container border-4 border-surface">
+<img class="w-full h-full object-cover" data-alt="Portrait of Rohan, a young athlete" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg6hkM1TjaQNG9uzZtewJ-aFkTwduUoLVLNkxr9o1BiLAOq-zxoAm1BJ_dYpN5sGYnp0G3mjbsu0PA2w19Kw8p_eO2oJNStsZ7mrUCoY7ACxlXbK2LxNeLu4u0vAwLhQ3FM_FT3uUdP6rzJloqUKrPKAtf6EAaOb1W8WcEnNaMxfus8zaQYo5Ul9OB1VHo0TWPuYG-GjkRjXJkZ3_wBNCas00rW81hInspT4cs_YbwYf1Bx8tZNBdT13-Sh5r0dLeXKxLa0jlei5TT"/>
+</div>
+</div>
+<span class="font-body text-sm font-medium text-on-surface text-center">Rohan</span>
+</div>
+<!-- Contact 2 -->
+<div class="flex flex-col items-center gap-3 group">
+<div class="relative p-1 rounded-full bg-gradient-to-tr from-primary to-secondary transition-transform group-hover:scale-110 duration-300">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-container border-4 border-surface">
+<img class="w-full h-full object-cover" data-alt="Portrait of Priya, female athlete" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCboCvPuh-zeyEyq9kA3a6Ql-_8xfYxC6vYlQaYpM8ZyMrKGJVE-wnPeQfUyTPipMlANiagbXrEE2YIKfw0wb2UifDkLoh6FqMUta9VEHC_rSfkbA7jRryIbJsKsNOgSEkIgqV2G_VqeMGxxwN6wQ-QQhb6sZdQXau_Xk599dj-zkMrVfnJG3e4B6uHzsgPPk72YSs9-sa9_DeWW_nXrW1r8gpxm2mfICmwzJHjTp3zKlAc5EdYEF_IIQiexZVq_8QcRBj1HJDDpO8C"/>
+</div>
+</div>
+<span class="font-body text-sm font-medium text-on-surface text-center">Priya</span>
+</div>
+<!-- Contact 3 -->
+<div class="flex flex-col items-center gap-3 group">
+<div class="relative p-1 rounded-full bg-gradient-to-tr from-primary to-secondary transition-transform group-hover:scale-110 duration-300">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-container border-4 border-surface">
+<img class="w-full h-full object-cover" data-alt="Portrait of Ishaan, male student" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm5Wm8f8dlZVfFNahSwszHq6bGA_Kv8e84_uzfCK7v5NScrk4WXi0t8mQXV_MVka3y9KVcz2o3b-CoFsIRjttNdGYtsbHBY7QVRIMnaha4ZAKdgVBYNhts4LZ_xvrFQo-MPrevG9bT7tiLYsiUfeFS6eadMwKJHGl0QPxvwOpuQXTu6jnBKG_OFpkhDwpBnsIJskMrrCH-Kgl8U9BzPPZ0okC1E-gDgPbFnYx9ltQHjHXfsQGcDKv9xiAfG8HVtep7kMfTjTFyqt35"/>
+</div>
+</div>
+<span class="font-body text-sm font-medium text-on-surface text-center">Ishaan</span>
+</div>
+<!-- Contact 4 -->
+<div class="flex flex-col items-center gap-3 group">
+<div class="relative p-1 rounded-full bg-gradient-to-tr from-primary to-secondary transition-transform group-hover:scale-110 duration-300">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-container border-4 border-surface">
+<img class="w-full h-full object-cover" data-alt="Portrait of Sunil, adult trainer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZohuUFpFERHW89NaZ-u5nWrWt8k7XVtWTlsOLa3P11LjPpi-6-WpBTbQt7ep252XBGk-mYc0-geb5e9uXRAcURKmgUQM8RgZPRbpAWUzgf0h3pbaXqUuqXtTJv33N0WlQ2Bag6C2iMDhbdzUFCWkUDIr-VyHfufY4vSt0J65rI-IZSfOOYBe1BEd5izw23bYo4MDBbiCze9sqV6iLR1hvBttiF4qjy0XaXbZ-LxvASBAukCMgCQkaiXPzTxNI9a2xbz3CszNmsgVV"/>
+</div>
+</div>
+<span class="font-body text-sm font-medium text-on-surface text-center">Sunil</span>
+</div>
+</div>
+</section>
+<!-- Contact List (High-End Layout) -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline text-secondary text-xs uppercase tracking-[0.2em] font-bold">All Contacts</h2>
+<span class="text-on-surface-variant text-xs font-medium">84 Available</span>
+</div>
+<div class="space-y-4">
+<!-- Alphabetical Header -->
+<div class="pt-4 pb-2 border-b border-outline-variant/10">
+<span class="font-headline font-bold text-2xl text-primary opacity-50">A</span>
+</div>
+<!-- Contact Card 1 -->
+<div class="group flex items-center justify-between p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Portrait of Arjun Nair" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-GouBkWWqXhZMu5Un2a_9PSRHmzkOR83axyrNgm24n4Yiz_6qYAV19UiKpD_oroJoerZkEnJMdQEgs14GQiaCjF4J4p6fRn7h90gtrmiZccnjj3xdGhPZHQFxwdkv7BOzcmk8xhnvDzHb_14BuKtnuBZZRXN69BHV360sx2sfOMoZy0Z74YnDAjqn7hkjZyHuJFbK09OUyW8Fndzbh7L91PqHtbk4GHLFYmjaR-ApdJnzNSdMsm1053oba6dJ32bH79u_Rb_YCUic"/>
+</div>
+<div>
+<h3 class="font-headline font-semibold text-on-surface group-hover:text-primary transition-colors">Arjun Nair</h3>
+<p class="text-on-surface-variant text-sm flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                                Head Coach
+                            </p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chat_bubble</span>
+</div>
+<!-- Contact Card 2 -->
+<div class="group flex items-center justify-between p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Portrait of Aryan Sharma" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkQZxaAg8lB3w5I03Ag3BZkXqvRt2ytTF0aweo7TS-RqUdZSvt7-0V9dxifKcMfKuYk1N8MxmiOJazU90BO6KU1M4Nixu2fBG1Sf8Va9EyRwGbTlhevEvM5I5twrXhK1y_yQoqyoTLtReDoGhM3whVq-0rNV3DC9tjPG_z7068cYEvr7wFzMp6Kh8MLIvNiH7QBbUgLhXMhJJpYKfgrCGG4sK0XVp3usdjtHgF9BifL7deEV5eOlWHVDPHZvipwDEuT6aNbB_S1JeM"/>
+</div>
+<div>
+<h3 class="font-headline font-semibold text-on-surface group-hover:text-primary transition-colors">Aryan Sharma</h3>
+<p class="text-on-surface-variant text-sm flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                Student • U-19 Squad
+                            </p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chat_bubble</span>
+</div>
+<!-- Alphabetical Header -->
+<div class="pt-8 pb-2 border-b border-outline-variant/10">
+<span class="font-headline font-bold text-2xl text-primary opacity-50">D</span>
+</div>
+<!-- Contact Card 3 -->
+<div class="group flex items-center justify-between p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Portrait of Deepika" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpMbnY3BURaGwAuD4-pUyOjVnTwYqICC4H8RJUFUrxE7yzPeKuus8NeCKiCgF1MpyDITo_mv7L2hAKITGdADI03X4h1KolI6ZjWypSQ8BBytO2NPpPBUATbsDx5wSBeus-k4dfNuEJIKHT2NGxhLQ3aqqeDIlwPcXUItsIwVOhFk1WhOYRxxiR6qd78f6g48ivZTTRFO6M1NB8vuaFgVQ0iKswy7FfWaf-2JiUG9_vshkt53fYbezOpArjzmPZWxO4K0Jb4ILA5rw-"/>
+</div>
+<div>
+<h3 class="font-headline font-semibold text-on-surface group-hover:text-primary transition-colors">Deepika Raj</h3>
+<p class="text-on-surface-variant text-sm flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                                Admin • Operations
+                            </p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chat_bubble</span>
+</div>
+<!-- Contact Card 4 -->
+<div class="group flex items-center justify-between p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Portrait of Dev" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKmd1PYm7iTexu36pViSfoLAnMKwzcEjmZ2Yngxi3sL7gPrXJo_APe4PgBP2F3Sz0VUvqO4RTUQh8SrFnJ55hfi32M6K70-ysc_X-kWfhtRWs4W6w_KTRN8wVmBmOw19zyDWkMbE5tKIzyQSUQldHDYFoKLDP36QIzBTmYtClLyV2GEHqVJr4Y3e6CTyqLBzrzYju-Nf0KPhbz78qrrVTXbgYf1O23FXOT2JEuYtsYdoHWbsZhPMgVP07E0LUNSZ3W-Puc971xUA7C"/>
+</div>
+<div>
+<h3 class="font-headline font-semibold text-on-surface group-hover:text-primary transition-colors">Dev Patel</h3>
+<p class="text-on-surface-variant text-sm flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                                Fitness Trainer
+                            </p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chat_bubble</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Execution from JSON) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#1f2b49]/80 backdrop-blur-xl z-50 rounded-t-2xl shadow-[0_-20px_40px_rgba(0,0,0,0.4)]">
+<a class="flex flex-col items-center justify-center text-[#a3aac4] hover:text-[#ffd709] transition-all active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-wider">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a3aac4] hover:text-[#ffd709] transition-all active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-wider">Squad</span>
+</a>
+<!-- Active Messaging Tab -->
+<a class="flex flex-col items-center justify-center text-[#6bff8f] bg-[#0f1930] rounded-xl px-3 py-1 hover:text-[#ffd709] transition-all active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-wider">Messages</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a3aac4] hover:text-[#ffd709] transition-all active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">strategy</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-wider">Tactics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a3aac4] hover:text-[#ffd709] transition-all active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-wider">Profile</span>
+</a>
+</nav>
+</body></html>

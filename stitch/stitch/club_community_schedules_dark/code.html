@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Club Community &amp; Schedules</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-background": "#dee5ff",
+              "surface-container-low": "#091328",
+              "on-tertiary": "#515c70",
+              "surface-tint": "#6bff8f",
+              "secondary-fixed-dim": "#efc900",
+              "surface-container": "#0f1930",
+              "on-primary": "#005f28",
+              "on-tertiary-fixed": "#374155",
+              "tertiary-fixed": "#dae6fe",
+              "primary": "#6bff8f",
+              "on-tertiary-fixed-variant": "#535e72",
+              "on-primary-container": "#002c0f",
+              "outline-variant": "#40485d",
+              "tertiary-dim": "#ccd7ef",
+              "on-surface": "#dee5ff",
+              "on-primary-fixed": "#004a1d",
+              "error-container": "#b92902",
+              "surface-container-high": "#141f38",
+              "primary-fixed": "#6bff8f",
+              "on-secondary-container": "#fff7e6",
+              "tertiary-container": "#dae6fe",
+              "on-secondary-fixed": "#453900",
+              "surface-container-lowest": "#000000",
+              "secondary": "#ffd709",
+              "secondary-dim": "#efc900",
+              "on-error": "#450900",
+              "error": "#ff7351",
+              "surface-bright": "#1f2b49",
+              "inverse-on-surface": "#4d556b",
+              "on-error-container": "#ffd2c8",
+              "inverse-surface": "#faf8ff",
+              "secondary-container": "#705d00",
+              "primary-dim": "#5bf083",
+              "background": "#060e20",
+              "tertiary-fixed-dim": "#ccd7ef",
+              "outline": "#6d758c",
+              "on-primary-fixed-variant": "#006a2d",
+              "on-secondary": "#5b4b00",
+              "tertiary": "#f0f3ff",
+              "secondary-fixed": "#ffd709",
+              "on-surface-variant": "#a3aac4",
+              "inverse-primary": "#006e2f",
+              "primary-container": "#0abc56",
+              "surface-variant": "#192540",
+              "on-tertiary-container": "#495468",
+              "surface-container-highest": "#192540",
+              "surface": "#060e20",
+              "error-dim": "#d53d18",
+              "primary-fixed-dim": "#5bf083",
+              "on-secondary-fixed-variant": "#665500",
+              "surface-dim": "#060e20"
+            },
+            fontFamily: {
+              "headline": ["Lexend"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #060e20;
+            color: #dee5ff;
+            font-family: 'Inter', sans-serif;
+        }
+        .lexend { font-family: 'Lexend', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="pb-24 pt-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 h-20 bg-[#060e20]/80 backdrop-blur-md shadow-2xl shadow-black/40 flex items-center justify-between px-6 transition-colors duration-300 bg-[#091328]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Club Manager Profile Picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKE5RV5XbIL3mQQ6PmT_lckkV290KMICYc-9UM7jiniqEEwaE60DX_IQbK_NtbNq3L-L0c68FBaUL9LT06ZPfu5iBSMeR-ib9HM3sJLZoAqZziEGzerV_QdrxOKAN-iwlPWaEpxYnrszc3FaXz5sHr3CsbLFCnFtEvlLSONbKjHpdFIwq70DfwfXkC9Ova3m6XLjri_zXocLHIsTH2W1n4XInkMT6mGlTioQkrPUi0vESZCHNECTxMosusaeBA0KEnQZfqWxlcIhhe"/>
+</div>
+<h1 class="font-['Lexend'] font-bold tracking-tighter text-3xl uppercase text-[#22C55E]">THE PITCH</h1>
+</div>
+<button class="text-[#dee5ff] hover:bg-[#1f2b49]/50 p-2 rounded-xl transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="px-4 max-w-2xl mx-auto space-y-8">
+<!-- News & Announcements -->
+<section>
+<div class="flex items-baseline justify-between mb-4">
+<h2 class="lexend text-xl font-bold uppercase tracking-tight text-on-background">News &amp; Updates</h2>
+<span class="text-primary lexend text-xs font-bold uppercase tracking-widest">View All</span>
+</div>
+<div class="space-y-4">
+<!-- Highlight Card -->
+<div class="relative h-48 rounded-xl overflow-hidden group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Football match high energy action shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsb1vrrDZ1ljEcqcBHdCsk8OBvrf1h4y8wvMurnNLP-PZVnj7ihK87wbPvEVljYyRyygB1KXNXFtWX4wB0bkjNXBoUt-gzfKusivfOkAkuorppu7DQZsQT0c_GzZJWBvZ0JcvnjiOPwpDgMgljRLX5MUauI0cxVYjTo_DjV3M_jxv9TjDxDfYa-fE5IVXC3OotFKTV74Ff8OYfy9W_F8Y4VcXqznb7LJ3Uzxy5RkRPrHve18Zjpj3gMRgUaQy9uuE4hthYDAO5maJ3"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<span class="bg-primary text-on-primary-container px-2 py-0.5 rounded-full text-[10px] font-black uppercase lexend mb-2 inline-block">Flash Update</span>
+<h3 class="lexend text-lg font-extrabold leading-tight text-white uppercase italic">Stadium Lights Upgrade Confirmed</h3>
+</div>
+</div>
+<!-- Bento Style Secondary News -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container p-4 rounded-xl">
+<span class="material-symbols-outlined text-secondary mb-2" data-icon="emoji_events">emoji_events</span>
+<h4 class="lexend text-sm font-bold text-on-surface leading-tight uppercase">Youth Trials Results</h4>
+<p class="text-on-surface-variant text-[10px] mt-1 font-medium">14 New squad additions...</p>
+</div>
+<div class="bg-surface-container p-4 rounded-xl border-l-4 border-primary">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="medical_services">medical_services</span>
+<h4 class="lexend text-sm font-bold text-on-surface leading-tight uppercase">Physio Schedule</h4>
+<p class="text-on-surface-variant text-[10px] mt-1 font-medium">Updated availability for Mon...</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Team Chat Preview -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="lexend text-xl font-bold uppercase tracking-tight text-on-background">Squad Comms</h2>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-surface bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Player avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4RNFuW-_u0epb8mnAQsLTe1ZmGhoCrB67400j48oibEDFxsa59JNPTclJitfzsZkdAa0OIK-rUuUiELMWsI_USymXWY2Tn46-V7F9KJol96QHAw0DOS7-ObfCedfMDgrl4mDzR7bi3IA0OEB1PSlqIkZk6U5HppyKJKp6PoIShn5-dYu_NIPyDP_Zt7UDe65bUmyMvklVYHGt5R5FsSBC3-cmt4zHDGa2CQkioVM3661xOAFhVtafClUQosp4KnjlAzKcG5Sodbkr"/>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-surface bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Player avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhQKZyOFYpSOANYbM3ybSHUCA1TB4ZPMV9CmhyNgz1wv6_gO5Gzi3OFHmAFg8W7g_2RX7et6T1hd9qMOpX2tMyDu5unc0_9XLvrXI92SIM8JJsBMqrT8MnlX5Xa2y8XdawoDDfI5sjkHKUwEjsSBPMUAjjD_iv-fv_mBetTtbCPQrDazJaJx1X_qQ_IjAJmAQEUx01T4tR8C1Ob-KdTjLtqr9MRXIhWtMf5HH0ZJxF3DCnat1O7jJAtWneeNr4RktoL8ZkyLqF8a3J"/>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-surface bg-primary flex items-center justify-center text-[8px] font-bold text-on-primary-container">
+                        +12
+                    </div>
+</div>
+</div>
+<div class="bg-surface-container rounded-2xl p-1 overflow-hidden">
+<div class="bg-surface-container-high/50 p-4 rounded-xl flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-surface-bright flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="groups">groups</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="lexend text-xs font-black uppercase text-secondary">First Team Alpha</span>
+<span class="text-[10px] text-on-surface-variant">2m ago</span>
+</div>
+<p class="text-sm text-on-surface line-clamp-1">Coach: "Great session today everyone. Recovery is key for Saturday's derby."</p>
+</div>
+</div>
+<div class="px-4 py-3 flex items-center justify-between">
+<p class="text-[10px] font-bold uppercase lexend text-on-surface-variant">4 Active Threads</p>
+<button class="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider hover:bg-primary/20 transition-all">Join Chat</button>
+</div>
+</div>
+</section>
+<!-- Schedules Section -->
+<section class="pb-10">
+<div class="flex items-center justify-between mb-4">
+<h2 class="lexend text-xl font-bold uppercase tracking-tight text-on-background">Schedule</h2>
+<div class="flex gap-2">
+<button class="p-1 rounded-lg bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="p-1 rounded-lg bg-surface-container text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Date Scroller -->
+<div class="flex gap-4 overflow-x-auto pb-6 scrollbar-hide no-scrollbar">
+<div class="flex-shrink-0 w-14 h-20 rounded-2xl bg-surface-container-high flex flex-col items-center justify-center gap-1 border border-transparent">
+<span class="lexend text-[10px] font-bold text-on-surface-variant uppercase">Mon</span>
+<span class="lexend text-lg font-black text-on-surface">12</span>
+</div>
+<div class="flex-shrink-0 w-14 h-20 rounded-2xl bg-[#0f1930] flex flex-col items-center justify-center gap-1 border-2 border-primary shadow-[0_0_15px_rgba(34,197,94,0.3)]">
+<span class="lexend text-[10px] font-bold text-primary uppercase">Tue</span>
+<span class="lexend text-lg font-black text-primary">13</span>
+</div>
+<div class="flex-shrink-0 w-14 h-20 rounded-2xl bg-surface-container-high flex flex-col items-center justify-center gap-1">
+<span class="lexend text-[10px] font-bold text-on-surface-variant uppercase">Wed</span>
+<span class="lexend text-lg font-black text-on-surface">14</span>
+</div>
+<div class="flex-shrink-0 w-14 h-20 rounded-2xl bg-surface-container-high flex flex-col items-center justify-center gap-1">
+<span class="lexend text-[10px] font-bold text-on-surface-variant uppercase">Thu</span>
+<span class="lexend text-lg font-black text-on-surface">15</span>
+</div>
+<div class="flex-shrink-0 w-14 h-20 rounded-2xl bg-surface-container-high flex flex-col items-center justify-center gap-1">
+<span class="lexend text-[10px] font-bold text-on-surface-variant uppercase">Fri</span>
+<span class="lexend text-lg font-black text-on-surface">16</span>
+</div>
+</div>
+<!-- Match/Training Cards -->
+<div class="space-y-4">
+<!-- Training Card -->
+<div class="bg-surface-container rounded-2xl p-5 flex items-center gap-5">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+</div>
+<div class="flex-1">
+<p class="lexend text-[10px] font-black text-secondary tracking-widest uppercase mb-1">Training Session</p>
+<h4 class="lexend text-base font-bold text-on-surface uppercase">Tactical Drills</h4>
+<div class="flex items-center gap-3 mt-1 text-[10px] text-on-surface-variant font-medium uppercase">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span> 09:30 AM</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs" data-icon="location_on">location_on</span> Pitch 4</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="more_vert">more_vert</span>
+</div>
+<!-- Match Card -->
+<div class="bg-surface-container-high rounded-2xl p-5 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 -mr-16 -mt-16 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors"></div>
+<div class="flex justify-between items-start relative z-10">
+<div class="flex-1">
+<p class="lexend text-[10px] font-black text-error tracking-widest uppercase mb-1 flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span> Away Match
+                            </p>
+<h4 class="lexend text-lg font-bold text-on-surface uppercase italic">FC Rangers vs. Titans</h4>
+<div class="flex items-center gap-4 mt-2">
+<div class="flex items-center gap-1 text-[10px] text-on-surface font-bold uppercase bg-surface-bright px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-xs" data-icon="event_available">event_available</span> Aug 17
+                                </div>
+<div class="flex items-center gap-1 text-[10px] text-on-surface font-bold uppercase bg-surface-bright px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-xs" data-icon="timer">timer</span> 15:00
+                                </div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center shadow-lg">
+<img class="w-5 h-5 object-contain opacity-50" data-alt="Team Crest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA-JVJl646Je-ySHpwpDdTgMXtUEaYY3E1A0wpI8-oIlBAqoHf3wPqkig9sdwCc1VjNJXQcaLV2rRbJCAgUT7ohnIxj0qxDT9YjSTggNP0-Xi6Dftf-nEpir70UOXPnNclNMtbsVLU6-F9J7N3hMG4hXFcEidRhJiYXjEvJjv7VN01bB55jzJqT9RB1QHRdHzu0dGJA7COEtcR6AKYRfCC_90EGwsfdT-_nXbsiPWgyNuh95ZYFotS82CJQBRnxtDUtx5kfbB6kdV7"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-4 h-20 rounded-t-2xl z-50 bg-gradient-to-t from-[#060e20] to-[#091328] shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-[#a3aac4] opacity-70 hover:text-[#22C55E] hover:opacity-100 transition-opacity active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="newspaper">newspaper</span>
+<span class="font-['Inter'] font-semibold text-[10px] uppercase tracking-wider">Feed</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#22C55E] bg-[#0f1930] rounded-xl px-4 py-1 shadow-[0_0_15px_rgba(34,197,94,0.2)] active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-['Inter'] font-semibold text-[10px] uppercase tracking-wider">Schedule</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a3aac4] opacity-70 hover:text-[#22C55E] hover:opacity-100 transition-opacity active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-['Inter'] font-semibold text-[10px] uppercase tracking-wider">Messages</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a3aac4] opacity-70 hover:text-[#22C55E] hover:opacity-100 transition-opacity active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-['Inter'] font-semibold text-[10px] uppercase tracking-wider">Squad</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a3aac4] opacity-70 hover:text-[#22C55E] hover:opacity-100 transition-opacity active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] font-semibold text-[10px] uppercase tracking-wider">Settings</span>
+</a>
+</nav>
+<!-- Contextual FAB (Schedule screen priority: Add Event) -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-gradient-to-br from-primary to-primary-container text-on-primary-container rounded-2xl shadow-2xl flex items-center justify-center active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined text-3xl font-bold" data-icon="add">add</span>
+</button>
+</body></html>

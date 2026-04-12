@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Athleo | Field Eval</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#6bff8f",
+              "background": "#0a0a0a",
+              "surface": "#171717",
+              "surface-border": "#262626",
+              "on-surface": "#fafafa",
+              "on-surface-variant": "#a3a3a3"
+            },
+            fontFamily: { "sans": ["Inter", "sans-serif"] }
+          }
+        }
+      }
+    </script>
+    <style>
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      body { background-color: #0a0a0a; color: #fafafa; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+      .glass-panel { background: rgba(23, 23, 23, 0.6); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.08); }
+      .glass-card { background: rgba(23, 23, 23, 0.4); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+      
+      
+      .star-active { color: #6bff8f !important; font-variation-settings: 'FILL' 1; }
+      ::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+
+<!-- FORCED GLOBAL STANDARDIZATION -->
+<style>
+input:not([type="file"]), textarea, select { 
+    background-color: #171717 !important; 
+    border: 1px solid #262626 !important; 
+    color: #fafafa !important; 
+    border-radius: 0.75rem !important;
+    padding-top: 0.85rem !important; padding-bottom: 0.85rem !important;
+    color-scheme: dark !important;
+    font-size: 0.9rem !important;
+}
+input:focus, textarea:focus, select:focus { 
+    border-color: rgba(107, 255, 143, 0.6) !important; 
+    outline: none !important; 
+    box-shadow: 0 0 0 1px rgba(107, 255, 143, 0.2) !important; 
+}
+select {
+    appearance: none !important; 
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="white" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>') !important; 
+    background-repeat: no-repeat !important; 
+    background-position: right 1.25rem center !important; 
+}
+</style>
+</head>
+<body class="min-h-screen pb-32">
+    <!-- Ambient Background Glow -->
+    <div class="fixed inset-0 z-0 flex items-start justify-center pointer-events-none overflow-hidden">
+        <div class="w-[120vw] h-[60vw] bg-primary/5 blur-[120px] rounded-full translate-y-[-50%]"></div>
+    </div>
+
+    <!-- Header -->
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 h-[72px] bg-[#0a0a0a]/95 backdrop-blur-md flex items-center justify-between px-6 border-b border-surface-border">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="typeof toggleSidebar === 'function' ? toggleSidebar() : window.history.back()">
+            <div class="w-10 h-10 rounded-full border border-surface-border overflow-hidden bg-surface flex-shrink-0">
+                 <img id="header-avatar" src="" class="w-full h-full object-cover hidden">
+                 <span id="header-initial" class="flex items-center justify-center w-full h-full text-sm font-bold text-primary">A</span>
+            </div>
+            <div>
+                <div class="flex items-center gap-1 -mb-0.5">
+                    <span class="text-[10px] font-black text-primary uppercase tracking-widest" id="header-role">USER</span>
+                    <span class="material-symbols-outlined text-[14px] text-primary">arrow_drop_down</span>
+                </div>
+                <h1 class="font-bold text-[15px] tracking-tight text-on-surface leading-tight mt-0.5 max-w-[150px] truncate" id="header-name">Athleo User</h1>
+            </div>
+        </div>
+        <div class="flex items-center gap-1">
+            <button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/5 active:scale-95 transition-all relative" onclick="if(window.Android) Android.openAnnouncements()">
+                <span class="material-symbols-outlined text-on-surface text-[20px]">notifications</span>
+                <span id="header-badge" class="absolute top-2.5 right-2 w-[7px] h-[7px] rounded-full bg-primary border-[1.5px] border-[#0a0a0a]"></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-24 px-6 max-w-lg mx-auto space-y-8">
+        <div>
+            <h2 class="text-3xl font-bold tracking-tight text-on-surface mb-2">Performance Log</h2>
+            <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Submit Today's Tactical Evaluation</p>
+        </div>
+
+        <form onsubmit="handleSubmit(event)" class="space-y-8">
+            <!-- Player Selection -->
+            <div class="space-y-3">
+                <label class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest ml-1">Select Player</label>
+                <div class="relative">
+                    <select id="player-select" class="w-full rounded-2xl p-5 appearance-none cursor-pointer text-sm font-medium">
+                        <option value="">Awaiting Roster...</option>
+                    </select>
+                    <span class="material-symbols-outlined absolute right-5 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">unfold_more</span>
+                </div>
+            </div>
+
+            <!-- Skills Grid -->
+            <div class="glass-card p-6 rounded-[2.5rem] space-y-6">
+                <!-- Precision -->
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-bold text-on-surface">Precision</p>
+                        <p class="text-[9px] text-on-surface-variant uppercase tracking-wider font-medium">Accuracy & Control</p>
+                    </div>
+                    <div class="flex gap-1" id="stars-precision">
+                        <span onclick="setRating('precision', 1)" class="material-symbols-outlined text-xl cursor-pointer text-on-surface-variant/30 hover:scale-110 transition-transform">star</span>
+                        <span onclick="setRating('precision', 2)" class="material-symbols-outlined text-xl cursor-pointer text-on-surface-variant/30 hover:scale-110 transition-transform">star</span>
+                        <span onclick="setRating('precision', 3)" class="material-symbols-outlined text-xl cursor-pointer text-on-surface-variant/30 hover:scale-110 transition-transform">star</span>
+                        <span onclick="setRating('precision', 4)" class="material-symbols-outlined text-xl cursor-pointer text-on-surface-variant/30 hover:scale-110 transition-transform">star</span>
+                        <span onclick="setRating('precision', 5)" class="material-symbols-outlined text-xl cursor-pointer text-on-surface-variant/30 hover:scale-110 transition-transform">star</span>
+                    </div>
+                </div>
+                <!-- Physical -->
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-bold text-on-surface">Stamina</p>
+                        <p class="text-[9px] text-on-surface-variant uppercase tracking-wider font-medium">Endurance & Power</p>
+                    </div>
+                    <div class="flex gap-1" id="stars-stamina">
+                        <span onclick="setRating('stamina', 1)" class="material-symbols-outlined text-xl cursor-pointer text-on-surface-variant/30 hover:scale-110 transition-transform">star</span>
+                        <span onclick="setRating('stamina', 2)" class="material-symbols-outlined text-xl cursor-pointer text-on-surface-variant/30 hover:scale-110 transition-transform">star</span>
+                        <span onclick="setRating('stamina', 3)" class="material-symbols-outlined text-xl cursor-pointer text-on-surface-variant/30 hover:scale-110 transition-transform">star</span>
+                        <span onclick="setRating('stamina', 4)" class="material-symbols-outlined text-xl cursor-pointer text-on-surface-variant/30 hover:scale-110 transition-transform">star</span>
+                        <span onclick="setRating('stamina', 5)" class="material-symbols-outlined text-xl cursor-pointer text-on-surface-variant/30 hover:scale-110 transition-transform">star</span>
+                    </div>
+                </div>
+                <!-- Mentality -->
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-bold text-on-surface">Tactical IQ</p>
+                        <p class="text-[9px] text-on-surface-variant uppercase tracking-wider font-medium">Positioning & Decisions</p>
+                    </div>
+                    <div class="flex gap-1" id="stars-tactical">
+                        <span onclick="setRating('tactical', 1)" class="material-symbols-outlined text-xl cursor-pointer text-on-surface-variant/30 hover:scale-110 transition-transform">star</span>
+                        <span onclick="setRating('tactical', 2)" class="material-symbols-outlined text-xl cursor-pointer text-on-surface-variant/30 hover:scale-110 transition-transform">star</span>
+                        <span onclick="setRating('tactical', 3)" class="material-symbols-outlined text-xl cursor-pointer text-on-surface-variant/30 hover:scale-110 transition-transform">star</span>
+                        <span onclick="setRating('tactical', 4)" class="material-symbols-outlined text-xl cursor-pointer text-on-surface-variant/30 hover:scale-110 transition-transform">star</span>
+                        <span onclick="setRating('tactical', 5)" class="material-symbols-outlined text-xl cursor-pointer text-on-surface-variant/30 hover:scale-110 transition-transform">star</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Feedback -->
+            <div class="space-y-3">
+                <label class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest ml-1">Tactical Observations</label>
+                <textarea id="feedback" rows="5" class="w-full rounded-2xl p-5 text-sm font-medium resize-none placeholder:text-on-surface-variant/20" placeholder="e.g. Needs to improve vertical leap during set-pieces. Good communication on field."></textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-primary text-[#0a0a0a] py-5 rounded-2xl font-bold uppercase tracking-widest text-xs shadow-xl active:scale-95 transition-all">
+                Publish Evaluation
+            </button>
+        </form>
+    </main>
+
+    <script>
+        const ratings = { precision: 0, stamina: 0, tactical: 0 };
+        let currentPlayers = [];
+
+        function setRating(key, val) {
+            ratings[key] = val;
+            const container = document.getElementById(`stars-${key}`);
+            const stars = container.querySelectorAll('span');
+            stars.forEach((s, idx) => {
+                if (idx < val) s.classList.add('star-active');
+                else s.classList.remove('star-active');
+            });
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const playerId = document.getElementById('player-select').value;
+            const feedback = document.getElementById('feedback').value.trim();
+            
+            if (!playerId) { Android.showToast('Please select a player'); return; }
+            if (!ratings.precision || !ratings.stamina || !ratings.tactical) { Android.showToast('Please provide all ratings'); return; }
+
+            const avgRating = ((ratings.precision + ratings.stamina + ratings.tactical) / 3).toFixed(1);
+            
+            if (typeof Android !== 'undefined') {
+                Android.submitPerformance(playerId, avgRating, feedback);
+            }
+        }
+
+        window.renderRoster = (players) => {
+            currentPlayers = players || [];
+            const select = document.getElementById('player-select');
+            if (!select) return;
+            select.innerHTML = '<option value="">Select Candidate</option>' + 
+                currentPlayers.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+        };
+
+        window.onload = () => {
+            if (typeof Android !== 'undefined') {
+                Android.loadRosterForPerformance();
+            } else {
+                // Mock for preview
+                window.renderRoster([{id: '1', name: 'Sunil Chhetri'}, {id: '2', name: 'Sandesh Jhingan'}]);
+            }
+        };
+    </script>
+</body>
+</html>

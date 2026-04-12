@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Athleo Head Coach Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error-dim": "#d53d18",
+                        "inverse-surface": "#faf8ff",
+                        "on-tertiary-container": "#495468",
+                        "surface-bright": "#1f2b49",
+                        "tertiary": "#f0f3ff",
+                        "on-primary": "#005f28",
+                        "on-error-container": "#ffd2c8",
+                        "surface-container": "#0f1930",
+                        "inverse-primary": "#006e2f",
+                        "secondary-container": "#705d00",
+                        "on-secondary-fixed": "#453900",
+                        "on-error": "#450900",
+                        "surface-container-low": "#091328",
+                        "tertiary-fixed-dim": "#ccd7ef",
+                        "secondary-fixed-dim": "#efc900",
+                        "primary": "#6bff8f",
+                        "primary-container": "#0abc56",
+                        "error": "#ff7351",
+                        "outline": "#6d758c",
+                        "surface-container-lowest": "#000000",
+                        "primary-dim": "#5bf083",
+                        "surface-dim": "#060e20",
+                        "on-surface-variant": "#a3aac4",
+                        "on-primary-container": "#002c0f",
+                        "on-background": "#dee5ff",
+                        "on-secondary-fixed-variant": "#665500",
+                        "inverse-on-surface": "#4d556b",
+                        "surface-variant": "#192540",
+                        "background": "#060e20",
+                        "surface-container-high": "#141f38",
+                        "tertiary-dim": "#ccd7ef",
+                        "on-tertiary": "#515c70",
+                        "surface-container-highest": "#192540",
+                        "surface": "#060e20",
+                        "on-surface": "#dee5ff",
+                        "tertiary-container": "#dae6fe",
+                        "primary-fixed-dim": "#5bf083",
+                        "on-tertiary-fixed": "#374155",
+                        "secondary-fixed": "#ffd709",
+                        "primary-fixed": "#6bff8f",
+                        "on-tertiary-fixed-variant": "#535e72",
+                        "outline-variant": "#40485d",
+                        "on-secondary-container": "#fff7e6",
+                        "on-secondary": "#5b4b00",
+                        "on-primary-fixed": "#004a1d",
+                        "secondary": "#ffd709",
+                        "secondary-dim": "#efc900",
+                        "on-primary-fixed-variant": "#006a2d",
+                        "tertiary-fixed": "#dae6fe",
+                        "error-container": "#b92902",
+                        "surface-tint": "#6bff8f"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary-container min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-[#060e20] flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<img alt="Head Coach Profile" class="w-full h-full object-cover" data-alt="Professional headshot of a football coach" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2jCgwjhKO0DCtofU6niqxYoRIbrC3alZGYjkIeRX8m0nsxJNo6x45HuVSxLGqUKDSLnUAVzGW3ASyk5lr3-qFlCn-Li-gYqSBZOjkc1r2iZiGRgp0H93vZZEZNtyYi-BbyBkq1TJqKVGyZ4E6CRDtSO-cOfvzFVD_ErBbg-vGr99J1Z1DaeSG_D3cLS8MLkXAHar_H5fFcW0nWHbGNSdUVmOMIAfASmwRXQPTbPGQyfTPfxJx4FWJ_UU_80q6LoQ9i5R8Ppf9vVPQ"/>
+</div>
+<h1 class="font-headline tracking-tight font-bold text-on-surface text-xl uppercase tracking-wider text-[#22C55E]">Athleo Head Coach</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-[#1f2b49]/80 transition-colors text-[#a3aac4] active:scale-95 duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-[#1f2b49]/80 transition-colors text-[#a3aac4] active:scale-95 duration-150">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-7xl mx-auto space-y-8">
+<!-- Hero Section: High Contrast Display -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 bg-surface-container-low rounded-xl p-8 flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-9xl text-primary" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<div class="relative z-10">
+<p class="font-headline text-secondary uppercase tracking-widest text-xs font-bold mb-2">Performance Overview</p>
+<h2 class="font-headline text-5xl font-extrabold text-on-surface leading-tight tracking-tighter">85% <span class="text-primary text-3xl block lg:inline-block">Task Completion</span></h2>
+<p class="text-on-surface-variant mt-4 max-w-md">Academy trainers are currently operating at peak efficiency. Tactical drills and attendance tracking are ahead of schedule for the upcoming tournament.</p>
+</div>
+<div class="mt-8 flex gap-4 relative z-10">
+<button class="px-6 py-3 bg-gradient-to-r from-primary to-primary-container text-on-primary-container font-bold rounded-xl flex items-center gap-2 active:scale-95 transition-transform">
+                        Review Daily Reports <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Bento Card: Performance Reviews -->
+<div class="bg-surface-container rounded-xl p-8 flex flex-col justify-center border-l-4 border-primary">
+<p class="font-headline text-on-surface-variant uppercase tracking-widest text-xs font-medium">Pending Feedback</p>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="font-headline text-6xl font-bold text-on-surface tracking-tighter">42</span>
+<span class="text-primary font-bold">Reviews</span>
+</div>
+<p class="text-on-surface-variant text-sm mt-2">New performance assessments submitted by trainers today.</p>
+<div class="mt-6 flex -space-x-3 overflow-hidden">
+<img alt="Avatar" class="inline-block h-10 w-10 rounded-full ring-2 ring-surface-container-low" data-alt="Trainer avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEIzm3OpqYRezui8ECYc0dUq50tHynqbGtgOSQ0d3GbOuER0yVakr1Txjc-VOTGdLozQZ4F5FHX1b9SQfTzHZE-ABL0W1dsCyGNCPYmxvkesEMmKyD242ySR_LMZp_uPnH45_rw9O719rN7pQOnAN3cuoK-mReUlqDfr8majLd2lR34O4odDP8frRCFzcHvP_G3_sNYCMtlF58bvC2tilvdhGrVtEK251ZtnqFrFvNYTwLkGYped4nbifPIEViimCGFrEnrzZRMEOl"/>
+<img alt="Avatar" class="inline-block h-10 w-10 rounded-full ring-2 ring-surface-container-low" data-alt="Trainer avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFweBRfZGbpQpnhZYtF6YqTJ8fp4xkeAvKW21qTMzdRlFmdZXgeJ_idtO1oKFq04pJFcs-dWr_eQQldarW61LvSJBrBoVqOztlW79vhSydJVEO46kQcfRCLBHtmwGcRm4TMkb-DhLdpBAk_AKMi47TlobV1U-MZJCalCCKvE_6wLtGjiAxcwyVQQYQRX7BWOWQGv9pV0l7jNlonOhDB9mBJJowTLpEPOwYMp1c8Jyg42HzoUFTybDmGtL3qqm921tS4qPgqViZeaQf"/>
+<img alt="Avatar" class="inline-block h-10 w-10 rounded-full ring-2 ring-surface-container-low" data-alt="Trainer avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBICxdmdZTJnRMuWbTCPLb0eA2Z8U7H5Tq20rq_XlyBluV8co5TyQqcP-3a1Sctbu9k7eeK6u_yhYBEhCnRARM2oWF-mV66qsarhCmiAGojrYt2XdAHN8DQAoLLNLGZ0c47fyjiyqrkpHJ8eiIiGO_ms5pqE1BLPu01A-Z2g_MPJbfc5ewDm8CUG0P5tLkA4eya-eDYzqWzhBQUgQJhLcmMcA9t6pI8O1770FVGQ6KlF7dS0R5-0DLtskgv-dNUTg-LMPNVGCe3bb1N"/>
+<div class="flex items-center justify-center h-10 w-10 rounded-full bg-surface-container-high ring-2 ring-surface-container-low text-[10px] font-bold">+39</div>
+</div>
+</div>
+</section>
+<!-- Stats Row -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-surface-container-high p-6 rounded-xl">
+<span class="material-symbols-outlined text-primary mb-2">groups</span>
+<p class="text-on-surface-variant text-xs uppercase font-bold tracking-wider">Active Trainers</p>
+<p class="font-headline text-2xl font-bold">12</p>
+</div>
+<div class="bg-surface-container-high p-6 rounded-xl">
+<span class="material-symbols-outlined text-secondary mb-2">sports_soccer</span>
+<p class="text-on-surface-variant text-xs uppercase font-bold tracking-wider">Squad Sessions</p>
+<p class="font-headline text-2xl font-bold">24</p>
+</div>
+<div class="bg-surface-container-high p-6 rounded-xl">
+<span class="material-symbols-outlined text-primary mb-2">trending_up</span>
+<p class="text-on-surface-variant text-xs uppercase font-bold tracking-wider">Growth Index</p>
+<p class="font-headline text-2xl font-bold">+12%</p>
+</div>
+<div class="bg-surface-container-high p-6 rounded-xl">
+<span class="material-symbols-outlined text-error mb-2">event_busy</span>
+<p class="text-on-surface-variant text-xs uppercase font-bold tracking-wider">Alerts</p>
+<p class="font-headline text-2xl font-bold">3</p>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Recent Activity: Asymmetric Layout -->
+<div class="lg:col-span-2 space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-headline text-2xl font-bold text-on-surface tracking-tight">Recent Activity</h3>
+<button class="text-primary text-sm font-bold uppercase tracking-wider">View All</button>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container flex items-center p-4 rounded-xl gap-4 group hover:bg-surface-container-high transition-colors">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">exercise</span>
+</div>
+<div class="flex-1">
+<p class="text-on-surface font-medium">'Coach Peterson completed elite squad drills'</p>
+<p class="text-on-surface-variant text-xs mt-1">Stamina &amp; Tactical Positioning • 24m ago</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</div>
+<div class="bg-surface-container flex items-center p-4 rounded-xl gap-4 group hover:bg-surface-container-high transition-colors">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">cloud_upload</span>
+</div>
+<div class="flex-1">
+<p class="text-on-surface font-medium">'Trainer Elias uploaded attendance'</p>
+<p class="text-on-surface-variant text-xs mt-1">U-19 Morning Session • 1h ago</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</div>
+<div class="bg-surface-container flex items-center p-4 rounded-xl gap-4 group hover:bg-surface-container-high transition-colors">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">rate_review</span>
+</div>
+<div class="flex-1">
+<p class="text-on-surface font-medium">'Scouting report submitted by Marcus'</p>
+<p class="text-on-surface-variant text-xs mt-1">Midfield Prospects • 3h ago</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Upcoming Matches: Luxury List -->
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-headline text-2xl font-bold text-on-surface tracking-tight">Upcoming</h3>
+</div>
+<div class="bg-surface-container rounded-2xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center bg-[#22C55E]/5">
+<div>
+<p class="text-secondary text-[10px] font-bold uppercase tracking-widest">Saturday, 14:00</p>
+<p class="font-headline font-bold text-lg mt-1">Athleo U-21 vs City Youth</p>
+</div>
+<div class="flex flex-col items-center">
+<span class="bg-error text-white text-[8px] px-2 py-0.5 rounded-full font-bold uppercase animate-pulse">Live Soon</span>
+</div>
+</div>
+<div class="p-6 border-b border-outline-variant/10">
+<p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest">Sunday, 10:30</p>
+<p class="font-headline font-bold text-lg mt-1 text-on-surface/80">Athleo Juniors vs Lions FC</p>
+<div class="mt-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">location_on</span>
+<span class="text-xs text-on-surface-variant" data-location="London">Main Academy Stadium</span>
+</div>
+</div>
+<div class="p-6 bg-surface-container-high">
+<button class="w-full py-3 text-sm font-bold text-on-surface-variant hover:text-primary transition-colors">SEE FULL CALENDAR</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-[#1f2b49]/80 backdrop-blur-xl flex justify-around items-center px-4 pb-6 pt-3 shadow-[0_-10px_30px_rgba(0,0,0,0.3)] rounded-t-2xl md:hidden">
+<a class="flex flex-col items-center justify-center bg-[#22C55E] text-[#060e20] rounded-xl px-3 py-1 scale-90 duration-200 ease-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-tighter mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#dee5ff] opacity-60 hover:opacity-100 transition-opacity" href="#">
+<span class="material-symbols-outlined">fitness_center</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-tighter mt-1">Training</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#dee5ff] opacity-60 hover:opacity-100 transition-opacity" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-tighter mt-1">Trainers</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#dee5ff] opacity-60 hover:opacity-100 transition-opacity" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-tighter mt-1">Players</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#dee5ff] opacity-60 hover:opacity-100 transition-opacity" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-tighter mt-1">Schedules</span>
+</a>
+</nav>
+<!-- FAB: Only for core action on Dashboard -->
+<div class="fixed bottom-28 right-6 z-40 md:bottom-10">
+<button class="w-14 h-14 bg-gradient-to-br from-primary to-primary-container text-on-primary-container rounded-full flex items-center justify-center shadow-[0_20px_40px_rgba(0,0,0,0.4)] active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</div>
+</body></html>

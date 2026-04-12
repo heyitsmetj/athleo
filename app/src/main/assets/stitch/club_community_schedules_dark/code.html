@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Athleo | Field Calendar</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#6bff8f",
+              "background": "#0a0a0a",
+              "surface": "#171717",
+              "surface-border": "#262626",
+              "on-surface": "#fafafa",
+              "on-surface-variant": "#a3a3a3",
+              "info": "#3b82f6"
+            },
+            fontFamily: { "sans": ["Inter", "sans-serif"] }
+          }
+        }
+      }
+    </script>
+    <style>
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      body { background-color: #0a0a0a; color: #fafafa; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+      .glass-panel { background: rgba(23, 23, 23, 0.6); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.08); }
+      .glass-card { background: rgba(23, 23, 23, 0.4); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+      .match-gradient { background: linear-gradient(135deg, rgba(107, 255, 143, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%); }
+      ::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+
+<!-- FORCED GLOBAL STANDARDIZATION -->
+<style>
+input:not([type="file"]), textarea, select { 
+    background-color: #171717 !important; 
+    border: 1px solid #262626 !important; 
+    color: #fafafa !important; 
+    border-radius: 0.75rem !important;
+    padding-top: 0.85rem !important; padding-bottom: 0.85rem !important;
+    color-scheme: dark !important;
+    font-size: 0.9rem !important;
+}
+input:focus, textarea:focus, select:focus { 
+    border-color: rgba(107, 255, 143, 0.6) !important; 
+    outline: none !important; 
+    box-shadow: 0 0 0 1px rgba(107, 255, 143, 0.2) !important; 
+}
+select {
+    appearance: none !important; 
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="white" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>') !important; 
+    background-repeat: no-repeat !important; 
+    background-position: right 1.25rem center !important; 
+}
+</style>
+</head>
+<body class="min-h-screen pb-32 relative">
+    <!-- Ambient Blur -->
+    <div class="fixed inset-0 z-0 flex items-start justify-center pointer-events-none overflow-hidden">
+        <div class="w-[120vw] h-[60vw] bg-primary/5 blur-[120px] rounded-full translate-y-[-50%]"></div>
+    </div>
+
+    <!-- Header -->
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 h-[72px] bg-[#0a0a0a]/95 backdrop-blur-md flex items-center justify-between px-6 border-b border-surface-border">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="typeof toggleSidebar === 'function' ? toggleSidebar() : window.history.back()">
+            <div class="w-10 h-10 rounded-full border border-surface-border overflow-hidden bg-surface flex-shrink-0">
+                 <img id="header-avatar" src="" class="w-full h-full object-cover hidden">
+                 <span id="header-initial" class="flex items-center justify-center w-full h-full text-sm font-bold text-primary">A</span>
+            </div>
+            <div>
+                <div class="flex items-center gap-1 -mb-0.5">
+                    <span class="text-[10px] font-black text-primary uppercase tracking-widest" id="header-role">USER</span>
+                    <span class="material-symbols-outlined text-[14px] text-primary">arrow_drop_down</span>
+                </div>
+                <h1 class="font-bold text-[15px] tracking-tight text-on-surface leading-tight mt-0.5 max-w-[150px] truncate" id="header-name">Athleo User</h1>
+            </div>
+        </div>
+        <div class="flex items-center gap-1">
+            <button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/5 active:scale-95 transition-all relative" onclick="if(window.Android) Android.openAnnouncements()">
+                <span class="material-symbols-outlined text-on-surface text-[20px]">notifications</span>
+                <span id="header-badge" class="absolute top-2.5 right-2 w-[7px] h-[7px] rounded-full bg-primary border-[1.5px] border-[#0a0a0a]"></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-24 px-6 max-w-lg mx-auto space-y-8">
+        <header>
+            <p class="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-2 px-1">Upcoming Events</p>
+            <h2 class="text-3xl font-black tracking-tighter text-on-surface leading-none">Field Schedule</h2>
+        </header>
+
+        <div id="schedules-list" class="space-y-6">
+            <div class="p-16 text-center text-on-surface-variant flex flex-col items-center justify-center gap-4 glass-card rounded-[2.5rem]">
+                <div class="w-10 h-10 rounded-2xl bg-surface border border-white/10 flex items-center justify-center animate-pulse">
+                    <div class="w-3 h-3 rounded-full bg-primary"></div>
+                </div>
+                <span class="text-xs font-black uppercase tracking-widest">Synchronizing...</span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        window.receiveRole = (role) => {
+            if (role === 'Technical Director' || role === 'Head Coach') {
+                document.getElementById('add-btn').style.display = 'flex';
+            }
+        };
+
+        window.renderSchedules = (schedules) => {
+            const list = document.getElementById('schedules-list');
+            if (!list) return;
+            if (!schedules || schedules.length === 0) {
+                list.innerHTML = `
+                    <div class="py-20 text-center text-on-surface-variant flex flex-col justify-center items-center glass-card rounded-[3rem] border-dashed border-2 border-white/5">
+                        <span class="material-symbols-outlined text-6xl opacity-20 mb-4">event_busy</span>
+                        <p class="text-[10px] font-black uppercase tracking-widest">No active fixtures found</p>
+                    </div>`;
+                return;
+            }
+            list.innerHTML = schedules.map(sch => `
+                <div class="glass-card p-8 rounded-[3rem] border border-white/5 relative overflow-hidden group hover:border-primary/20 transition-all active:scale-[0.98]">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-[40px] rounded-full translate-x-10 -translate-y-10 group-hover:bg-primary/10 transition-all"></div>
+                    
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex items-center gap-2">
+                             <div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+                             <span class="text-[10px] font-black uppercase text-primary tracking-[0.2em]">${sch.status || 'UPCOMING'}</span>
+                        </div>
+                        <span class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest">${sch.date}</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between gap-4 py-8 relative">
+                        <div class="flex flex-col items-center gap-3 flex-1">
+                            <div class="w-20 h-20 rounded-3xl bg-surface border border-white/10 flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform">
+                                <span class="material-symbols-outlined text-4xl text-primary">shield</span>
+                            </div>
+                            <span class="text-[10px] font-black uppercase tracking-widest text-center">Athleo FC</span>
+                        </div>
+                        
+                        <div class="flex flex-col items-center opacity-30">
+                            <span class="text-2xl font-black italic tracking-tighter">VS</span>
+                        </div>
+                        
+                        <div class="flex flex-col items-center gap-3 flex-1">
+                            <div class="w-20 h-20 rounded-3xl bg-surface border border-white/10 flex items-center justify-center -rotate-3 group-hover:rotate-0 transition-transform">
+                                <span class="material-symbols-outlined text-4xl text-on-surface-variant">shield_with_house</span>
+                            </div>
+                            <span class="text-[10px] font-black uppercase tracking-widest text-center truncate w-24">${sch.opponent || 'Opponent'}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-center gap-8 pt-8 border-t border-white/5">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-xl">schedule</span>
+                            <span class="text-[10px] font-black uppercase tracking-widest text-on-surface">${sch.time}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-xl">location_on</span>
+                            <span class="text-[10px] font-black uppercase tracking-widest text-on-surface">${sch.location}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        };
+        window.onload = () => { 
+            if (typeof Android !== 'undefined') { 
+                if (Android.loadRole) Android.loadRole();
+                if (Android.loadSchedules) Android.loadSchedules(); 
+            } else {
+                window.renderSchedules([
+                    { opponent: 'Lions FC', date: 'Oct 24, 2024', time: '16:00', location: 'Pitch A', status: 'Match Day' },
+                    { opponent: 'Academy Drills', date: 'Oct 25, 2024', time: '10:00', location: 'Training Ground', status: 'Session' }
+                ]);
+            }
+        };
+    </script>
+</body>
+</html>

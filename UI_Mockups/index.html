@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athleo UI Mockups</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 2rem;
+            justify-content: center;
+        }
+
+        .phone-mockup {
+            width: 375px;
+            height: 812px;
+            background: white;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 0 0 10px #1a1a1a, inset 0 0 0 4px #4a4a4a;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #1a1a1a;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            z-index: 10;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 3.5rem 1.5rem 1.5rem;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .header.login {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            flex-direction: column;
+        }
+
+        .content {
+            padding: 2rem 1.5rem;
+            flex-grow: 1;
+            overflow-y: auto;
+            background: #fafafa;
+        }
+
+        .login-content {
+            background: white;
+            flex-grow: 2;
+            padding: 3rem 1.5rem;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            margin-top: -30px;
+            box-shadow: 0 -10px 20px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: #4b5563;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            background: white;
+            color: #1f2937;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #2a5298;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+        }
+
+        textarea.form-control {
+            resize: none;
+            height: 120px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            background: #2a5298;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(42, 82, 152, 0.2);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(42, 82, 152, 0.2);
+        }
+
+        .profile-pic-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #9ca3af;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .edit-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #2a5298;
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid white;
+        }
+
+        .dropdown {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234b5563%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4l128-127.9c3.6-3.6%205.4-7.8%205.4-12.8%200-5-1.8-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem top 50%;
+            background-size: 0.65rem auto;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .amount-wrapper {
+            position: relative;
+        }
+
+        .amount-wrapper::before {
+            content: '$';
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4b5563;
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        .amount-wrapper .form-control {
+            padding-left: 2rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .tag-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: #e5e7eb;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            color: #4b5563;
+            cursor: pointer;
+        }
+
+        .tag.active {
+            background: #2a5298;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Form -->
+    <div class="phone-mockup">
+        <div class="notch"></div>
+        <div class="header login">
+            <span style="font-size: 3rem;">ATHLEO</span>
+            <span style="font-size: 1rem; font-weight: 400; opacity: 0.8; margin-top: 0.5rem;">Empowering Your Journey</span>
+        </div>
+        <div class="login-content">
+            <h2 class="section-title">Welcome Back</h2>
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-control" value="TD_Test@athleo.com">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" value="str0ngP@ssw0rd!">
+            </div>
+            <div class="form-group" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <label style="font-size: 0.875rem; color: #4b5563; display: flex; align-items: center; gap: 0.5rem;">
+                    <input type="checkbox" checked style="accent-color: #2a5298;"> Remember me
+                </label>
+                <a href="#" style="font-size: 0.875rem; color: #2a5298; text-decoration: none;">Forgot Password?</a>
+            </div>
+            <button class="btn">Sign In</button>
+            <div style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem; color: #6b7280;">
+                Don't have an account? <a href="#" style="color: #2a5298; font-weight: 600; text-decoration: none;">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Form -->
+    <div class="phone-mockup">
+        <div class="notch"></div>
+        <div class="header">
+            Edit Profile
+        </div>
+        <div class="content">
+            <div class="profile-pic-container">
+                <div class="profile-pic">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=e5e7eb&color=4b5563&size=120&font-size=0.4" alt="Profile" style="border-radius: 60px; width: 100%; height: 100%;">
+                    <div class="edit-badge">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" value="John Doe">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Role</label>
+                <input type="text" class="form-control" value="Technical Director" disabled style="background-color: #f3f4f6; color: #6b7280;">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" value="+1 (555) 123-4567">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Bio</label>
+                <textarea class="form-control">Passionate about sports development and streamlining operations for coaches and athletes worldwide.</textarea>
+            </div>
+            <button class="btn">Save Changes</button>
+        </div>
+    </div>
+
+    <!-- Add Expense Form -->
+    <div class="phone-mockup">
+        <div class="notch"></div>
+        <div class="header">
+            Add New Expense
+        </div>
+        <div class="content">
+            <div class="form-group">
+                <label class="form-label">Amount</label>
+                <div class="amount-wrapper">
+                    <input type="number" class="form-control" value="250.00">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Date</label>
+                <input type="date" class="form-control" value="2026-03-25">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Category</label>
+                <div class="tag-group">
+                    <div class="tag active">Equipment</div>
+                    <div class="tag">Travel</div>
+                    <div class="tag">Maintenance</div>
+                    <div class="tag">Marketing</div>
+                    <div class="tag">Other</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Supplier/Vendor (Optional)</label>
+                <input type="text" class="form-control" value="Nike Sports Goods">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Description</label>
+                <textarea class="form-control">Purchased 10 new footballs and 25 training cones for the upcoming summer camp sessions.</textarea>
+            </div>
+            <button class="btn">Submit Expense</button>
+        </div>
+    </div>
+
+    <!-- Create Task Form -->
+    <div class="phone-mockup">
+        <div class="notch"></div>
+        <div class="header">
+            Create New Task
+        </div>
+        <div class="content">
+            <div class="form-group">
+                <label class="form-label">Task Title</label>
+                <input type="text" class="form-control" value="Daily Dribbling Drills">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Assign To</label>
+                <select class="form-control dropdown">
+                    <option>All Students</option>
+                    <option selected>Intermediate Group</option>
+                    <option>Beginner Group</option>
+                    <option>Specific Student...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Difficulty Level</label>
+                <div class="tag-group">
+                    <div class="tag">Easy</div>
+                    <div class="tag active" style="background: #f59e0b;">Medium</div>
+                    <div class="tag">Hard</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Due Date</label>
+                <input type="date" class="form-control" value="2026-04-01">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Instructions</label>
+                <textarea class="form-control">Complete 50 repetitions of figure-8 dribbles. Make sure to record a continuous 60-second video of your best attempt and upload it via the Submission tab.</textarea>
+            </div>
+            <div class="form-group" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; border: 1px dashed #d1d5db; border-radius: 12px; margin-bottom: 1.5rem;">
+                <span style="font-size: 0.875rem; color: #4b5563;">Attach Reference Video</span>
+                <span style="color: #2a5298; font-weight: 500; font-size: 0.875rem;">+ Upload File</span>
+            </div>
+            <button class="btn">Assign Task</button>
+        </div>
+    </div>
+
+    <!-- Submit Feedback Form -->
+    <div class="phone-mockup">
+        <div class="notch"></div>
+        <div class="header">
+            Submit Feedback
+        </div>
+        <div class="content">
+            <div style="background: #eff6ff; padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid #bfdbfe;">
+                <p style="margin: 0; font-size: 0.875rem; color: #1e3a8a;">
+                    Use this form to send feedback, suggestions, or report any issues directly to the administration.
+                </p>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Type</label>
+                <select class="form-control dropdown">
+                    <option>General Feedback</option>
+                    <option selected>Complaint / Issue</option>
+                    <option>Suggestion</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Subject</label>
+                <input type="text" class="form-control" value="Field Conditions (East Turf)">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Visibility</label>
+                <select class="form-control dropdown">
+                    <option selected>Visible to Administration</option>
+                    <option>Anonymous</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Details</label>
+                <textarea class="form-control" style="height: 180px;">The East Turf field is becoming very slippery near the penalty boxes due to worn out synthetic grass. It poses an injury risk during match simulations. Could maintenance take a look at replacing those patches?</textarea>
+            </div>
+            <button class="btn" style="background: #2563eb;">Send Feedback</button>
+        </div>
+    </div>
+
+</body>
+</html>

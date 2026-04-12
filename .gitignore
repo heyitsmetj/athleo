@@ -1,0 +1,34 @@
+*.iml
+.gradle
+/local.properties
+/.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Android Studio / IntelliJ
+*.ipr
+*.iws
+*.iml
+.idea/
+
+# Gradle
+.gradle/
+build/
+
+# Firebase
+.firebase/
+firebaserc
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Local logs
+log.txt
+logcat.txt
+logcat2.txt

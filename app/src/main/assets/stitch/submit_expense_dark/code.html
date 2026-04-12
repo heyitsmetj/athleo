@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Athleo | Submit Expense</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#6bff8f",
+              "background": "#0a0a0a",
+              "surface": "#171717",
+              "surface-border": "#262626",
+              "on-surface": "#fafafa",
+              "on-surface-variant": "#a3a3a3",
+              "danger": "#ef4444"
+            },
+            fontFamily: { "sans": ["Inter", "sans-serif"] }
+          }
+        }
+      }
+    </script>
+    <style>
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      body { background-color: #0a0a0a; color: #fafafa; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+      .glass-card { background: rgba(23, 23, 23, 0.4); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+      
+      input, select, textarea { 
+          background-color: #171717 !important; 
+          border: 1px solid #262626 !important; 
+          color: #fafafa !important; 
+          border-radius: 0.75rem !important;
+          padding: 0.85rem 1rem !important;
+          color-scheme: dark !important;
+          width: 100%;
+          font-size: 0.9rem !important;
+      }
+      input:focus, select:focus, textarea:focus { 
+          border-color: rgba(107, 255, 143, 0.6) !important; 
+          outline: none !important; 
+      }
+      label {
+          font-size: 10px;
+          font-weight: 700;
+          color: #a3a3a3;
+          text-transform: uppercase;
+          tracking: 0.1em;
+          margin-bottom: 0.5rem;
+          display: block;
+          padding-left: 0.25rem;
+      }
+      .btn-primary { 
+          background: #6bff8f; 
+          color: #0a0a0a; 
+          border-radius: 1rem; 
+          width: 100%; 
+          height: 3.5rem; 
+          font-weight: 700; 
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      }
+      .btn-primary:active { transform: scale(0.97); }
+    </style>
+</head>
+<body class="min-h-screen pb-12">
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 h-[72px] bg-[#0a0a0a]/95 backdrop-blur-md flex items-center justify-between px-6 border-b border-surface-border">
+        <button onclick="window.history.back()" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/5 active:scale-95 transition-all text-on-surface">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </button>
+        <h1 class="font-bold text-[17px] tracking-tight text-on-surface">Submit Expense</h1>
+        <div class="w-10"></div>
+    </header>
+
+    <main class="relative z-10 pt-24 px-6 max-w-lg mx-auto space-y-8">
+        <div>
+            <h2 class="text-3xl font-bold tracking-tight text-on-surface mb-2">New Entry</h2>
+            <p class="text-xs text-on-surface-variant font-medium">Please provide accurate financial details for reimbursement.</p>
+        </div>
+
+        <form onsubmit="handleFormSubmit(event)" class="space-y-6">
+            <div class="space-y-4">
+                <div>
+                    <label>Description</label>
+                    <input type="text" id="desc" placeholder="e.g. Travel to Inter-City Match" required>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label>Amount (₹)</label>
+                        <input type="number" id="amount" placeholder="2500" required>
+                    </div>
+                    <div>
+                        <label>Category</label>
+                        <select id="category">
+                            <option value="Travel">Travel</option>
+                            <option value="Equipment">Equipment</option>
+                            <option value="Medical">Medical</option>
+                            <option value="Training">Training</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label>Additional Notes (Optional)</label>
+                    <textarea id="notes" rows="4" placeholder="Mention any specific details..."></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary shadow-lg shadow-primary/20 mt-4">
+                Publish Expense Report
+            </button>
+        </form>
+    </main>
+
+    <script>
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const desc = document.getElementById('desc').value.trim();
+            const amount = document.getElementById('amount').value;
+            const category = document.getElementById('category').value;
+            const notes = document.getElementById('notes').value.trim();
+
+            if (!desc || !amount) {
+                if(window.Android) Android.showToast("Please fill all fields");
+                return;
+            }
+
+            if(window.Android) {
+                // We'll add this method to WebAppInterface
+                Android.submitExpense(desc, parseFloat(amount), category, notes);
+            } else {
+                alert("Expense Submitted: " + desc + " - ₹" + amount);
+                window.history.back();
+            }
+        }
+    </script>
+</body>
+</html>

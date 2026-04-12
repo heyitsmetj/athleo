@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Staff</title>
+    <style>
+        :root {
+            --primary: #6bff8f;
+            --bg-dark: #0a0a0a;
+            --bg-card: rgba(23, 23, 23, 0.4);
+            --text-main: #fafafa;
+            --text-sub: #a3a3a3;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(24px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            color: white;
+            font-size: 0.95rem;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        .staff-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .player-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .player-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
+            background: rgba(107, 255, 143, 0.1);
+            border: 1px solid rgba(107, 255, 143, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .player-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .player-info {
+            flex: 1;
+        }
+
+        .player-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .player-meta {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <button class="back-btn" onclick="window.history.back()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+        </button>
+        <h1>Academy Staff</h1>
+    </div>
+
+    <div class="content">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search staff members..." oninput="filterStaff()">
+        
+        <div class="staff-list" id="staffList">
+            <div class="empty-state">Loading directory...</div>
+        </div>
+    </div>
+
+    <script>
+        let allStaff = [];
+
+        window.renderStaff = (dataVal) => {
+            try {
+                allStaff = (typeof dataVal === 'string') ? JSON.parse(dataVal) : dataVal;
+                displayStaff(allStaff);
+            } catch(e) {
+                document.getElementById('staffList').innerHTML = '<div class="empty-state">Error loading directory data.</div>';
+            }
+        }
+
+        function filterStaff() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allStaff.filter(s => s.name && s.name.toLowerCase().includes(query));
+            displayStaff(filtered);
+        }
+
+        function displayStaff(staff) {
+            const listEl = document.getElementById('staffList');
+            if(!staff || staff.length === 0) {
+                listEl.innerHTML = '<div class="empty-state">No staff found.</div>';
+                return;
+            }
+            
+            listEl.innerHTML = staff.map(s => {
+                const initial = s.name ? s.name.charAt(0) : '?';
+                return `
+                    <div class="player-card">
+                        <div class="player-avatar">
+                            ${s.profileImageUrl ? `<img src="${s.profileImageUrl}">` : initial}
+                        </div>
+                        <div class="player-info">
+                            <div class="player-name">${s.name || 'Unknown Staff'}</div>
+                            <div class="player-meta">${s.rank || s.role || 'Staff Member'}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.onload = () => {
+            if(window.Android) {
+                window.Android.loadStaff();
+            } else {
+                window.renderStaff('[{"name":"Coach Rajan", "role":"Head Trainer"}, {"name":"Coach Sanjay", "role":"Physical Coach"}]');
+            }
+        };
+    </script>
+</body>
+</html>

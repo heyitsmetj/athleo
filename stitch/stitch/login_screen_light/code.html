@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ATHLEO - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed": "#004a1d",
+                        "error-dim": "#d53d18",
+                        "tertiary-container": "#dae6fe",
+                        "surface-bright": "#1f2b49",
+                        "inverse-on-surface": "#4d556b",
+                        "on-primary": "#005f28",
+                        "surface-container-low": "#091328",
+                        "tertiary-dim": "#ccd7ef",
+                        "on-primary-fixed-variant": "#006a2d",
+                        "secondary-container": "#705d00",
+                        "surface-variant": "#192540",
+                        "on-secondary-fixed": "#453900",
+                        "surface-container": "#0f1930",
+                        "outline-variant": "#40485d",
+                        "surface-container-high": "#141f38",
+                        "primary-container": "#0abc56",
+                        "surface-dim": "#060e20",
+                        "tertiary": "#f0f3ff",
+                        "on-tertiary": "#515c70",
+                        "outline": "#6d758c",
+                        "on-surface": "#dee5ff",
+                        "tertiary-fixed": "#dae6fe",
+                        "secondary-dim": "#efc900",
+                        "surface-container-highest": "#192540",
+                        "primary-fixed-dim": "#5bf083",
+                        "on-tertiary-fixed": "#374155",
+                        "surface-tint": "#6bff8f",
+                        "surface": "#060e20",
+                        "secondary-fixed": "#ffd709",
+                        "tertiary-fixed-dim": "#ccd7ef",
+                        "on-surface-variant": "#a3aac4",
+                        "error": "#ff7351",
+                        "on-primary-container": "#002c0f",
+                        "on-tertiary-fixed-variant": "#535e72",
+                        "on-error": "#450900",
+                        "error-container": "#b92902",
+                        "on-secondary-fixed-variant": "#665500",
+                        "on-tertiary-container": "#495468",
+                        "inverse-primary": "#006e2f",
+                        "on-background": "#dee5ff",
+                        "primary-dim": "#5bf083",
+                        "inverse-surface": "#faf8ff",
+                        "primary": "#6bff8f",
+                        "surface-container-lowest": "#000000",
+                        "background": "#060e20",
+                        "on-secondary": "#5b4b00",
+                        "secondary": "#ffd709",
+                        "secondary-fixed-dim": "#efc900",
+                        "on-secondary-container": "#fff7e6",
+                        "primary-fixed": "#6bff8f",
+                        "on-error-container": "#ffd2c8"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(45deg, #6bff8f, #0abc56);
+        }
+        .glass-panel {
+            background: rgba(31, 43, 73, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation Anchor (Manual Filter: Suppress Nav Items for Login) -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-6 h-16 bg-[#060e20]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="sports_soccer">sports_soccer</span>
+<span class="font-headline font-black text-[#22C55E] text-2xl tracking-tighter uppercase">ATHLEO</span>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-6 pt-24 pb-12 relative">
+<!-- Aesthetic Background Elements -->
+<div class="absolute top-1/4 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-[100px]"></div>
+<div class="absolute bottom-1/4 -left-20 w-64 h-64 bg-secondary/5 rounded-full blur-[100px]"></div>
+<!-- Login Container -->
+<div class="w-full max-w-md space-y-10 relative z-10">
+<!-- Hero Header -->
+<div class="space-y-2">
+<h1 class="font-headline text-4xl font-extrabold tracking-tight text-on-surface">
+                    Welcome <span class="text-primary">Back</span>
+</h1>
+<p class="text-on-surface-variant font-medium">Manage your squad with tactical precision.</p>
+</div>
+<!-- Form Fields -->
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="font-label text-xs font-semibold uppercase tracking-widest text-on-surface-variant ml-1">Email Address</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-lg group-focus-within:text-primary transition-colors" data-icon="mail">mail</span>
+</div>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder-outline focus:ring-2 focus:ring-primary transition-all duration-300" placeholder="coach@athleo.com" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label text-xs font-semibold uppercase tracking-widest text-on-surface-variant ml-1">Password</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-lg group-focus-within:text-primary transition-colors" data-icon="lock">lock</span>
+</div>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-12 text-on-surface placeholder-outline focus:ring-2 focus:ring-primary transition-all duration-300" placeholder="••••••••" type="password"/>
+<div class="absolute inset-y-0 right-0 pr-4 flex items-center">
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-on-surface" data-icon="visibility">visibility</span>
+</div>
+</div>
+</div>
+<div class="flex justify-end">
+<a class="text-secondary font-semibold text-sm hover:underline underline-offset-4 decoration-2" href="#">Forgot Password?</a>
+</div>
+</div>
+<!-- Primary Action -->
+<div class="space-y-6 pt-4">
+<button class="kinetic-gradient w-full py-4 rounded-xl font-headline font-bold text-on-primary-container text-lg shadow-[0_10px_30px_rgba(107,255,143,0.2)] active:scale-95 transition-all duration-150 uppercase tracking-wide">
+                    SIGN IN
+                </button>
+<div class="flex flex-col items-center gap-4">
+<div class="flex items-center gap-2 px-4 py-2 bg-surface-container rounded-full">
+<span class="material-symbols-outlined text-secondary text-base" data-icon="verified_user">verified_user</span>
+<span class="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant">Role-based access enabled</span>
+</div>
+</div>
+</div>
+<!-- Secondary Action -->
+<div class="text-center pt-8">
+<p class="text-on-surface-variant text-sm">
+                    Don't have an account? 
+                    <a class="text-primary font-bold ml-1 hover:underline" href="#">Request Access</a>
+</p>
+</div>
+</div>
+</main>
+<!-- Visual Footer Accent -->
+<div class="w-full h-1 kinetic-gradient opacity-20"></div>
+<!-- Background Decorative Image (Bento style hint) -->
+<div class="fixed bottom-0 right-0 w-1/2 h-1/2 -z-10 opacity-10 pointer-events-none overflow-hidden">
+<img class="w-full h-full object-cover object-center grayscale mix-blend-overlay" data-alt="Abstract cinematic dark stadium lighting background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4rRGwM-85g4Mad2y2GtsJP05li9RCpxU5af8C0OLQGIqtKp6PKxIh_Gb1O9Au13LhznwEL_aauGXxZLUOJUPhtWkTIsNgQnF1cUsJv3Rn9y57hUaxl5728BFCQioHwOOqtv_syqoAQj1H8foXD7lTe_EgMiOiEl6N0IskJhCypLL0vlPDyRRftTIGLhFOH9v23lvIs9LL4H9mxPtc5BnLcAd6DIE8I_Qo-IkD0t4XRULHu2d0LTA_TuX30RD7x2XSG85Cuw40OlHA"/>
+</div>
+</body></html>

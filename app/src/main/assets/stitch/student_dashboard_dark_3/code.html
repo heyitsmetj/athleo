@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Athleo | Student Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#6bff8f",
+              "background": "#0a0a0a",
+              "surface": "#171717",
+              "surface-border": "#262626",
+              "on-surface": "#fafafa",
+              "on-surface-variant": "#a3a3a3"
+            },
+            fontFamily: { "sans": ["Inter", "sans-serif"] }
+          }
+        }
+      }
+    </script>
+    <style>
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      body { background-color: #0a0a0a; color: #fafafa; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+      .glass-panel { background: rgba(23, 23, 23, 0.6); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.08); }
+      .glass-card { background: rgba(23, 23, 23, 0.4); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+      #sidebar { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); }
+      #sidebar.open { transform: translateX(0); }
+      ::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+
+<!-- FORCED GLOBAL STANDARDIZATION -->
+<style>
+input:not([type="file"]), textarea, select { 
+    background-color: #171717 !important; 
+    border: 1px solid #262626 !important; 
+    color: #fafafa !important; 
+    border-radius: 0.75rem !important;
+    padding-top: 0.85rem !important; padding-bottom: 0.85rem !important;
+    color-scheme: dark !important;
+    font-size: 0.9rem !important;
+}
+input:focus, textarea:focus, select:focus { 
+    border-color: rgba(107, 255, 143, 0.6) !important; 
+    outline: none !important; 
+    box-shadow: 0 0 0 1px rgba(107, 255, 143, 0.2) !important; 
+}
+select {
+    appearance: none !important; 
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="white" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>') !important; 
+    background-repeat: no-repeat !important; 
+    background-position: right 1.25rem center !important; 
+}
+</style>
+</head>
+<body class="min-h-screen pb-32">
+    <!-- Ambient Blur -->
+    <div class="fixed inset-0 z-0 flex items-start justify-center pointer-events-none overflow-hidden">
+        <div class="w-[120vw] h-[60vw] bg-primary/5 blur-[120px] rounded-full translate-y-[-50%]"></div>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed inset-y-0 right-0 w-72 glass-panel z-[100] border-l border-white/10 shadow-2xl">
+        <div class="p-8 flex flex-col h-full">
+            <div class="flex items-center justify-between mb-8">
+                <span class="text-[10px] font-black text-on-surface-variant uppercase tracking-[0.2em]">Profile Menu</span>
+                <button onclick="toggleSidebar()" class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all">close</button>
+            </div>
+            <div class="flex items-center gap-4 mb-10">
+                <div class="w-16 h-16 rounded-2xl border-2 border-primary/20 overflow-hidden bg-surface">
+                    <img id="sidebar-profile-img" class="w-full h-full object-cover" src="">
+                </div>
+                <div>
+                    <h3 id="sidebar-user-name" class="font-bold text-on-surface text-lg leading-tight">Elite Student</h3>
+                    <p id="sidebar-user-role" class="text-[9px] text-primary font-black uppercase tracking-widest mt-1">Academy Pro</p>
+                </div>
+            </div>
+            <nav class="flex-1 space-y-2">
+                <button onclick="Android.editProfile()" class="w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all group text-left">
+                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">person_edit</span>
+                    <span class="text-xs font-bold text-on-surface">Edit Profile</span>
+                </button>
+                <button onclick="Android.openFeedback()" class="w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all group text-left">
+                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">chat_bubble</span>
+                    <span class="text-xs font-bold text-on-surface">Feedback</span>
+                </button>
+                <button onclick="Android.openSupportChat()" class="w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all group text-left">
+                    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">support_agent</span>
+                    <span class="text-xs font-bold text-on-surface">Support</span>
+                </button>
+            </nav>
+            <button onclick="Android.logout()" class="w-full flex items-center justify-center gap-3 p-5 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-500 hover:bg-red-500/20 transition-all active:scale-95">
+                <span class="material-symbols-outlined text-xl">logout</span>
+                <span class="text-[10px] font-black uppercase tracking-widest">Terminate Session</span>
+            </button>
+        </div>
+    </div>
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] hidden"></div>
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 h-[72px] bg-[#0a0a0a]/95 backdrop-blur-md flex items-center justify-between px-6 border-b border-surface-border">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="toggleSidebar()">
+            <div class="w-10 h-10 rounded-full border border-surface-border overflow-hidden bg-surface">
+                 <img id="header-avatar" src="" class="w-full h-full object-cover hidden">
+                 <span id="header-initial" class="flex items-center justify-center w-full h-full text-sm font-bold text-primary">S</span>
+            </div>
+            <div>
+                <div class="flex items-center gap-1 -mb-0.5">
+                    <span class="text-[10px] font-black text-primary uppercase tracking-widest" id="header-role">STUDENT</span>
+                    <span class="material-symbols-outlined text-[14px] text-primary">arrow_drop_down</span>
+                </div>
+                <h1 class="font-bold text-[15px] tracking-tight text-on-surface leading-tight mt-0.5" id="header-name">Athleo HQ</h1>
+            </div>
+        </div>
+        <div class="flex items-center gap-1">
+            <button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/5 active:scale-95 transition-all relative" onclick="Android.openAnnouncements()">
+                <span class="material-symbols-outlined text-on-surface text-[20px]">notifications</span>
+                <span id="header-badge" class="absolute top-2.5 right-2 w-[7px] h-[7px] rounded-full bg-primary border-[1.5px] border-[#0a0a0a]"></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-24 px-6 max-w-lg mx-auto space-y-8">
+        <!-- Hero Section -->
+        <section>
+            <p id="rank-text" class="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-2 px-1">Academy Rank: Elite</p>
+            <h2 id="greeting-text" class="text-4xl font-black text-on-surface tracking-tighter leading-none">Namaste, Champ!</h2>
+        </section>
+
+        <!-- KPI Grid -->
+        <section class="grid grid-cols-2 gap-4">
+            <div onclick="Android.openPlayerAnalytics('me', 'attendance')" class="glass-card p-6 rounded-[2.5rem] relative overflow-hidden group cursor-pointer active:scale-95 transition-all">
+                <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full group-hover:bg-primary/10 transition-all"></div>
+                <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2 px-1">Attendance</p>
+                <p id="attendance-text" class="text-3xl font-black text-primary">94%</p>
+                <div class="h-1 w-12 bg-primary rounded-full mt-4"></div>
+            </div>
+            <div onclick="Android.openPlayerAnalytics('me', 'performance')" class="glass-card p-6 rounded-[2.5rem] relative overflow-hidden group cursor-pointer active:scale-95 transition-all">
+                 <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full group-hover:bg-primary/10 transition-all"></div>
+                <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2 px-1">Performance</p>
+                <p id="perf-score-text" class="text-3xl font-black text-primary">4.8</p>
+                <div class="h-1 w-12 bg-primary rounded-full mt-4"></div>
+            </div>
+        </section>
+
+        <!-- Next Session Card -->
+        <section class="glass-card p-8 rounded-[2.5rem] border border-primary/20 bg-gradient-to-br from-[#171717] to-[#0a0a0a]">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">timer</span>
+                    <span class="text-[10px] font-black text-primary uppercase tracking-widest">Next Drill</span>
+                </div>
+                <span class="px-2 py-1 bg-white/5 rounded-lg text-[9px] font-bold text-on-surface-variant uppercase">Oct 24, 10:00 AM</span>
+            </div>
+            <h3 class="text-2xl font-black text-on-surface mb-2 leading-none">Tactical Analysis</h3>
+            <p class="text-xs text-on-surface-variant font-medium leading-relaxed">Review defensive coordination and transition patterns in the final third.</p>
+            <button onclick="Android.openSchedules()" class="mt-8 w-full py-4 rounded-2xl bg-primary text-black font-black uppercase tracking-widest text-[10px] active:scale-95 transition-all">
+                Full Schedule
+            </button>
+        </section>
+
+        <!-- Active Tasks Summary -->
+         <section class="glass-card p-8 rounded-[2.5rem]">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-black text-on-surface tracking-tight">Active Tasks</h3>
+                <span id="task-count" class="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-[10px] font-black text-black">3</span>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl">
+                    <span class="material-symbols-outlined text-primary">fitness_center</span>
+                    <div class="flex-1">
+                        <p class="text-[11px] font-bold text-on-surface">Agility Drill</p>
+                        <p class="text-[9px] text-on-surface-variant uppercase font-medium">Physical • Due Today</p>
+                    </div>
+                </div>
+                <button onclick="Android.openTaskManagement()" class="w-full py-4 rounded-2xl border border-white/5 hover:bg-white/5 text-[10px] font-black text-on-surface-variant uppercase tracking-widest transition-all">
+                    View All Tasks
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 w-full z-50 glass-panel border-t border-surface-border pb-safe pt-2 px-6 rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+        <div class="flex justify-between items-center max-w-lg mx-auto pb-4 pt-1">
+            <a href="#" class="flex flex-col items-center gap-1 min-w-[64px]">
+                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-0.5">
+                    <span class="material-symbols-outlined text-[20px] transition-transform active:scale-90" style="font-variation-settings: 'FILL' 1;">home</span>
+                </div>
+                <span class="text-[9px] font-bold text-primary tracking-wide">Home</span>
+            </a>
+            <a href="#" onclick="Android.openSchedules()" class="flex flex-col items-center gap-1.5 min-w-[64px] group">
+                <span class="material-symbols-outlined text-[24px] text-on-surface-variant group-hover:text-on-surface transition-colors mt-1">calendar_month</span>
+                <span class="text-[9px] font-medium text-on-surface-variant group-hover:text-on-surface tracking-wide">Schedule</span>
+            </a>
+            <a href="#" onclick="Android.openCommunity()" class="flex flex-col items-center gap-1.5 min-w-[64px] group relative">
+                <span class="material-symbols-outlined text-[24px] text-on-surface-variant group-hover:text-on-surface transition-colors mt-1">forum</span>
+                <span class="text-[9px] font-medium text-on-surface-variant group-hover:text-on-surface tracking-wide">Community</span>
+            </a>
+            
+        </div>
+    </nav>
+
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const isOpen = sidebar.classList.contains('open');
+            if (isOpen) {
+                sidebar.classList.remove('open');
+                setTimeout(() => overlay.classList.add('hidden'), 400);
+            } else {
+                overlay.classList.remove('hidden');
+                setTimeout(() => sidebar.classList.add('open'), 10);
+            }
+        }
+
+        window.renderProfile = (user) => {
+            if (user.name) {
+                const h = new Date().getHours(); const g = h<12?"Good Morning":h<17?"Good Afternoon":"Good Evening"; document.getElementById('greeting-text').innerText = g + ", " + user.name.split(' ')[0] + "!";
+                document.getElementById('sidebar-user-name').innerText = user.name;
+                document.getElementById('header-name').innerText = user.name;
+                document.getElementById('header-initial').innerText = user.name.charAt(0).toUpperCase();
+            }
+            if (user.role) {
+                document.getElementById('header-role').innerText = user.role;
+            }
+            if (user.rank) {
+                document.getElementById('rank-text').innerText = "Academy Rank: " + user.rank;
+            }
+            if (user.profileImageUrl) {
+                document.getElementById('sidebar-profile-img').src = user.profileImageUrl;
+                document.getElementById('header-avatar').src = user.profileImageUrl;
+                document.getElementById('header-avatar').classList.remove('hidden');
+                document.getElementById('header-initial').classList.add('hidden');
+            }
+            if (user.attendancePercentage) {
+                document.getElementById('attendance-text').innerText = user.attendancePercentage + "%";
+            }
+            if (user.performanceScore) {
+                document.getElementById('perf-score-text').innerText = (user.performanceScore / 20).toFixed(1);
+            }
+        };
+
+        window.onload = () => { if (typeof Android !== 'undefined') Android.loadUserProfile(); };
+    </script>
+</body>
+</html>

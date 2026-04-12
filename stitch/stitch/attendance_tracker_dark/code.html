@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Training Command - Attendance Tracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-fixed-dim": "#efc900",
+                        "on-error-container": "#ffd2c8",
+                        "surface-container": "#0f1930",
+                        "tertiary-fixed": "#dae6fe",
+                        "primary-fixed": "#6bff8f",
+                        "tertiary-container": "#dae6fe",
+                        "error-container": "#b92902",
+                        "error": "#ff7351",
+                        "on-primary": "#005f28",
+                        "primary-fixed-dim": "#5bf083",
+                        "on-secondary": "#5b4b00",
+                        "secondary-dim": "#efc900",
+                        "surface-variant": "#192540",
+                        "surface-dim": "#060e20",
+                        "on-tertiary": "#515c70",
+                        "on-background": "#dee5ff",
+                        "on-tertiary-container": "#495468",
+                        "tertiary-dim": "#ccd7ef",
+                        "surface-container-high": "#141f38",
+                        "on-primary-fixed-variant": "#006a2d",
+                        "on-surface": "#dee5ff",
+                        "surface-container-highest": "#192540",
+                        "on-surface-variant": "#a3aac4",
+                        "on-tertiary-fixed-variant": "#535e72",
+                        "tertiary": "#f0f3ff",
+                        "inverse-primary": "#006e2f",
+                        "primary-container": "#0abc56",
+                        "surface-tint": "#6bff8f",
+                        "inverse-on-surface": "#4d556b",
+                        "on-primary-container": "#002c0f",
+                        "surface-container-lowest": "#000000",
+                        "surface-bright": "#1f2b49",
+                        "surface": "#060e20",
+                        "on-error": "#450900",
+                        "on-secondary-fixed-variant": "#665500",
+                        "background": "#060e20",
+                        "secondary-container": "#705d00",
+                        "tertiary-fixed-dim": "#ccd7ef",
+                        "on-secondary-container": "#fff7e6",
+                        "inverse-surface": "#faf8ff",
+                        "outline": "#6d758c",
+                        "primary-dim": "#5bf083",
+                        "secondary-fixed": "#ffd709",
+                        "on-primary-fixed": "#004a1d",
+                        "on-secondary-fixed": "#453900",
+                        "outline-variant": "#40485d",
+                        "primary": "#6bff8f",
+                        "secondary": "#ffd709",
+                        "on-tertiary-fixed": "#374155",
+                        "surface-container-low": "#091328",
+                        "error-dim": "#d53d18"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #060e20;
+        }
+        h1, h2, h3, .font-lexend {
+            font-family: 'Lexend', sans-serif;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060e20;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2b49;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#091328]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Professional athletic trainer headshot profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjCzYS116Eh7bfbS7b-y9z_yhWh3cmxUSa_4OvcYZRP2C18eCOS1uMrtx7EFqBpreoxJsiuPnEY1YogAKD8pt9z6oIdfwc2PMKeK4bCGU6FbdVc0VC1ojPs3KVS2yi08eZrL020jxnysXPPRGBpTKZ9ZzkbkiOqsKFvkHzNW6EWCNagcwvW92wq3hEUUexhnpp-Qx6TLS1a3HzmWsejntnzA9nUfoNQsmUR3TpjME3Ixp_AHxSWhH4cOriO3XZzPyNl-Ymnu5KZIu9"/>
+</div>
+<span class="text-xl font-black tracking-tighter text-[#dee5ff] font-lexend uppercase">TRAINING COMMAND</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#a3aac4] hover:bg-[#1f2b49]/80 transition-colors p-2 rounded-xl scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</button>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-32 px-6 max-w-4xl mx-auto w-full">
+<!-- Summary Dashboard (Asymmetric Bento) -->
+<section class="mb-10">
+<div class="grid grid-cols-12 gap-4">
+<div class="col-span-12 md:col-span-7 p-6 rounded-2xl bg-surface-container flex flex-col justify-between">
+<div>
+<span class="text-secondary font-lexend text-xs font-bold uppercase tracking-widest">Session Intelligence</span>
+<h1 class="text-4xl font-extrabold font-lexend tracking-tight mt-1">OCTOBER 24, 2024</h1>
+</div>
+<p class="text-on-surface-variant text-sm mt-4 font-medium italic">Morning Tactical &amp; Conditioning Drill</p>
+</div>
+<div class="col-span-12 md:col-span-5 grid grid-cols-2 gap-4">
+<div class="bg-primary/10 p-5 rounded-2xl flex flex-col items-center justify-center">
+<span class="text-primary font-lexend text-4xl font-black">24</span>
+<span class="text-primary font-lexend text-[10px] font-bold uppercase mt-1">PRESENT</span>
+</div>
+<div class="bg-error/10 p-5 rounded-2xl flex flex-col items-center justify-center">
+<span class="text-error font-lexend text-4xl font-black">02</span>
+<span class="text-error font-lexend text-[10px] font-bold uppercase mt-1">ABSENT</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Search & Filter Cluster -->
+<section class="mb-8 flex flex-col md:flex-row gap-4">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-highest border-0 rounded-2xl py-4 pl-12 pr-4 text-sm font-lexend tracking-wide focus:ring-2 focus:ring-primary placeholder:text-on-surface-variant/50" placeholder="FIND ATHLETE BY NAME OR SQUAD..." type="text"/>
+</div>
+<button class="bg-surface-container-high px-6 py-4 rounded-2xl flex items-center gap-2 hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="filter_list">filter_list</span>
+<span class="font-lexend text-xs font-bold uppercase tracking-widest">SQUAD</span>
+</button>
+</section>
+<!-- Player List -->
+<div class="space-y-4">
+<!-- Player Item 1 -->
+<div class="bg-surface-container hover:bg-surface-container-high transition-all duration-300 p-4 rounded-2xl flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-14 h-14 rounded-xl overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Young athlete player profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQDZSxZ08cVSCpoChW0R8nlOANHJxbM0UoZwv3pAiru9gRBtG0IhSr9GeOnrJXjpPSx-PAp2JKonMNYjn9_W2H2XJ3Y16v2l3LhFsewgrxwVMkPoMaYO64DvNN96R4_bTGjNTiFrWiPC1nfbWHv0lj4IEFJ6kJrK1U_LQD8IjlH-oL7VAsAvPHFGNMUogogsElQDJ8giBvhgZN_4_VNlPFPsEJqgjU04twkjH9TB-HZQ8gcRFGB076V6LQBTrbwcDmInzs6XMzxgmI"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-primary rounded-full border-2 border-surface flex items-center justify-center">
+<span class="text-[10px] font-bold text-on-primary-container">10</span>
+</div>
+</div>
+<div>
+<h3 class="font-lexend font-bold text-lg leading-tight">MARCUS RASHFORD</h3>
+<div class="flex gap-2 mt-0.5">
+<span class="bg-surface-container-highest text-on-surface-variant text-[10px] px-2 py-0.5 rounded-full font-bold tracking-widest uppercase">FORWARD</span>
+<span class="bg-primary/10 text-primary text-[10px] px-2 py-0.5 rounded-full font-bold tracking-widest uppercase">A-TEAM</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-primary-container text-on-primary-container transition-all active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[8px] font-black uppercase mt-1">P</span>
+</button>
+<button class="flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-surface-container-highest text-on-surface-variant opacity-40 hover:opacity-100 transition-all active:scale-90">
+<span class="material-symbols-outlined">cancel</span>
+<span class="text-[8px] font-black uppercase mt-1">A</span>
+</button>
+</div>
+</div>
+<!-- Player Item 2 -->
+<div class="bg-surface-container hover:bg-surface-container-high transition-all duration-300 p-4 rounded-2xl flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-14 h-14 rounded-xl overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Male athlete player profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhm0R_x6SmAG_mV8omA2rfqxbmasf27PRAwEd7zPLUoyJv-cwAFyFZVcToeshV7fKe8QhJ2Ps0bgnQMlI2sOKfT1g2XlJnuYbPq_peniGSC36QhKngdglGgHSSzX4ljbclFRwmppRIj27sw9SIiartv0j9KoIKZBZ76qzQ7F7vaopPSRA2Bk-D1ZlCQLrRPZDhitDlWyaDX6PaYZ9Q3J2XWq73vd6ee6YIlL7AXXBE973S1xHxtPb2bgA1ilE_j54IlAidTBboK6p5"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-secondary rounded-full border-2 border-surface flex items-center justify-center">
+<span class="text-[10px] font-bold text-on-secondary">06</span>
+</div>
+</div>
+<div>
+<h3 class="font-lexend font-bold text-lg leading-tight">KEVIN DE BRUYNE</h3>
+<div class="flex gap-2 mt-0.5">
+<span class="bg-surface-container-highest text-on-surface-variant text-[10px] px-2 py-0.5 rounded-full font-bold tracking-widest uppercase">MIDFIELD</span>
+<span class="bg-primary/10 text-primary text-[10px] px-2 py-0.5 rounded-full font-bold tracking-widest uppercase">A-TEAM</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-surface-container-highest text-on-surface-variant opacity-40 hover:opacity-100 transition-all active:scale-90">
+<span class="material-symbols-outlined">check_circle</span>
+<span class="text-[8px] font-black uppercase mt-1">P</span>
+</button>
+<button class="flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-error/20 text-error transition-all active:scale-90 ring-1 ring-error/50">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">cancel</span>
+<span class="text-[8px] font-black uppercase mt-1">A</span>
+</button>
+</div>
+</div>
+<!-- Player Item 3 -->
+<div class="bg-surface-container hover:bg-surface-container-high transition-all duration-300 p-4 rounded-2xl flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-14 h-14 rounded-xl overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Athletic male player profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVnL-o9n14AuAug-Df1apnX4S9nULKu3ZNan9WBu14tXO3iXdqEqqh79J65avsTh0T436TlHP2R12oCMjjNFZ39LxF-JShuLhpPkoh5GJeswaQ_N1ueUcoJeBnmXQl-TjrRpxSOYh-TNXy4geND3SbuknsVWQtnR5NZ7LkYr7DXGyP2HyOleE5le6Nav7v5yMvC30ycN71bYzytn33tfx6Mn5ky3qq3KGk-YQJoRxpz27vB1fBm9aH-92IpLoXbO1wFi9Qt3sK9GrY"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-primary rounded-full border-2 border-surface flex items-center justify-center">
+<span class="text-[10px] font-bold text-on-primary-container">04</span>
+</div>
+</div>
+<div>
+<h3 class="font-lexend font-bold text-lg leading-tight">VIRGIL VAN DIJK</h3>
+<div class="flex gap-2 mt-0.5">
+<span class="bg-surface-container-highest text-on-surface-variant text-[10px] px-2 py-0.5 rounded-full font-bold tracking-widest uppercase">DEFENSE</span>
+<span class="bg-primary/10 text-primary text-[10px] px-2 py-0.5 rounded-full font-bold tracking-widest uppercase">B-TEAM</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-surface-container-highest text-on-surface-variant opacity-40 hover:opacity-100 transition-all active:scale-90">
+<span class="material-symbols-outlined">check_circle</span>
+<span class="text-[8px] font-black uppercase mt-1">P</span>
+</button>
+<button class="flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-surface-container-highest text-on-surface-variant opacity-40 hover:opacity-100 transition-all active:scale-90">
+<span class="material-symbols-outlined">cancel</span>
+<span class="text-[8px] font-black uppercase mt-1">A</span>
+</button>
+</div>
+</div>
+<!-- Player Item 4 -->
+<div class="bg-surface-container hover:bg-surface-container-high transition-all duration-300 p-4 rounded-2xl flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-14 h-14 rounded-xl overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Professional player profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQBDBFtSbgWzjZKuwirYdgfniXNICB69eBQNtquxkmZS81iHNFJ4Sktyh_AECGo6SynZr3NHtMDUp3nom1-k36T4p-iOTxiGdC-GMMpjU_-7aSi48C2SRZizNvpaxEn4Tv6y5IB8oArSbUwxAz4bXCDbr8p6l-V4Eo6mJIxfQkC9N9hPloVzMQ2PSXVLddvRsCra8iFcGt78EInkWetw-v61N78fo38UJhYAffBjgg_7Ggtr18fh7geI6ShOa785d1Ieq50nGs6E7M"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-primary rounded-full border-2 border-surface flex items-center justify-center">
+<span class="text-[10px] font-bold text-on-primary-container">01</span>
+</div>
+</div>
+<div>
+<h3 class="font-lexend font-bold text-lg leading-tight">ALISSON BECKER</h3>
+<div class="flex gap-2 mt-0.5">
+<span class="bg-surface-container-highest text-on-surface-variant text-[10px] px-2 py-0.5 rounded-full font-bold tracking-widest uppercase">GOALKEEPER</span>
+<span class="bg-primary/10 text-primary text-[10px] px-2 py-0.5 rounded-full font-bold tracking-widest uppercase">A-TEAM</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-primary-container text-on-primary-container transition-all active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[8px] font-black uppercase mt-1">P</span>
+</button>
+<button class="flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-surface-container-highest text-on-surface-variant opacity-40 hover:opacity-100 transition-all active:scale-90">
+<span class="material-symbols-outlined">cancel</span>
+<span class="text-[8px] font-black uppercase mt-1">A</span>
+</button>
+</div>
+</div>
+<!-- Player Item 5 -->
+<div class="bg-surface-container hover:bg-surface-container-high transition-all duration-300 p-4 rounded-2xl flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-14 h-14 rounded-xl overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Team athlete profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbkdqwMEe9AUQyylcg58FoTQpblX9YlS7nE7NOBxHG5zycWJ3lmLdUdatcLnH47XBiWtk0-b9MidH4__eXhL7rXvrMTSK5WCd1pxtkFOeMY8s-i8EWmP9gkaUGLNmZu6AlLks44qdHaxM1TZC_WxhnAV7itxQLvgD3Ksc5mcHfWfC5NSp7p4yPYf821Uo1p4GnVHpoVTCuQLb9_uvu69Nnkh4e88uslx-QbJjL-KxRg9VGLA5t-ql_esrKYg_KGxj5r-9-g8FwUpEY"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-primary rounded-full border-2 border-surface flex items-center justify-center">
+<span class="text-[10px] font-bold text-on-primary-container">08</span>
+</div>
+</div>
+<div>
+<h3 class="font-lexend font-bold text-lg leading-tight">PEDRI GONZALEZ</h3>
+<div class="flex gap-2 mt-0.5">
+<span class="bg-surface-container-highest text-on-surface-variant text-[10px] px-2 py-0.5 rounded-full font-bold tracking-widest uppercase">MIDFIELD</span>
+<span class="bg-primary/10 text-primary text-[10px] px-2 py-0.5 rounded-full font-bold tracking-widest uppercase">A-TEAM</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-primary-container text-on-primary-container transition-all active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[8px] font-black uppercase mt-1">P</span>
+</button>
+<button class="flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-surface-container-highest text-on-surface-variant opacity-40 hover:opacity-100 transition-all active:scale-90">
+<span class="material-symbols-outlined">cancel</span>
+<span class="text-[8px] font-black uppercase mt-1">A</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Sticky Action Button -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 z-40 w-full max-w-md px-6">
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary-container font-lexend font-black uppercase py-5 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.4)] tracking-[0.2em] active:scale-95 transition-all">
+                SUBMIT ROSTER LOG
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#1f2b49]/80 backdrop-blur-xl rounded-t-2xl shadow-[0_-10px_30px_rgba(0,0,0,0.3)]">
+<a class="flex flex-col items-center justify-center text-[#6bff8f] bg-[#6bff8f]/10 rounded-xl px-4 py-1 active:scale-95 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="groups" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-widest mt-1">Roster</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a3aac4] opacity-70 hover:text-[#dee5ff] transition-opacity active:scale-95 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-widest mt-1">Schedule</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a3aac4] opacity-70 hover:text-[#dee5ff] transition-opacity active:scale-95 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-widest mt-1">Stats</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a3aac4] opacity-70 hover:text-[#dee5ff] transition-opacity active:scale-95 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-widest mt-1">Settings</span>
+</a>
+</nav>
+</body></html>

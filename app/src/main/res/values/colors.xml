@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- Sports Theme Colors -->
+    <color name="primaryOrange">#FF5A00</color>
+    <color name="primaryOrangeDark">#CC4800</color>
+    <color name="secondaryGreen">#00E676</color>
+    
+    <!-- Light Mode -->
+    <color name="backgroundLight">#F5F5F7</color>
+    <color name="surfaceLight">#FFFFFF</color>
+    <color name="textPrimaryLight">#212121</color>
+    
+    <!-- Dark Mode -->
+    <color name="backgroundDark">#121212</color>
+    <color name="surfaceDark">#1E1E1E</color>
+    <color name="textPrimaryDark">#E0E0E0</color>
+
+    <!-- Stitch UI Theme Colors -->
+    <color name="on_primary_fixed">#004a1d</color>
+    <color name="error_dim">#d53d18</color>
+    <color name="tertiary_container">#dae6fe</color>
+    <color name="surface_bright">#1f2b49</color>
+    <color name="inverse_on_surface">#4d556b</color>
+    <color name="on_primary">#005f28</color>
+    <color name="surface_container_low">#091328</color>
+    <color name="tertiary_dim">#ccd7ef</color>
+    <color name="on_primary_fixed_variant">#006a2d</color>
+    <color name="secondary_container">#705d00</color>
+    <color name="surface_variant">#192540</color>
+    <color name="on_secondary_fixed">#453900</color>
+    <color name="surface_container">#0f1930</color>
+    <color name="outline_variant">#40485d</color>
+    <color name="surface_container_high">#141f38</color>
+    <color name="primary_container">#0abc56</color>
+    <color name="surface_dim">#060e20</color>
+    <color name="tertiary">#f0f3ff</color>
+    <color name="on_tertiary">#515c70</color>
+    <color name="outline">#6d758c</color>
+    <color name="on_surface">#dee5ff</color>
+    <color name="tertiary_fixed">#dae6fe</color>
+    <color name="secondary_dim">#efc900</color>
+    <color name="surface_container_highest">#192540</color>
+    <color name="primary_fixed_dim">#5bf083</color>
+    <color name="on_tertiary_fixed">#374155</color>
+    <color name="surface_tint">#6bff8f</color>
+    <color name="surface">#060e20</color>
+    <color name="secondary_fixed">#ffd709</color>
+    <color name="tertiary_fixed_dim">#ccd7ef</color>
+    <color name="on_surface_variant">#a3aac4</color>
+    <color name="error">#ff7351</color>
+    <color name="on_primary_container">#002c0f</color>
+    <color name="on_tertiary_fixed_variant">#535e72</color>
+    <color name="on_error">#450900</color>
+    <color name="error_container">#b92902</color>
+    <color name="on_secondary_fixed_variant">#665500</color>
+    <color name="on_tertiary_container">#495468</color>
+    <color name="inverse_primary">#006e2f</color>
+    <color name="on_background">#dee5ff</color>
+    <color name="primary_dim">#5bf083</color>
+    <color name="inverse_surface">#faf8ff</color>
+    <color name="primary">#6bff8f</color>
+    <color name="surface_container_lowest">#000000</color>
+    <color name="background">#060e20</color>
+    <color name="on_secondary">#5b4b00</color>
+    <color name="secondary">#ffd709</color>
+    <color name="secondary_fixed_dim">#efc900</color>
+    <color name="on_secondary_container">#fff7e6</color>
+    <color name="primary_fixed">#6bff8f</color>
+    <color name="on_error_container">#ffd2c8</color>
+</resources>

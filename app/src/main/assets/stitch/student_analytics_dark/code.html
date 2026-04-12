@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Athleo | Player Analytics</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#6bff8f",
+              "background": "#0a0a0a",
+              "surface": "#171717",
+              "surface-border": "#262626",
+              "on-surface": "#fafafa",
+              "on-surface-variant": "#a3a3a3",
+              "accent-blue": "#3b82f6"
+            },
+            fontFamily: { "sans": ["Inter", "sans-serif"] }
+          }
+        }
+      }
+    </script>
+    <style>
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      body { background-color: #0a0a0a; color: #fafafa; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+      
+      .glass-panel { background: rgba(23, 23, 23, 0.6); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.08); }
+      .glass-card { background: rgba(23, 23, 23, 0.4); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+      
+      .tab-active { color: #6bff8f; position: relative; }
+      .tab-active::after { content: ''; position: absolute; bottom: -12px; left: 0; width: 100%; height: 2px; background: #6bff8f; border-radius: 2px; }
+      
+      ::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+      .chart-pixel { width: 4px; border-radius: 2px; background: #6bff8f; min-height: 4px; }
+    </style>
+</head>
+<body class="min-h-screen pb-12">
+    <!-- Ambient Background Glow -->
+    <div class="fixed inset-0 z-0 flex items-start justify-center pointer-events-none overflow-hidden">
+        <div class="w-[120vw] h-[60vw] bg-primary/5 blur-[120px] rounded-full translate-y-[-50%]"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 h-[72px] bg-[#0a0a0a]/95 backdrop-blur-md flex items-center justify-between px-6 border-b border-surface-border">
+        <button onclick="window.history.back()" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/5 active:scale-95 transition-all text-on-surface">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </button>
+        <h1 class="font-bold text-[15px] tracking-tight text-on-surface truncate px-4" id="pageTitle">Analytics Hub</h1>
+        <button onclick="location.reload()" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/5 active:scale-95 transition-all text-on-surface">
+            <span class="material-symbols-outlined text-[20px]">refresh</span>
+        </button>
+    </header>
+
+    <main class="relative z-10 pt-24 px-6 max-w-lg mx-auto space-y-8">
+        <!-- Tab Switcher -->
+        <div class="flex items-center justify-around border-b border-surface-border pb-3 relative">
+            <button onclick="switchTab('overview')" id="tab-overview" class="text-xs font-black uppercase tracking-widest tab-active transition-all">Overview</button>
+            <button onclick="switchTab('performance')" id="tab-performance" class="text-xs font-black uppercase tracking-widest text-on-surface-variant transition-all">Performance</button>
+            <button onclick="switchTab('attendance')" id="tab-attendance" class="text-xs font-black uppercase tracking-widest text-on-surface-variant transition-all">Attendance</button>
+        </div>
+
+        <!-- Overview Section -->
+        <div id="section-overview" class="space-y-8 animate-in fade-in duration-500">
+            <!-- Score Cards -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="glass-card p-6 rounded-[2rem] flex flex-col justify-between h-36 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                        <span class="material-symbols-outlined text-5xl">trending_up</span>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest">Global Rank</p>
+                        <p class="text-3xl font-black text-primary mt-1">A+</p>
+                    </div>
+                    <p class="text-[10px] font-bold text-primary bg-primary/10 px-2 py-1 rounded-lg w-max">Top 5%</p>
+                </div>
+                <div class="glass-card p-6 rounded-[2rem] flex flex-col justify-between h-36 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 text-accent-blue">
+                        <span class="material-symbols-outlined text-5xl">star</span>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest">Avg. Score</p>
+                        <p id="valOverallScore" class="text-3xl font-black text-on-surface mt-1">4.8</p>
+                    </div>
+                    <p id="valScoreMeta" class="text-[10px] font-bold text-on-surface-variant">Out of 5.0</p>
+                </div>
+            </div>
+
+            <!-- Chart Preview -->
+            <div class="glass-card p-6 rounded-[2.5rem] space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xs font-black uppercase tracking-widest text-on-surface-variant">Progression Trend</h3>
+                    <span class="material-symbols-outlined text-primary text-sm">auto_graph</span>
+                </div>
+                <div class="h-32 w-full flex items-end justify-between gap-2 px-2" id="trend-bars">
+                    <!-- Bars inserted here -->
+                </div>
+                <div class="flex justify-between px-2">
+                    <span class="text-[9px] font-bold text-on-surface-variant">JAN</span>
+                    <span class="text-[9px] font-bold text-on-surface-variant">MAR</span>
+                    <span class="text-[9px] font-bold text-on-surface-variant">MAY</span>
+                    <span class="text-[9px] font-bold text-on-surface-variant">JUL</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance / History Section (Shared for now) -->
+        <div id="section-history" class="hidden space-y-6">
+            <h3 class="text-sm font-bold text-on-surface tracking-wide px-1">Session Logs</h3>
+            <div id="feedbackList" class="space-y-4">
+                <!-- Records -->
+            </div>
+        </div>
+
+        <!-- Attendance Section -->
+        <div id="section-attendance" class="hidden space-y-8 animate-in slide-in-from-bottom duration-500">
+             <div class="glass-card p-8 rounded-[2.5rem] flex flex-col items-center text-center gap-4">
+                <div class="w-24 h-24 rounded-full border-4 border-primary/20 flex items-center justify-center relative">
+                    <svg class="absolute inset-0 w-full h-full -rotate-90">
+                        <circle cx="48" cy="48" r="44" stroke="currentColor" stroke-width="8" fill="transparent" class="text-white/5" />
+                        <circle id="attendance-circle" cx="48" cy="48" r="44" stroke="currentColor" stroke-width="8" fill="transparent" stroke-dasharray="276" stroke-dashoffset="30" class="text-primary" />
+                    </svg>
+                    <span id="valAttendanceLarge" class="text-2xl font-black text-on-surface">92%</span>
+                </div>
+                <div>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-primary mb-1">Consistency Score</p>
+                    <p class="text-xs text-on-surface-variant font-medium">You have missed only 2 sessions this month.</p>
+                </div>
+            </div>
+
+            <!-- Streak -->
+            <div class="glass-card p-6 rounded-3xl flex items-center gap-4 bg-orange-500/5 border-orange-500/10">
+                <div class="w-12 h-12 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-500">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+                </div>
+                <div>
+                    <h4 class="font-bold text-on-surface text-sm">Active Streak</h4>
+                    <p class="text-xs text-on-surface-variant">12 Days in a row</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        window.studentId = "me";
+
+        function switchTab(tab) {
+            const sections = ['overview', 'history', 'attendance'];
+            sections.forEach(s => {
+                document.getElementById('tab-' + s)?.classList.remove('tab-active');
+                document.getElementById('tab-' + s)?.classList.add('text-on-surface-variant');
+                document.getElementById('section-' + s)?.classList.add('hidden');
+            });
+
+            const showSection = (tab === 'performance') ? 'history' : tab;
+            document.getElementById('tab-' + tab).classList.add('tab-active');
+            document.getElementById('tab-' + tab).classList.remove('text-on-surface-variant');
+            document.getElementById('section-' + showSection).classList.remove('hidden');
+        }
+
+        window.renderAnalytics = (uVal, hVal, tVal) => {
+            try {
+                const user = (typeof uVal === 'string') ? JSON.parse(uVal) : uVal;
+                const history = (typeof hVal === 'string') ? JSON.parse(hVal) : hVal;
+                
+                document.getElementById('pageTitle').innerText = user.name ? (user.name + "'s Pro Stats") : "Analytics Hub";
+                document.getElementById('valOverallScore').innerText = (user.performanceScore ? (user.performanceScore / 20).toFixed(1) : "0.0");
+                
+                const att = user.attendancePercentage || 0;
+                document.getElementById('valAttendanceLarge').innerText = att + "%";
+                const offset = 276 - (276 * att / 100);
+                document.getElementById('attendance-circle').style.strokeDashoffset = offset;
+
+                // Render Logs
+                const list = document.getElementById('feedbackList');
+                if(!history || history.length === 0) {
+                    list.innerHTML = `<div class="p-12 text-center text-on-surface-variant">No records available</div>`;
+                } else {
+                    list.innerHTML = history.sort((a,b)=>b.timestamp-a.timestamp).map(log => `
+                        <div class="glass-card p-5 rounded-2xl flex flex-col gap-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-[10px] font-black text-primary uppercase tracking-widest">Session: ${new Date(log.timestamp).toLocaleDateString()}</span>
+                                <span class="text-xs font-bold text-on-surface">Score: ${(log.score/20).toFixed(1)}</span>
+                            </div>
+                            <p class="text-xs text-on-surface-variant leading-relaxed">${log.feedback || "Good technical progress shown during drills."}</p>
+                        </div>
+                    `).join('');
+                }
+
+                // Render Trend Bars
+                const bars = document.getElementById('trend-bars');
+                bars.innerHTML = '';
+                // Use history or random if empty for visual
+                const data = history.length > 0 ? history.slice(-8) : [{score:60},{score:80},{score:70},{score:90}];
+                data.forEach(d => {
+                    const h = (d.score || 0) + "%";
+                    const bar = document.createElement('div');
+                    bar.className = 'flex-1 bg-primary/20 rounded-t-lg relative group transition-all duration-700';
+                    bar.style.height = '0%';
+                    setTimeout(()=> bar.style.height = h, 100);
+                    bar.innerHTML = `<div class="absolute bottom-0 w-full bg-primary rounded-t-lg" style="height:30%"></div>`;
+                    bars.appendChild(bar);
+                });
+
+            } catch(e) { console.error(e); }
+        };
+
+        window.onload = () => {
+             // Check URL params for initial tab
+             const params = new URLSearchParams(window.location.search);
+             if(window.Android) {
+                window.Android.loadPlayerAnalytics(window.studentId);
+             } else {
+                window.renderAnalytics({name:"Rohan", performanceScore:90, attendancePercentage:85}, []);
+             }
+        };
+    </script>
+</body>
+</html>

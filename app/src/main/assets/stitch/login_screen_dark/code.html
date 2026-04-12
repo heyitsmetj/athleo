@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Athleo | Gate</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#6bff8f",
+              "background": "#0a0a0a",
+              "surface": "#171717",
+              "surface-border": "#262626",
+              "on-surface": "#fafafa",
+              "on-surface-variant": "#a3a3a3"
+            },
+            fontFamily: { "sans": ["Inter", "sans-serif"] }
+          }
+        }
+      }
+    </script>
+    <style>
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      body { background-color: #0a0a0a; color: #fafafa; font-family: 'Inter', sans-serif; overflow: hidden; }
+      
+      .glass-card { 
+          background: rgba(15, 15, 15, 0.6); 
+          backdrop-filter: blur(40px); 
+          border: 1px solid rgba(255, 255, 255, 0.05); 
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+      }
+      
+      .input-style { 
+          background: #171717; 
+          border: 1px solid #262626; 
+          border-radius: 1rem; 
+          padding: 1.15rem 1.25rem 1.15rem 1.25rem; 
+          width: 100%; 
+          font-size: 0.95rem; 
+          font-weight: 500;
+          color: #fafafa; 
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      }
+      
+      .input-style:focus { 
+          border-color: rgba(107, 255, 143, 0.6); 
+          outline: none; 
+          background: rgba(255, 255, 255, 0.04); 
+          box-shadow: 0 8px 24px -4px rgba(107, 255, 143, 0.15); 
+          transform: translateY(-2px);
+      }
+      
+      .input-style::placeholder {
+          color: rgba(163, 163, 163, 0.5);
+          font-weight: 400;
+      }
+      
+      .btn-primary { 
+          background: #fafafa; 
+          color: #0a0a0a; 
+          border-radius: 1rem; 
+          width: 100%; 
+          height: 3.5rem; 
+          font-weight: 700; 
+          font-size: 0.95rem; 
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+          display: flex; 
+          align-items: center; 
+          justify-content: center; 
+      }
+      .btn-primary:active { transform: scale(0.97); }
+      .btn-primary:hover { box-shadow: 0 10px 25px -5px rgba(250, 250, 250, 0.2); }
+      
+      .loader { display: none; gap: 4px; }
+      .loader span { width: 6px; height: 6px; border-radius: 50%; background-color: #0a0a0a; animation: pulse 1s infinite ease-in-out both; }
+      .loader span:nth-child(1) { animation-delay: -0.32s; }
+      .loader span:nth-child(2) { animation-delay: -0.16s; }
+      @keyframes pulse { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+      
+      .tab-active { color: #fafafa; font-weight: 700; position: relative; }
+      .tab-active::after { 
+          content: ''; 
+          position: absolute; 
+          bottom: -6px; 
+          left: 50%; 
+          transform: translateX(-50%);
+          width: 16px; 
+          height: 3px; 
+          background: #6bff8f; 
+          border-radius: 3px; 
+      }
+      
+      ::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      
+      /* Subtle sporty background effect */
+      .stadium-lights {
+          position: absolute;
+          inset: 0;
+          background: 
+            radial-gradient(circle at 15% 30%, rgba(107, 255, 143, 0.08) 0%, transparent 40%),
+            radial-gradient(circle at 85% 70%, rgba(107, 255, 143, 0.05) 0%, transparent 50%);
+          z-index: 0;
+          pointer-events: none;
+      }
+    </style>
+
+<!-- FORCED GLOBAL STANDARDIZATION -->
+<style>
+input:not([type="file"]), textarea, select { 
+    background-color: #171717 !important; 
+    border: 1px solid #262626 !important; 
+    color: #fafafa !important; 
+    border-radius: 0.75rem !important;
+    padding-top: 0.85rem !important; padding-bottom: 0.85rem !important;
+    color-scheme: dark !important;
+    font-size: 0.9rem !important;
+}
+input:focus, textarea:focus, select:focus { 
+    border-color: rgba(107, 255, 143, 0.6) !important; 
+    outline: none !important; 
+    box-shadow: 0 0 0 1px rgba(107, 255, 143, 0.2) !important; 
+}
+select {
+    appearance: none !important; 
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="white" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>') !important; 
+    background-repeat: no-repeat !important; 
+    background-position: right 1.25rem center !important; 
+}
+</style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-6 bg-background relative selection:bg-primary/30">
+    <div class="stadium-lights"></div>
+
+    <main class="relative z-10 w-full max-w-sm">
+        <header class="mb-10 text-center">
+            <h1 class="font-bold text-4xl tracking-tight text-on-surface mb-1 flex items-center justify-center gap-1">
+                Athleo<span class="w-2 h-2 rounded-full bg-primary mt-3 block"></span>
+            </h1>
+        </header>
+
+        <div class="glass-card p-2 pb-8 rounded-[2rem] relative overflow-hidden">
+            <!-- Tabs -->
+            <div class="flex px-8 pt-6 mb-8 gap-8 justify-center">
+                <button onclick="toggleMode('login')" id="tab-login" class="text-sm tab-active transition-all">Sign In</button>
+                <button onclick="toggleMode('register')" id="tab-register" class="text-sm font-medium text-on-surface-variant/60 hover:text-on-surface transition-all">Create Account</button>
+            </div>
+
+            <div id="error-message" class="hidden mx-6 mb-6 text-primary text-xs font-medium text-center bg-primary/10 py-3 rounded-xl border border-primary/20 backdrop-blur-md"></div>
+
+            <form onsubmit="handleSubmit(event)" class="px-6 space-y-4">
+                <!-- Registration Fields -->
+                <div id="register-fields" class="hidden space-y-4">
+                    <div class="relative group">
+                        <input id="reg-name" type="text" placeholder="Full Name" class="input-style">
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <input id="email" type="email" placeholder="Email Address" class="input-style" autocomplete="email">
+                </div>
+
+                <div class="relative group">
+                    <input id="password" type="password" oninput="handlePasswordInput(this)" placeholder="Password" class="input-style pr-12" autocomplete="current-password">
+                    <button id="eye-btn" type="button" onclick="togglePassword()" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-on-surface-variant/40 hover:text-primary transition-all focus:outline-none opacity-0 pointer-events-none rounded-full hover:bg-white/5">
+                        <span id="eye-icon" class="material-symbols-outlined text-[20px]">visibility</span>
+                    </button>
+                </div>
+
+                <button id="submit-btn" type="submit" class="btn-primary mt-6 group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-primary/20 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-300 ease-out z-0"></div>
+                    <span id="btn-text" class="relative z-10">Continue</span>
+                    <div id="btn-loader" class="loader relative z-10">
+                        <span></span><span></span><span></span>
+                    </div>
+                </button>
+            </form>
+        </div>
+
+        <footer class="mt-10 px-4 flex flex-col gap-4 items-center">
+             <div class="flex gap-4">
+                <button onclick="Android.seedTestAccounts()" class="text-[10px] font-semibold text-on-surface-variant/40 hover:text-on-surface transition-colors">Global Init (Recommended)</button>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        let mode = 'login';
+
+        function toggleMode(newMode) {
+            mode = newMode;
+            const regFields = document.getElementById('register-fields');
+            const submitText = document.getElementById('btn-text');
+            const tabLogin = document.getElementById('tab-login');
+            const tabReg = document.getElementById('tab-register');
+
+            if (mode === 'register') {
+                regFields.classList.remove('hidden');
+                submitText.innerText = 'Register';
+                tabReg.classList.add('tab-active');
+                tabReg.classList.remove('text-on-surface-variant/60', 'font-medium');
+                tabLogin.classList.remove('tab-active');
+                tabLogin.classList.add('text-on-surface-variant/60', 'font-medium');
+            } else {
+                regFields.classList.add('hidden');
+                submitText.innerText = 'Continue';
+                tabLogin.classList.add('tab-active');
+                tabLogin.classList.remove('text-on-surface-variant/60', 'font-medium');
+                tabReg.classList.remove('tab-active');
+                tabReg.classList.add('text-on-surface-variant/60', 'font-medium');
+            }
+            
+            document.getElementById('error-message').classList.add('hidden');
+        }
+
+        function handlePasswordInput(input) {
+            const btn = document.getElementById('eye-btn');
+            if (input.value.length > 0) {
+                btn.classList.replace('opacity-0', 'opacity-100');
+                btn.classList.remove('pointer-events-none');
+            } else {
+                btn.classList.replace('opacity-100', 'opacity-0');
+                btn.classList.add('pointer-events-none');
+            }
+        }
+
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const eye = document.getElementById('eye-icon');
+            input.type = input.type === 'password' ? 'text' : 'password';
+            eye.innerText = input.type === 'password' ? 'visibility' : 'visibility_off';
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const name = document.getElementById('reg-name').value.trim();
+            
+            document.getElementById('error-message').classList.add('hidden');
+
+            if (!email || !password || (mode === 'register' && !name)) {
+                showError('Please fill in all fields.');
+                return;
+            }
+
+            setLoading(true);
+            if (typeof Android !== 'undefined') {
+                if (mode === 'register') {
+                    Android.registerUser(email, password, name, "Student");
+                } else {
+                    Android.login(email, password);
+                }
+            } else {
+                setTimeout(() => showError('Environment Error (Not inside App)'), 1000);
+            }
+        }
+
+        function setLoading(isLoading) {
+            const btnText = document.getElementById('btn-text');
+            const btnLoader = document.getElementById('btn-loader');
+            const btn = document.getElementById('submit-btn');
+            btnText.style.display = isLoading ? 'none' : 'block';
+            btnLoader.style.display = isLoading ? 'flex' : 'none';
+            btn.disabled = isLoading;
+            if(isLoading) {
+                btn.classList.add('bg-primary');
+                btn.classList.remove('bg-[#fafafa]');
+            } else {
+                btn.classList.remove('bg-primary');
+                btn.classList.add('bg-[#fafafa]');
+            }
+        }
+
+        function showError(msg) {
+            setLoading(false);
+            const err = document.getElementById('error-message');
+            if (msg.toLowerCase().includes('password') || msg.toLowerCase().includes('invalid')) {
+                err.classList.replace('text-primary', 'text-amber-400');
+                err.classList.replace('bg-primary/10', 'bg-amber-400/10');
+                err.classList.replace('border-primary/20', 'border-amber-400/20');
+            } else {
+                err.classList.replace('text-amber-400', 'text-primary');
+                err.classList.replace('bg-amber-400/10', 'bg-primary/10');
+                err.classList.replace('border-amber-400/20', 'border-primary/20');
+            }
+            err.innerText = msg;
+            err.classList.remove('hidden');
+        }
+
+        window.loginError = (msg) => showError(msg);
+    </script>
+</body>
+</html>

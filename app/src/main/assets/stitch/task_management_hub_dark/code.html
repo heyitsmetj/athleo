@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Athleo | Tasks</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#6bff8f",
+              "background": "#0a0a0a",
+              "surface": "#171717",
+              "surface-border": "#262626",
+              "on-surface": "#fafafa",
+              "on-surface-variant": "#a3a3a3"
+            },
+            fontFamily: { "sans": ["Inter", "sans-serif"] }
+          }
+        }
+      }
+    </script>
+    <style>
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      body { background-color: #0a0a0a; color: #fafafa; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+      .glass-panel { background: rgba(23, 23, 23, 0.6); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.08); }
+      .glass-card { background: rgba(23, 23, 23, 0.4); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+      .tab-active { background: rgba(107, 255, 143, 0.1); color: #6bff8f; }
+      ::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+
+<!-- FORCED GLOBAL STANDARDIZATION -->
+<style>
+input:not([type="file"]), textarea, select { 
+    background-color: #171717 !important; 
+    border: 1px solid #262626 !important; 
+    color: #fafafa !important; 
+    border-radius: 0.75rem !important;
+    padding-top: 0.85rem !important; padding-bottom: 0.85rem !important;
+    color-scheme: dark !important;
+    font-size: 0.9rem !important;
+}
+input:focus, textarea:focus, select:focus { 
+    border-color: rgba(107, 255, 143, 0.6) !important; 
+    outline: none !important; 
+    box-shadow: 0 0 0 1px rgba(107, 255, 143, 0.2) !important; 
+}
+select {
+    appearance: none !important; 
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="white" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>') !important; 
+    background-repeat: no-repeat !important; 
+    background-position: right 1.25rem center !important; 
+}
+</style>
+</head>
+<body class="min-h-screen pb-32">
+    <!-- Background Glow -->
+    <div class="fixed inset-0 z-0 flex items-start justify-center pointer-events-none overflow-hidden">
+        <div class="w-[120vw] h-[60vw] bg-primary/5 blur-[120px] rounded-full translate-y-[-50%]"></div>
+    </div>
+
+    <!-- Header -->
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 h-[72px] bg-[#0a0a0a]/95 backdrop-blur-md flex items-center justify-between px-6 border-b border-surface-border">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="typeof toggleSidebar === 'function' ? toggleSidebar() : window.history.back()">
+            <div class="w-10 h-10 rounded-full border border-surface-border overflow-hidden bg-surface flex-shrink-0">
+                 <img id="header-avatar" src="" class="w-full h-full object-cover hidden">
+                 <span id="header-initial" class="flex items-center justify-center w-full h-full text-sm font-bold text-primary">A</span>
+            </div>
+            <div>
+                <div class="flex items-center gap-1 -mb-0.5">
+                    <span class="text-[10px] font-black text-primary uppercase tracking-widest" id="header-role">USER</span>
+                    <span class="material-symbols-outlined text-[14px] text-primary">arrow_drop_down</span>
+                </div>
+                <h1 class="font-bold text-[15px] tracking-tight text-on-surface leading-tight mt-0.5 max-w-[150px] truncate" id="header-name">Athleo User</h1>
+            </div>
+        </div>
+        <div class="flex items-center gap-1">
+            <button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/5 active:scale-95 transition-all relative" onclick="if(window.Android) Android.openAnnouncements()">
+                <span class="material-symbols-outlined text-on-surface text-[20px]">notifications</span>
+                <span id="header-badge" class="absolute top-2.5 right-2 w-[7px] h-[7px] rounded-full bg-primary border-[1.5px] border-[#0a0a0a]"></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-24 px-6 max-w-lg mx-auto">
+        <div class="mb-8">
+            <h2 id="hub-title" class="text-3xl font-bold tracking-tight text-on-surface">Active Drills</h2>
+            <p class="text-xs font-semibold text-on-surface-variant mt-2 flex items-center gap-2">
+                <span class="material-symbols-outlined text-[14px] text-primary">verified</span>
+                Task Hub
+            </p>
+        </div>
+
+        <div id="tasks-list" class="space-y-4">
+            <div class="p-10 text-center text-on-surface-variant text-xs italic glass-card rounded-3xl">Synchronizing tactical objectives...</div>
+        </div>
+    </main>
+
+    <!-- Evaluation Modal -->
+    <div id="eval-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-6 bg-black/80 backdrop-blur-sm">
+        <div class="glass-panel w-full max-w-sm p-8 rounded-[2.5rem] shadow-2xl">
+            <h3 class="text-xl font-bold text-on-surface mb-2">Review Submission</h3>
+            <p class="text-[10px] text-on-surface-variant mb-6 uppercase tracking-widest">Assign Score & Feedback</p>
+            
+            <div class="space-y-4 mb-8">
+                <div class="p-4 bg-white/5 rounded-2xl border border-white/10">
+                    <p class="text-[10px] text-on-surface-variant uppercase mb-2">Evidence Link</p>
+                    <a id="proof-link" href="#" target="_blank" class="text-xs text-primary font-bold truncate block">Click to view proof</a>
+                </div>
+                
+                <div class="flex gap-2">
+                    <input id="eval-score" type="number" min="0" max="100" placeholder="0" class="w-20 p-4 bg-white/5 rounded-2xl border border-white/10 text-center font-bold text-primary text-sm focus:border-primary outline-none">
+                    <div class="flex-1 flex items-center px-4 bg-white/5 rounded-2xl border border-white/10">
+                        <span class="text-[10px] font-bold text-on-surface-variant uppercase">Drill Score (%)</span>
+                    </div>
+                </div>
+
+                <textarea id="eval-feedback" rows="3" placeholder="Coach's insight..." class="w-full p-4 bg-white/5 rounded-2xl border border-white/10 text-xs text-on-surface outline-none focus:border-primary"></textarea>
+            </div>
+
+            <div class="flex gap-3">
+                <button onclick="closeEvalModal()" class="flex-1 py-4 rounded-2xl bg-white/5 text-on-surface text-[10px] font-bold uppercase">Cancel</button>
+                <button onclick="submitEvaluation()" class="flex-1 py-4 rounded-2xl bg-primary text-[#0a0a0a] text-[10px] font-bold uppercase">Publish</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="fixed inset-0 z-[110] hidden items-center justify-center p-6 bg-black/80 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-sm p-8 rounded-[2.5rem] shadow-2xl text-center">
+            <div class="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mb-6 mx-auto text-red-500">
+                <span class="material-symbols-outlined text-3xl font-bold">history_edu</span>
+            </div>
+            <h3 class="text-xl font-bold text-on-surface mb-2">Recall Assignment?</h3>
+            <p class="text-[10px] text-on-surface-variant mb-10 uppercase tracking-widest leading-relaxed">This will remove the task for all assigned members. This action cannot be undone.</p>
+            
+            <div class="flex gap-3">
+                <button onclick="closeDeleteModal()" class="flex-1 py-4 rounded-2xl bg-white/5 text-on-surface text-[10px] font-bold uppercase transition-all hover:bg-white/10">Keep It</button>
+                <button onclick="executeDelete()" class="flex-1 py-4 rounded-2xl bg-red-500 text-white text-[10px] font-bold uppercase shadow-lg shadow-red-500/30 active:scale-95 transition-all">Recall Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal (Optional if picker fails) -->
+    <div id="file-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-6 bg-black/80 backdrop-blur-sm">
+        <div class="glass-panel w-full max-w-sm p-8 rounded-3xl shadow-2xl text-center">
+            <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 mx-auto text-primary">
+                <span class="material-symbols-outlined text-3xl font-bold">upload_file</span>
+            </div>
+            <h3 class="text-xl font-bold text-on-surface mb-2">Upload Evidence</h3>
+            <p class="text-xs text-on-surface-variant mb-8 uppercase tracking-widest">Select photo or video proof</p>
+            <div class="flex gap-3">
+                <button onclick="closeModal()" class="flex-1 py-4 rounded-2xl bg-white/5 text-on-surface text-[10px] font-bold uppercase">Cancel</button>
+                <button onclick="triggerFilePicker()" class="flex-1 py-4 rounded-2xl bg-primary text-[#0a0a0a] text-[10px] font-bold uppercase">Browse Files</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Task FAB -->
+    <button id="add-task-fab" onclick="Android.showAddTask()" class="fixed bottom-8 right-6 w-14 h-14 bg-primary text-[#0a0a0a] rounded-2xl shadow-2xl flex items-center justify-center active:scale-95 transition-all z-50">
+        <span class="material-symbols-outlined text-2xl font-bold">add</span>
+    </button>
+
+    <script>
+        let currentTasks = [];
+        let currentTab = 'active';
+        let currentUser = null;
+        let activeTaskId = null;
+
+        function setTab(tab) {
+            currentTab = tab;
+            document.getElementById('tab-active').className = tab === 'active' ? 'px-5 py-2 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all tab-active' : 'px-5 py-2 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all text-on-surface-variant';
+            document.getElementById('tab-history').className = tab === 'history' ? 'px-5 py-2 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all tab-active' : 'px-5 py-2 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all text-on-surface-variant';
+            document.getElementById('hub-title').innerText = tab === 'active' ? 'Active Drills' : 'Completed';
+            renderList();
+        }
+
+        window.renderProfile = (user) => {
+            currentUser = user;
+            if (user.role === 'Student') {
+                
+                if(document.getElementById('header-name')) {
+                    document.getElementById('header-name').innerText = user.name;
+                    document.getElementById('header-initial').innerText = user.name.charAt(0).toUpperCase();
+                }
+                if(document.getElementById('header-role') && user.role) {
+                    document.getElementById('header-role').innerText = user.role.toUpperCase();
+                }
+                if(document.getElementById('header-avatar') && user.profileImageUrl) {
+                    document.getElementById('header-avatar').src = user.profileImageUrl;
+                    document.getElementById('header-avatar').classList.remove('hidden');
+                    document.getElementById('header-initial').classList.add('hidden');
+                }const fab = document.getElementById('add-task-fab');
+                if (fab) fab.style.display = 'none';
+            }
+            renderList();
+        };
+
+        window.renderTasks = (tasks) => {
+            currentTasks = tasks || [];
+            renderList();
+        };
+
+        function renderList() {
+            const list = document.getElementById('tasks-list');
+            if (!list) return;
+
+            // Student: Only see their tasks or All. 
+            // Trainer: See all tasks to evaluate.
+            let filtered = [];
+            const isStudent = currentUser && currentUser.role === 'Student';
+            
+            if (isStudent) {
+                filtered = currentTasks.filter(t => (t.assignedTo === 'All' || t.assignedTo === currentUser.id));
+            } else {
+                filtered = currentTasks;
+            }
+
+            filtered = filtered.filter(t => (currentTab === 'active') ? t.status !== 'Completed' : t.status === 'Completed');
+
+            if (filtered.length === 0) {
+                list.innerHTML = `<div class="p-12 text-center text-on-surface-variant text-xs italic glass-card rounded-3xl">No ${currentTab} tactical assignments.</div>`;
+                return;
+            }
+
+            list.innerHTML = filtered.map(task => {
+                const isCompleted = task.status === 'Completed';
+                const isPending = task.status === 'Pending Review';
+                
+                const dateStr = task.timestamp ? new Date(task.timestamp).toLocaleDateString('en-US', {month:'short', day:'numeric'}) : 'N/A';
+                const deadlineStr = task.deadline || 'No Deadline';
+
+                return `
+                <div class="glass-card p-6 rounded-[2.5rem] border border-white/5 relative group bg-white/[0.02] hover:bg-white/[0.04] transition-all">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex flex-col gap-1">
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-[9px] font-black uppercase tracking-widest rounded-full w-fit border border-primary/20">${task.category || 'TASK'}</span>
+                        </div>
+                        <div class="flex gap-4">
+                            ${isCompleted ? 
+                                '<span class="text-primary material-symbols-outlined text-xl">verified</span>' : 
+                                (isStudent ? 
+                                    (isPending ? 
+                                        '<span class="text-amber-500 material-symbols-outlined text-xl animate-pulse">history</span>' :
+                                        `<button onclick="startUpload('${task.id}')" class="text-primary material-symbols-outlined text-xl hover:scale-110 active:scale-95 transition-all">upload_file</button>`
+                                    ) : 
+                                    (isPending ?
+                                        `<button onclick="openEvalModal('${task.id}', '${task.submissionUrl}')" class="text-primary material-symbols-outlined text-xl hover:scale-110 active:scale-95 transition-all">assignment_turned_in</button>` :
+                                        '<span class="text-on-surface-variant/20 material-symbols-outlined text-xl">hourglass_empty</span>'
+                                    )
+                                )
+                            }
+                            ${!isStudent ? `<button onclick="confirmDelete('${task.id}')" class="text-on-surface-variant/40 hover:text-red-500 material-symbols-outlined text-xl transition-all active:scale-90">delete</button>` : ''}
+                        </div>
+                    </div>
+                    <h4 class="text-lg font-black text-on-surface mb-2 tracking-tight">${task.title}</h4>
+                    <p class="text-[10px] text-on-surface-variant leading-relaxed line-clamp-3 mb-4 font-medium">${task.description}</p>
+                    
+                    <div class="flex items-center gap-5 py-3 mt-1 border-t border-white/5">
+                        <div class="flex flex-col">
+                            <span class="text-[8px] text-on-surface-variant/60 uppercase font-black tracking-widest">Assigned</span>
+                            <span class="text-[10px] text-on-surface font-black mt-0.5">${dateStr.toUpperCase()}</span>
+                        </div>
+                        <div class="w-px h-6 bg-white/10"></div>
+                        <div class="flex flex-col">
+                            <span class="text-[8px] text-amber-500/80 uppercase font-black tracking-widest">Deadline</span>
+                            <span class="text-[10px] text-on-surface font-black mt-0.5">${deadlineStr.toUpperCase()}</span>
+                        </div>
+                    </div>
+                    
+                    ${task.submissionUrl && isStudent ? `
+                        <div class="mt-4 pt-4 border-t border-white/5 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-xs text-primary">description</span>
+                            <p class="text-[10px] text-primary font-bold truncate">Submission Logged</p>
+                        </div>
+                    ` : ''}
+
+                    ${task.coachFeedback ? `
+                        <div class="mt-4 p-4 rounded-xl bg-primary/5 border border-primary/10">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-[9px] font-black text-primary uppercase">Coach Insight</span>
+                                <span class="text-[9px] font-black text-primary uppercase">Score: ${task.score}%</span>
+                            </div>
+                            <p class="text-[10px] text-on-surface-variant italic leading-snug">${task.coachFeedback}</p>
+                        </div>
+                    ` : ''}
+                </div>`;
+            }).join('');
+        }
+
+        function openEvalModal(id, url) {
+            activeTaskId = id;
+            const link = document.getElementById('proof-link');
+            if (url && (url.startsWith('http') || url.startsWith('https'))) {
+                link.href = url;
+                link.className = "text-xs text-primary font-black truncate block underline underline-offset-4";
+                link.innerText = "Click to View Web Link";
+                link.onclick = null;
+            } else {
+                link.removeAttribute('href');
+                link.className = "text-xs text-primary font-black truncate block underline cursor-pointer";
+                link.innerText = "Open Uploaded Evidence";
+                link.style.cursor = 'pointer';
+                link.onclick = (e) => {
+                    e.preventDefault();
+                    if (typeof Android !== 'undefined') Android.openUri(url);
+                };
+            }
+            document.getElementById('eval-modal').classList.remove('hidden');
+            document.getElementById('eval-modal').classList.add('flex');
+        }
+
+        function closeEvalModal() {
+            document.getElementById('eval-modal').classList.add('hidden');
+            document.getElementById('eval-modal').classList.remove('flex');
+        }
+
+        function submitEvaluation() {
+            const score = document.getElementById('eval-score').value;
+            const feedback = document.getElementById('eval-feedback').value;
+            if (typeof Android !== 'undefined') {
+                Android.evaluateTask(activeTaskId, 'Completed', score, feedback);
+                closeEvalModal();
+            }
+        }
+
+        function startUpload(id) {
+            activeTaskId = id;
+            if (typeof Android !== 'undefined') {
+                Android.openFilePicker(id);
+            }
+        }
+
+        function confirmDelete(id) {
+            activeTaskId = id;
+            document.getElementById('delete-modal').classList.remove('hidden');
+            document.getElementById('delete-modal').classList.add('flex');
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('delete-modal').classList.add('hidden');
+            document.getElementById('delete-modal').classList.remove('flex');
+        }
+
+        function executeDelete() {
+            if (activeTaskId && typeof Android !== 'undefined') {
+                Android.deleteTask(activeTaskId);
+                closeDeleteModal();
+                activeTaskId = null;
+            }
+        }
+
+        function loadTasks() {
+            if (typeof Android !== 'undefined') Android.loadTasks();
+        }
+
+        window.onload = () => {
+            if (typeof Android !== 'undefined') {
+                Android.loadUserProfile();
+                loadTasks();
+            }
+        };
+    </script>
+</body>
+</html>

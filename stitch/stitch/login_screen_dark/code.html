@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ATHLEO | Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "on-primary-fixed": "#004a1d",
+                "error-dim": "#d53d18",
+                "tertiary-container": "#dae6fe",
+                "surface-bright": "#1f2b49",
+                "inverse-on-surface": "#4d556b",
+                "on-primary": "#005f28",
+                "surface-container-low": "#091328",
+                "tertiary-dim": "#ccd7ef",
+                "on-primary-fixed-variant": "#006a2d",
+                "secondary-container": "#705d00",
+                "surface-variant": "#192540",
+                "on-secondary-fixed": "#453900",
+                "surface-container": "#0f1930",
+                "outline-variant": "#40485d",
+                "surface-container-high": "#141f38",
+                "primary-container": "#0abc56",
+                "surface-dim": "#060e20",
+                "tertiary": "#f0f3ff",
+                "on-tertiary": "#515c70",
+                "outline": "#6d758c",
+                "on-surface": "#dee5ff",
+                "tertiary-fixed": "#dae6fe",
+                "secondary-dim": "#efc900",
+                "surface-container-highest": "#192540",
+                "primary-fixed-dim": "#5bf083",
+                "on-tertiary-fixed": "#374155",
+                "surface-tint": "#6bff8f",
+                "surface": "#060e20",
+                "secondary-fixed": "#ffd709",
+                "tertiary-fixed-dim": "#ccd7ef",
+                "on-surface-variant": "#a3aac4",
+                "error": "#ff7351",
+                "on-primary-container": "#002c0f",
+                "on-tertiary-fixed-variant": "#535e72",
+                "on-error": "#450900",
+                "error-container": "#b92902",
+                "on-secondary-fixed-variant": "#665500",
+                "on-tertiary-container": "#495468",
+                "inverse-primary": "#006e2f",
+                "on-background": "#dee5ff",
+                "primary-dim": "#5bf083",
+                "inverse-surface": "#faf8ff",
+                "primary": "#6bff8f",
+                "surface-container-lowest": "#000000",
+                "background": "#060e20",
+                "on-secondary": "#5b4b00",
+                "secondary": "#ffd709",
+                "secondary-fixed-dim": "#efc900",
+                "on-secondary-container": "#fff7e6",
+                "primary-fixed": "#6bff8f",
+                "on-error-container": "#ffd2c8"
+              },
+              fontFamily: {
+                "headline": ["Lexend"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pitch-gradient {
+            background: linear-gradient(180deg, rgba(6,14,32,0) 0%, rgba(10,188,86,0.05) 100%);
+        }
+        .btn-glow:active {
+            box-shadow: 0 0 20px rgba(107, 255, 143, 0.4);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary-container min-h-screen flex flex-col">
+<!-- Hero Visual Background (Abstract Kinetic Energy) -->
+<div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+<div class="absolute top-[-10%] right-[-10%] w-[80%] h-[50%] bg-primary/5 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-5%] left-[-5%] w-[60%] h-[40%] bg-secondary/5 blur-[100px] rounded-full"></div>
+<div class="absolute inset-0 pitch-gradient"></div>
+</div>
+<!-- Main Content Canvas -->
+<main class="relative z-10 flex-1 flex flex-col px-8 pt-20 pb-12 max-w-md mx-auto w-full">
+<!-- Brand Identity Section -->
+<header class="mb-16">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="sports_soccer">sports_soccer</span>
+<h1 class="font-headline font-black text-4xl tracking-tighter text-primary">ATHLEO</h1>
+</div>
+<div class="space-y-1">
+<p class="font-headline text-2xl font-bold tracking-tight text-on-surface">Tactical Command</p>
+<p class="text-on-surface-variant text-sm font-medium">Access your elite performance dashboard.</p>
+</div>
+</header>
+<!-- Login Form -->
+<form class="flex-1 flex flex-col gap-6">
+<!-- Input: Identifier -->
+<div class="space-y-2">
+<label class="font-headline text-[10px] font-extrabold uppercase tracking-[0.2em] text-on-surface-variant ml-1">Manager ID</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-xl group-focus-within:text-primary transition-colors" data-icon="person">person</span>
+</div>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary/50 transition-all outline-none" placeholder="Enter credentials" type="text"/>
+</div>
+</div>
+<!-- Input: Security Key -->
+<div class="space-y-2">
+<label class="font-headline text-[10px] font-extrabold uppercase tracking-[0.2em] text-on-surface-variant ml-1">Security Key</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-xl group-focus-within:text-primary transition-colors" data-icon="lock">lock</span>
+</div>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-12 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary/50 transition-all outline-none" placeholder="••••••••" type="password"/>
+<button class="absolute inset-y-0 right-4 flex items-center text-outline hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-xl" data-icon="visibility">visibility</span>
+</button>
+</div>
+<div class="flex justify-end">
+<a class="text-xs font-semibold text-primary/80 hover:text-primary transition-colors" href="#">Forgot Access Code?</a>
+</div>
+</div>
+<!-- Action: Sign In -->
+<div class="mt-4">
+<button class="btn-glow w-full bg-gradient-to-r from-primary to-primary-container text-on-primary-container font-headline font-extrabold py-5 rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 transform active:scale-[0.98] transition-all" type="submit">
+                    SIGN IN
+                    <span class="material-symbols-outlined font-bold" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Alternative Entry -->
+<div class="relative my-4">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant/30"></div>
+</div>
+<div class="relative flex justify-center text-xs uppercase tracking-widest">
+<span class="bg-surface px-4 text-outline font-medium">Or deploy via</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center py-3 px-4 rounded-xl bg-surface-container border border-outline-variant/10 hover:bg-surface-bright transition-colors" type="button">
+<img alt="Google" class="w-5 h-5 grayscale opacity-70" data-alt="Google brand logo grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANTlJWxOXgugTHOnNPRL-RJduWikQr7WXVfxJeJZVHpcEQQJX035PgKQ7KncLk5Q8TcIAS60a7Y24bDZ30f4OkyML6WwA9N5tse5q-L_UWFUylpF6jDDVio53XeHIGKL7gEDzbXahwVFa6Bl-apTEQr6h1iNgEbj1ggw1vEXrkG-vieYYjan4zFSk9DGQ1FCt9jDy8ZWu-k0TBfVQ_Kj4uwWEqrcvaFPRvZDY9t4Przhyr2jc5cX7tG2VWQj4yby7yKNNEWf-7vZle"/>
+</button>
+<button class="flex items-center justify-center py-3 px-4 rounded-xl bg-surface-container border border-outline-variant/10 hover:bg-surface-bright transition-colors" type="button">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="fingerprint">fingerprint</span>
+</button>
+</div>
+</form>
+<!-- Footer Footer -->
+<footer class="mt-auto pt-12 text-center">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-high border border-outline-variant/10 mb-8">
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_#ffd709]"></span>
+<span class="font-headline text-[10px] font-bold uppercase tracking-widest text-secondary">Role-based access enabled</span>
+</div>
+<p class="text-on-surface-variant text-xs font-medium">
+                New scout or analyst? <a class="text-primary font-bold hover:underline" href="#">Apply for Entry</a>
+</p>
+</footer>
+</main>
+<!-- Visual Polish: Screen Border/Gradient mask -->
+<div class="fixed inset-0 border-[12px] border-surface pointer-events-none z-50"></div>
+</body></html>

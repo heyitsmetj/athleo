@@ -1,0 +1,26 @@
+/* TopBar Component Styles */
+#top-bar-container header {
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#top-bar-container header h1 {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.02em;
+}
+
+#tb-avatar {
+    background: #171717;
+    object-position: center;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+#top-bar-container header {
+    animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}

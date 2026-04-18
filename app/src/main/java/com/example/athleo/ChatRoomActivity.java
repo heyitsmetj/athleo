@@ -42,6 +42,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
+        webView.setWebChromeClient(new android.webkit.WebChromeClient());
         
         // Pass the activity to WebAppInterface so we can extract groupId if needed
         WebAppInterface webAppInterface = new WebAppInterface(this, webView);

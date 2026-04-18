@@ -1,12 +1,15 @@
 package com.example.athleo.models;
 
 public class Expense {
-    private String id;
     private String description;
     private double amount;
     private String category;
     private long timestamp;
     private String status;
+    private String notes;
+    private String id;
+    private String submittedBy;
+    private String submitterId;
 
     public Expense() {
     }
@@ -36,4 +39,13 @@ public class Expense {
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+    public String getNotes() { return notes; }
+    public void setNotes(String notes) { this.notes = notes; }
+
+    public String getSubmittedBy() { return submittedBy; }
+    public void setSubmittedBy(String submittedBy) { this.submittedBy = submittedBy; }
+
+    public String getSubmitterId() { return submitterId; }
+    public void setSubmitterId(String submitterId) { this.submitterId = submitterId; }
 }

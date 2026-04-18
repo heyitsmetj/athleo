@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.example.athleo.models.User;
+import com.example.athleo.models.Expense;
 
 import android.webkit.WebView;
 import android.webkit.ValueCallback;
@@ -250,20 +251,65 @@ public class WebAppInterface {
 
     @JavascriptInterface
     public void submitExpense(String title, double amount, String category, String notes) {
-        java.util.Map<String, Object> expense = new java.util.HashMap<>();
-        expense.put("description", title);
-        expense.put("amount", amount);
-        expense.put("category", category);
-        expense.put("notes", notes);
-        expense.put("timestamp", System.currentTimeMillis());
-        expense.put("status", "Pending");
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() == null) return;
+        String uid = auth.getCurrentUser().getUid();
 
-        FirestoreRepository.getInstance().getDb().collection("Financials").add(expense)
-            .addOnSuccessListener(ref -> {
-                showToast("Expense Submitted for Approval.");
-                if (mContext instanceof android.app.Activity) ((android.app.Activity) mContext).finish();
+        FirestoreRepository.getInstance().getDb().collection("Users").document(uid).get()
+            .addOnSuccessListener(doc -> {
+                String name = doc.exists() ? doc.getString("name") : "Staff";
+                Expense expense = new Expense();
+                expense.setDescription(title);
+                expense.setAmount(amount);
+                expense.setCategory(category);
+                expense.setNotes(notes);
+                expense.setTimestamp(System.currentTimeMillis());
+                expense.setStatus("Pending");
+                expense.setSubmittedBy(name);
+                expense.setSubmitterId(uid);
+
+                com.google.firebase.firestore.DocumentReference ref = 
+                    FirestoreRepository.getInstance().getDb().collection("Financials").document();
+                expense.setId(ref.getId());
+
+                ref.set(expense)
+                    .addOnSuccessListener(v -> {
+                        showToast("Expense Submitted. ID: " + expense.getId());
+                        if (mContext instanceof android.app.Activity) {
+                            ((android.app.Activity) mContext).finish();
+                        }
+                    })
+                    .addOnFailureListener(e -> showToast("Submission failed: " + e.getMessage()));
+            });
+    }
+
+    @JavascriptInterface
+    public void updateExpenseStatus(String expenseId, String status) {
+        FirestoreRepository.getInstance().updateExpenseStatus(expenseId, status)
+            .addOnSuccessListener(aVoid -> {
+                showToast("Expense " + status);
+                safeEval("if(window.loadFinancials) window.loadFinancials();");
             })
-            .addOnFailureListener(e -> showToast("Error: " + e.getMessage()));
+            .addOnFailureListener(e -> showToast("Status update failed: " + e.getMessage()));
+    }
+
+    @JavascriptInterface
+    public void deleteExpense(String expenseId) {
+        FirestoreRepository.getInstance().deleteExpense(expenseId)
+            .addOnSuccessListener(aVoid -> {
+                showToast("Expense Record Deleted");
+                safeEval("if(window.loadFinancials) window.loadFinancials();");
+            })
+            .addOnFailureListener(e -> showToast("Deletion failed: " + e.getMessage()));
+    }
+
+    @JavascriptInterface
+    public void clearFinancials() {
+        FirestoreRepository.getInstance().clearFinancials()
+            .addOnSuccessListener(aVoid -> {
+                showToast("Financial Ledger Cleared.");
+                safeEval("if(window.loadFinancials) window.loadFinancials();");
+            });
     }
 
     @JavascriptInterface
@@ -475,17 +521,75 @@ public class WebAppInterface {
     }
 
     @JavascriptInterface
-    public void createChatGroup(String name, String memberIdsJson) {
+    public void createChatGroup(String name, String description, String memberIdsJson) {
         FirestoreRepository.getInstance().getUserDataJson().addOnCompleteListener(userTask -> {
             if (userTask.isSuccessful()) {
                 User user = new Gson().fromJson(userTask.getResult(), User.class);
                 if (user != null) {
+                    // Role Validation
+                    String role = user.getRole();
+                    if (role != null && role.equalsIgnoreCase("Student")) {
+                        showToast("Access Denied: Students cannot create groups.");
+                        return;
+                    }
+
                     try {
                         java.util.List<String> memberIds = new Gson().fromJson(memberIdsJson, new com.google.gson.reflect.TypeToken<java.util.List<String>>(){}.getType());
-                        FirestoreRepository.getInstance().createChatGroup(name, memberIds, user.getId())
-                            .addOnSuccessListener(aVoid -> showToast("Group created!"))
+                        FirestoreRepository.getInstance().createChatGroup(name, description, memberIds, user.getId())
+                            .addOnSuccessListener(aVoid -> {
+                                showToast("Group created!");
+                                safeEval("if(window.loadChatGroups) window.loadChatGroups();");
+                            })
                             .addOnFailureListener(e -> showToast("Error: " + e.getMessage()));
                     } catch (Exception e) { showToast("Invalid member data."); }
+                }
+            }
+        });
+    }
+
+    @JavascriptInterface
+    public void removeMember(String groupId, String userId) {
+        FirestoreRepository.getInstance().getUserDataJson().addOnCompleteListener(userTask -> {
+            if (userTask.isSuccessful()) {
+                User user = new Gson().fromJson(userTask.getResult(), User.class);
+                if (user != null) {
+                    // Role Validation
+                    String role = user.getRole();
+                    if (role != null && role.equalsIgnoreCase("Student")) {
+                        showToast("Access Denied.");
+                        return;
+                    }
+
+                    FirestoreRepository.getInstance().removeMemberFromChatGroup(groupId, userId)
+                        .addOnSuccessListener(aVoid -> {
+                            showToast("Member removed.");
+                            safeEval("if(window.onGroupUpdated) window.onGroupUpdated();");
+                        })
+                        .addOnFailureListener(e -> showToast("Failed: " + e.getMessage()));
+                }
+            }
+        });
+    }
+
+    @JavascriptInterface
+    public void deleteChatGroup(String groupId) {
+        FirestoreRepository.getInstance().getUserDataJson().addOnCompleteListener(userTask -> {
+            if (userTask.isSuccessful()) {
+                User user = new Gson().fromJson(userTask.getResult(), User.class);
+                if (user != null) {
+                    // Role Validation
+                    String role = user.getRole();
+                    if (role != null && role.equalsIgnoreCase("Student")) {
+                        showToast("Access Denied: Students cannot delete groups.");
+                        return;
+                    }
+
+                    FirestoreRepository.getInstance().deleteChatGroup(groupId)
+                        .addOnSuccessListener(aVoid -> {
+                            showToast("Group deleted successfully.");
+                            safeEval("if(window.loadChatGroups) window.loadChatGroups();");
+                        })
+                        .addOnFailureListener(e -> showToast("Deletion failed: " + e.getMessage()));
                 }
             }
         });
@@ -672,7 +776,9 @@ public class WebAppInterface {
     }
 
     private void seedDataSequence() {
-        FirestoreRepository.getInstance().seedMockData().addOnCompleteListener(seedTask -> {
+        FirestoreRepository.getInstance().clearFinancials().continueWithTask(t -> 
+            FirestoreRepository.getInstance().seedMockData()
+        ).addOnCompleteListener(seedTask -> {
             if (seedTask.isSuccessful()) {
                 showToast("Global Init Complete!");
             } else {

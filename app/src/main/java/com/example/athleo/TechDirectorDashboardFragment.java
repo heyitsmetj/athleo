@@ -42,7 +42,7 @@ public class TechDirectorDashboardFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (webView != null) {
-            webView.evaluateJavascript("if(window.Android) window.Android.loadUserProfile();", null);
+            webView.evaluateJavascript("if(window.Android) { window.Android.loadUserProfile(); window.Android.loadFinancials(); }", null);
         }
     }
 }

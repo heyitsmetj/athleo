@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../components/TopBar.css">
+    <script src="../components/TopBar.js"></script>
     <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -101,6 +103,10 @@ select {
                     <span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">badge</span>
                     <span class="text-xs font-semibold">Manage Staff</span>
                 </button>
+                <button onclick="Android.openSubmitExpense()" class="w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all text-on-surface-variant hover:text-on-surface group">
+                    <span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">add_card</span>
+                    <span class="text-xs font-semibold">Submit Expense</span>
+                </button>
             </nav>
             
             <button onclick="Android.logout()" class="w-full flex items-center justify-center gap-2 p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-500 hover:bg-red-500/20 transition-all">
@@ -111,31 +117,27 @@ select {
     </div>
     <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[90] hidden opacity-0 transition-opacity duration-300"></div>
 
-    <!-- Header -->
-    <!-- Header -->
-    <header class="fixed top-0 w-full z-50 h-[72px] bg-[#0a0a0a]/95 backdrop-blur-md flex items-center justify-between px-6 border-b border-surface-border">
-        <div class="flex items-center gap-3 cursor-pointer" onclick="typeof toggleSidebar === 'function' ? toggleSidebar() : window.history.back()">
-            <div class="w-10 h-10 rounded-full border border-surface-border overflow-hidden bg-surface flex-shrink-0">
-                 <img id="header-avatar" src="" class="w-full h-full object-cover hidden">
-                 <span id="header-initial" class="flex items-center justify-center w-full h-full text-sm font-bold text-primary">A</span>
+    <!-- Custom Confirmation Modal -->
+    <div id="confirm-modal" class="fixed inset-0 z-[200] flex items-center justify-center hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeConfirm()"></div>
+        <div class="relative glass-panel w-[85%] max-w-sm p-6 rounded-[2rem] border border-white/10 shadow-2xl scale-95 opacity-0 transition-all duration-300" id="modal-content">
+            <div class="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 mb-6 mx-auto">
+                <span class="material-symbols-outlined text-3xl">delete_forever</span>
             </div>
-            <div>
-                <div class="flex items-center gap-1 -mb-0.5">
-                    <span class="text-[10px] font-black text-primary uppercase tracking-widest" id="header-role">DIRECTOR</span>
-                    <span class="material-symbols-outlined text-[14px] text-primary">arrow_drop_down</span>
-                </div>
-                <h1 class="font-bold text-[15px] tracking-tight text-on-surface leading-tight mt-0.5 max-w-[150px] truncate" id="header-name">Athleo User</h1>
+            <h3 class="text-lg font-bold text-center text-on-surface mb-2">Delete Record?</h3>
+            <p class="text-xs text-center text-on-surface-variant leading-relaxed mb-8">This action cannot be undone. The expense record will be permanently removed from the ledger.</p>
+            <div class="flex gap-3">
+                <button onclick="closeConfirm()" class="flex-1 py-4 rounded-2xl bg-white/5 text-on-surface font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 transition-all">Cancel</button>
+                <button id="modal-action" class="flex-1 py-4 rounded-2xl bg-red-500 text-white font-bold text-[10px] uppercase tracking-widest shadow-xl shadow-red-500/20 active:scale-95 transition-all">Delete</button>
             </div>
         </div>
-        <div class="flex items-center gap-1">
-            <button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/5 active:scale-95 transition-all relative" onclick="if(window.Android) Android.openAnnouncements()">
-                <span class="material-symbols-outlined text-on-surface text-[20px]">notifications</span>
-                <span id="header-badge" class="absolute top-2.5 right-2 w-[7px] h-[7px] rounded-full bg-primary border-[1.5px] border-[#0a0a0a]"></span>
-            </button>
-        </div>
-    </header>
+    </div>
 
-    <main class="relative z-10 pt-24 px-6 max-w-lg mx-auto space-y-8">
+    <!-- Header -->
+    <!-- Header -->
+    <div id="top-bar-container"></div>
+
+    <main class="relative z-10 px-6 max-w-lg mx-auto space-y-8">
         <!-- Greeting -->
         <header>
             <h2 id="greeting-text" class="text-3xl font-bold tracking-tight text-on-surface">Overview</h2>
@@ -282,6 +284,22 @@ select {
                 </button>
             </div>
         </section>
+
+        <!-- Recent Activity Section -->
+        <section class="pb-10">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm font-bold text-on-surface tracking-wide">Recent Expense Requests</h3>
+                <button onclick="Android.openManageExpenses()" class="text-[10px] font-bold text-primary uppercase tracking-wider hover:opacity-70">View All</button>
+            </div>
+            <div id="recent-expenses-list" class="space-y-3">
+                <div class="p-8 text-center text-on-surface-variant flex flex-col items-center justify-center gap-2">
+                    <div class="w-8 h-8 rounded-xl bg-surface border border-white/5 flex items-center justify-center animate-pulse">
+                        <div class="w-2 h-2 rounded-full bg-primary/40"></div>
+                    </div>
+                    <span class="text-[10px] font-medium opacity-60">Syncing ledger...</span>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Bottom Navigation -->
@@ -354,13 +372,84 @@ select {
             }
         };
         
-        window.onload = () => { 
-            if (typeof Android !== 'undefined') {
-                Android.loadUserProfile(); 
-            } else {
-                // Mock data for browser testing
-                window.renderProfile({ name: "Jane Director", role: "Technical Director" });
+        window.loadFinancials = () => {
+            if (typeof Android !== 'undefined' && Android.loadFinancials) Android.loadFinancials();
+        };
+
+        window.renderFinancials = (expenses) => {
+            const list = document.getElementById('recent-expenses-list');
+            if (!list || !expenses) return;
+            
+            // Show only the 3 most recent
+            const recent = expenses.slice(0, 3);
+            if (recent.length === 0) {
+                list.innerHTML = `<div class="p-6 text-center text-[10px] text-on-surface-variant/60 border border-dashed border-surface-border rounded-2xl bg-surface-border/5">No recent expenses found.</div>`;
+                return;
             }
+
+            list.innerHTML = recent.map(rec => {
+                const statusColor = rec.status?.toLowerCase() === 'approved' ? 'text-primary bg-primary/10' : 
+                                  rec.status?.toLowerCase() === 'pending' ? 'text-amber-400 bg-amber-400/10' : 'text-danger bg-danger/10';
+                return `
+                <div class="glass-card p-3 rounded-2xl flex items-center justify-between group active:scale-[0.98] transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-surface border border-surface-border flex items-center justify-center text-on-surface-variant group-hover:bg-surface-border transition-colors">
+                            <span class="material-symbols-outlined text-lg">${rec.category === 'Travel' ? 'directions_bus' : 'receipt_long'}</span>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-on-surface truncate max-w-[120px]">${rec.description || 'Service Bill'}</p>
+                            <p class="text-[8px] text-on-surface-variant font-medium">₹${parseFloat(rec.amount || 0).toLocaleString()} • From ${rec.submittedBy || 'Staff'}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[8px] font-black rounded-full px-2 py-0.5 ${statusColor} uppercase tracking-wider">${rec.status || 'PENDING'}</span>
+                        ${rec.status?.toLowerCase() === 'pending' ? `
+                            <button onclick="showDeleteConfirm('${rec.id}')" class="w-7 h-7 rounded-lg bg-red-500/5 text-red-500 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-[14px]">delete</span>
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>`;
+            }).join('');
+        };
+
+        let pendingDeleteId = null;
+        function showDeleteConfirm(id) {
+            pendingDeleteId = id;
+            const modal = document.getElementById('confirm-modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+            
+            document.getElementById('modal-action').onclick = () => {
+                if(pendingDeleteId && typeof Android !== 'undefined') {
+                    Android.deleteExpense(pendingDeleteId);
+                    closeConfirm();
+                }
+            };
+        }
+
+        function closeConfirm() {
+            const modal = document.getElementById('confirm-modal');
+            const content = document.getElementById('modal-content');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                pendingDeleteId = null;
+            }, 300);
+        }
+
+        window.onload = () => {
+            if (window.AthleoUI) {
+                AthleoUI.initTopBar({
+                    title: "Overview",
+                    type: "dashboard",
+                    showNotifications: true
+                });
+            }
+            loadFinancials();
         };
     </script>
 </body>

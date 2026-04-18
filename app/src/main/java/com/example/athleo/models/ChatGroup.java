@@ -7,6 +7,7 @@ public class ChatGroup {
     private String id;
     private String name;
     private String type; // "default" or "custom"
+    private String description;
     private List<String> adminIds;
     private List<String> memberIds;
     private long createdAt;
@@ -17,8 +18,13 @@ public class ChatGroup {
     }
 
     public ChatGroup(String id, String name, String type) {
+        this(id, name, "", type);
+    }
+
+    public ChatGroup(String id, String name, String description, String type) {
         this.id = id;
         this.name = name;
+        this.description = description;
         this.type = type;
         this.adminIds = new ArrayList<>();
         this.memberIds = new ArrayList<>();
@@ -30,6 +36,9 @@ public class ChatGroup {
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }

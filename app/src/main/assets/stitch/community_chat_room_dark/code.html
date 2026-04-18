@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../components/TopBar.css">
+    <script src="../components/TopBar.js"></script>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -66,21 +68,7 @@ select {
         <div class="w-[120vw] h-[60vw] bg-primary/10 blur-[120px] rounded-full translate-y-[-50%]"></div>
     </div>
 
-    <!-- Header -->
-    <header class="w-full z-50 h-[72px] glass-panel flex items-center px-4 gap-4 shrink-0 shadow-md">
-        <button onclick="Android.finishActivity()" class="material-symbols-outlined text-on-surface-variant hover:text-on-surface p-2 -ml-2 rounded-full">arrow_back</button>
-        
-        <div class="w-10 h-10 rounded-full bg-surface-border flex items-center justify-center shrink-0">
-            <span class="material-symbols-outlined text-on-surface-variant text-[20px]">group</span>
-        </div>
-        
-        <div class="flex-1 min-w-0">
-            <h1 id="group-name" class="font-bold text-base text-on-surface truncate">Loading...</h1>
-            <p class="text-xs text-primary font-medium truncate">Tap here for group info</p>
-        </div>
-        
-        <button class="material-symbols-outlined text-on-surface-variant p-2">more_vert</button>
-    </header>
+    <div id="top-bar-container"></div>
 
     <!-- Chat Area -->
     <main id="chat-container" class="flex-1 w-full max-w-2xl mx-auto z-10 overflow-y-auto no-scrollbar p-4 flex flex-col gap-4 pb-4">
@@ -129,8 +117,30 @@ select {
                 </div>
             </div>
 
-            <div id="admin-actions" class="absolute bottom-6 left-6 right-6 hidden">
+            <div id="admin-actions" class="mt-4 flex flex-col gap-3 hidden">
                 <button onclick="saveGroupSettings()" class="w-full bg-primary text-black font-bold py-3.5 rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-transform">Save Changes</button>
+                <div class="h-px bg-surface-border my-2"></div>
+                <button onclick="confirmDeleteGroup()" class="w-full bg-red-500/10 text-red-500 font-bold py-3.5 rounded-xl border border-red-500/20 active:scale-95 transition-transform flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">delete</span>
+                    Delete Group
+                </button>
+            </div>
+            <div class="h-10"></div>
+        </div>
+    </div>
+
+    <!-- Custom Confirmation Modal -->
+    <div id="confirm-modal" class="fixed inset-0 z-[200] flex items-center justify-center hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeConfirm()"></div>
+        <div class="relative glass-panel w-[85%] max-w-sm p-6 rounded-[2rem] border border-white/10 shadow-2xl scale-95 opacity-0 transition-all duration-300" id="confirm-modal-content">
+            <div id="confirm-icon-bg" class="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 mb-6 mx-auto">
+                <span id="confirm-icon" class="material-symbols-outlined text-3xl">delete_forever</span>
+            </div>
+            <h3 id="confirm-title" class="text-lg font-bold text-center text-on-surface mb-2">Are you sure?</h3>
+            <p id="confirm-desc" class="text-xs text-center text-on-surface-variant leading-relaxed mb-8">This action cannot be undone.</p>
+            <div class="flex gap-3">
+                <button onclick="closeConfirm()" class="flex-1 py-4 rounded-2xl bg-white/5 text-on-surface font-bold text-[10px] uppercase tracking-widest">Cancel</button>
+                <button id="btn-confirm-action" class="flex-1 py-4 rounded-2xl bg-red-500 text-white font-bold text-[10px] uppercase tracking-widest shadow-xl shadow-red-500/20 active:scale-95 transition-all">Confirm</button>
             </div>
         </div>
     </div>
@@ -149,7 +159,16 @@ select {
 
         window.initChat = (groupId, groupName) => {
             currentGroupId = groupId;
-            document.getElementById('group-name').textContent = groupName;
+            if (window.AthleoUI) {
+                AthleoUI.initTopBar({
+                    title: groupName,
+                    type: "page",
+                    onBack: "Android.finishActivity()",
+                    actions: [
+                        { icon: "info", onclick: "openGroupInfo()" }
+                    ]
+                });
+            }
             
             if (typeof Android !== 'undefined') {
                 Android.loadChatMessages(groupId);
@@ -237,6 +256,18 @@ select {
                 let adminBadgeHtml = isAdmin ? '<span class="text-[9px] bg-primary/20 text-primary px-1.5 py-0.5 rounded uppercase font-bold tracking-widest ml-2">Admin</span>' : '';
                 let promoteHtml = '';
 
+                const isMemberAdmin = isAdmin;
+                const iAmAdmin = pendingAdminIds.has(currentUser?.id);
+
+                let removeHtml = '';
+                if (iAmAdmin && user.id !== currentUser?.id && groupData.type === 'custom' && !isEditMode) {
+                    removeHtml = `
+                        <button onclick="confirmRemoveMember('${user.id}', '${user.name}')" class="p-2 text-red-500/60 hover:text-red-500">
+                            <span class="material-symbols-outlined text-[18px]">person_remove</span>
+                        </button>
+                    `;
+                }
+
                 if (isEditMode) {
                     const checkedStr = (isMember || isAdmin) ? 'checked' : '';
                     checkboxHtml = `<input type="checkbox" ${checkedStr} onchange="toggleMember('${user.id}', this)" class="w-5 h-5 rounded border-surface-border text-primary bg-surface cursor-pointer mr-3">`;
@@ -253,14 +284,70 @@ select {
                             <span class="material-symbols-outlined text-[20px]">person</span>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <p class="text-sm font-semibold text-on-surface flex items-center">${user.name} ${adminBadgeHtml}</p>
+                            <p class="text-sm font-semibold text-on-surface flex items-center truncate">${user.name} ${adminBadgeHtml}</p>
                             <p class="text-[10px] text-on-surface-variant uppercase tracking-wide truncate">${user.role}</p>
                         </div>
                         ${promoteHtml}
+                        ${removeHtml}
                     </div>
                 `;
                 list.insertAdjacentHTML('beforeend', html);
             });
+        }
+
+        function confirmRemoveMember(userId, userName) {
+            showConfirm(
+                "Remove member?",
+                `Are you sure you want to remove ${userName} from this group?`,
+                "person_remove",
+                "bg-red-500/10",
+                "text-red-500",
+                () => {
+                    if(typeof Android !== 'undefined') Android.removeMember(currentGroupId, userId);
+                    closeConfirm();
+                }
+            );
+        }
+
+        function confirmDeleteGroup() {
+            showConfirm(
+                "Delete Group?",
+                "This will permanently delete the group and all message history for everyone.",
+                "delete_forever",
+                "bg-red-500/10",
+                "text-red-500",
+                () => {
+                    if(typeof Android !== 'undefined') {
+                        Android.deleteChatGroup(currentGroupId);
+                        Android.finishActivity();
+                    }
+                    closeConfirm();
+                }
+            );
+        }
+
+        function showConfirm(title, desc, icon, iconBg, iconColor, onConfirm) {
+            const modal = document.getElementById('confirm-modal');
+            const content = document.getElementById('confirm-modal-content');
+            
+            document.getElementById('confirm-title').innerText = title;
+            document.getElementById('confirm-desc').innerText = desc;
+            document.getElementById('confirm-icon').innerText = icon;
+            document.getElementById('confirm-icon-bg').className = `w-16 h-16 rounded-full ${iconBg} flex items-center justify-center ${iconColor} mb-6 mx-auto`;
+            
+            const btn = document.getElementById('btn-confirm-action');
+            btn.onclick = onConfirm;
+            btn.className = `flex-1 py-4 rounded-2xl ${iconColor.replace('text-', 'bg-')} text-white font-bold text-[10px] uppercase tracking-widest shadow-xl active:scale-95 transition-all`;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => content.classList.remove('scale-95', 'opacity-0'), 10);
+        }
+
+        function closeConfirm() {
+            const modal = document.getElementById('confirm-modal');
+            const content = document.getElementById('confirm-modal-content');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
         }
 
         function toggleEditMode() {

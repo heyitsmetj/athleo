@@ -85,13 +85,19 @@ public class FirestoreRepository {
         // 5. Sample Financials
         com.example.athleo.models.Expense overview = new com.example.athleo.models.Expense("overview", "Total Operating Balance", 48295000, "Balance", System.currentTimeMillis());
         overview.setStatus("approved");
+        overview.setSubmittedBy("Director Jane");
+        overview.setSubmitterId("director_0");
         batch.set(db.collection("Financials").document("overview"), overview);
 
         com.example.athleo.models.Expense e1 = new com.example.athleo.models.Expense("exp_1", "Training Equipment", 25000, "Equipment", System.currentTimeMillis() - 86400000);
+        e1.setSubmittedBy("Coach Rajan");
+        e1.setSubmitterId("trainer_0");
         e1.setStatus("pending");
         batch.set(db.collection("Financials").document("exp_1"), e1);
 
         com.example.athleo.models.Expense e2 = new com.example.athleo.models.Expense("exp_2", "Travel Allowance", 15000, "Travel", System.currentTimeMillis() - 172800000);
+        e2.setSubmittedBy("Amit Trainer");
+        e2.setSubmitterId("trainer_2");
         e2.setStatus("pending");
         batch.set(db.collection("Financials").document("exp_2"), e2);
 
@@ -147,9 +153,9 @@ public class FirestoreRepository {
                 });
     }
 
-    public Task<Void> createChatGroup(String name, java.util.List<String> memberIds, String adminId) {
+    public Task<Void> createChatGroup(String name, String description, java.util.List<String> memberIds, String adminId) {
         String id = db.collection("ChatGroups").document().getId();
-        ChatGroup group = new ChatGroup(id, name, "custom");
+        ChatGroup group = new ChatGroup(id, name, description, "custom");
         group.getAdminIds().add(adminId);
         group.getMemberIds().addAll(memberIds);
         return db.collection("ChatGroups").document(id).set(group);
@@ -168,6 +174,12 @@ public class FirestoreRepository {
     public Task<Void> updateChatGroupMembers(String groupId, java.util.List<String> memberIds, java.util.List<String> adminIds) {
         return db.collection("ChatGroups").document(groupId)
                 .update("memberIds", memberIds, "adminIds", adminIds);
+    }
+
+    public Task<Void> removeMemberFromChatGroup(String groupId, String userId) {
+        return db.collection("ChatGroups").document(groupId)
+                .update("memberIds", com.google.firebase.firestore.FieldValue.arrayRemove(userId),
+                        "adminIds", com.google.firebase.firestore.FieldValue.arrayRemove(userId));
     }
 
     public Task<String> getAnnouncementsJson() {
@@ -191,10 +203,18 @@ public class FirestoreRepository {
     }
 
     public Task<String> getFinancialsJson() {
-        return db.collection("Financials").get()
+        return db.collection("Financials").orderBy("timestamp", com.google.firebase.firestore.Query.Direction.DESCENDING).get()
                 .continueWith(task -> {
                     if (task.isSuccessful() && task.getResult() != null) {
-                        return gson.toJson(task.getResult().toObjects(com.example.athleo.models.Expense.class)); // Using Expense for all financial records
+                        java.util.List<com.example.athleo.models.Expense> list = new java.util.ArrayList<>();
+                        for (com.google.firebase.firestore.DocumentSnapshot doc : task.getResult()) {
+                            com.example.athleo.models.Expense e = doc.toObject(com.example.athleo.models.Expense.class);
+                            if (e != null) {
+                                e.setId(doc.getId());
+                                list.add(e);
+                            }
+                        }
+                        return gson.toJson(list);
                     }
                     return "[]";
                 });
@@ -335,6 +355,23 @@ public class FirestoreRepository {
                 .update("status", status);
     }
 
+    public Task<Void> deleteExpense(String expenseId) {
+        return db.collection("Financials").document(expenseId).delete();
+    }
+
+    public Task<Void> clearFinancials() {
+        return db.collection("Financials").get().continueWithTask(task -> {
+            if (task.isSuccessful()) {
+                com.google.firebase.firestore.WriteBatch batch = db.batch();
+                for (com.google.firebase.firestore.DocumentSnapshot doc : task.getResult()) {
+                    batch.delete(doc.getReference());
+                }
+                return batch.commit();
+            }
+            return com.google.android.gms.tasks.Tasks.forResult(null);
+        });
+    }
+
     public Task<Void> createAnnouncement(String title, String message, String type) {
         String id = db.collection("Announcements").document().getId();
         Announcement ann = new Announcement(id, title, message, "Academy Admin", System.currentTimeMillis());
@@ -355,10 +392,22 @@ public class FirestoreRepository {
         return db.collection("ChatGroups").get()
                 .continueWith(task -> {
                     if (task.isSuccessful() && task.getResult() != null) {
-                        return gson.toJson(task.getResult().toObjects(ChatGroup.class));
+                        java.util.List<ChatGroup> groups = new java.util.ArrayList<>();
+                        for (com.google.firebase.firestore.DocumentSnapshot doc : task.getResult().getDocuments()) {
+                            ChatGroup g = doc.toObject(ChatGroup.class);
+                            if (g != null) {
+                                g.setId(doc.getId());
+                                groups.add(g);
+                            }
+                        }
+                        return gson.toJson(groups);
                     }
                     return "[]";
                 });
+    }
+
+    public Task<Void> deleteChatGroup(String groupId) {
+        return db.collection("ChatGroups").document(groupId).delete();
     }
 
     public Task<String> getChatMessagesJson(String groupId) {

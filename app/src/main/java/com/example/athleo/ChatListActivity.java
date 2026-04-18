@@ -37,6 +37,7 @@ public class ChatListActivity extends AppCompatActivity {
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
+        webView.setWebChromeClient(new android.webkit.WebChromeClient());
         webView.addJavascriptInterface(new WebAppInterface(this, webView), "Android");
         webView.loadUrl("file:///android_asset/stitch/community_chat_list_dark/code.html");
     }

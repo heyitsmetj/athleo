@@ -37,6 +37,7 @@ public class ManageExpensesActivity extends AppCompatActivity {
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
+        webView.setWebChromeClient(new android.webkit.WebChromeClient());
         webView.addJavascriptInterface(new WebAppInterface(this, webView), "Android");
         webView.loadUrl("file:///android_asset/stitch/financial_overview_dark_3/code.html");
     }
